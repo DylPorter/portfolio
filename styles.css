@@ -4,11 +4,13 @@
     --t-text: #777777;
 
     --p-box: #151515;
-    --s-box: #181818;
+/*    --s-box: #120e29;*/
+    --s-box: #191919;
     --t-box: #282828;
 
     --p-border: #282828;
-    --s-border: #333333;
+    --s-border: #34284b;
+
 
     --background: #101010;
 }
@@ -52,11 +54,14 @@ p.text {
 p.subtext {
     font-size: 18px;
     color: var(--t-text);
-    margin: 10px 0px;
+    margin: 10px 0px 0px 0px;
 }
 
 p.title {
     font-size: 80px;
+    margin: 0px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 p.header {
@@ -64,49 +69,28 @@ p.header {
     letter-spacing: 0.15em;
     font-size: 18px;
     color: var(--t-text);
+    margin-top: 10px;
 }
 
-nav {
-    width: 60vw;
-    height: 5vh;
-    border-radius: 16px;
-    margin-bottom: 15px;
+.headshot {
+    background-image: url("images/headshot.jpg");
+    background-position: top;
+    background-size: cover;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    gap: 15px;
-}
-
-li a {
-    display: block;
-    color: var(--p-text);
-    background: var(--p-box);
-    border: 2px solid var(--p-border);
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 16px;
-    transition: 0.5s;
-}
-
-li a:hover {
-    color: var(--t-text);
-    background-color: var(--t-box);
-    border: 2px solid var(--s-border);
+.skyline {
+    background-image: url("images/city.jpg");
+    background-position: bottom;
+    background-size: cover;
 }
 
 .container {
-    width: 60vw;
-    height: 80vh;
-    gap: 15px;
+    width: 100vw;
+    height: 100vh;
     display: flex;
+    gap: 15px;
+    padding: 30px;
+    box-sizing: border-box;
 }
 
 .column {
@@ -127,7 +111,7 @@ li a:hover {
 
 .box {
     border: 2px solid var(--p-border);
-    border-radius: 16px;
+    border-radius: 32px;
     transition: 0.5s;
     background-color: var(--p-box);
     padding: 20px 30px;
@@ -138,11 +122,34 @@ li a:hover {
     border-color: var(--s-border);
 }
 
+.title-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-container {
+    padding: 50px;
+}
+
 .flex2 {
     flex: 2;
 }
 
 .flex3 {
     flex: 3;
+}
+
+/* Layout for smaller screens (e.g., tablets and mobiles) */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .subgrid-container {
+        flex-direction: column;
+    }
+    .image {
+        min-height: 30vh;
+    }
 }
 
