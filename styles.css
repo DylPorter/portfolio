@@ -3,13 +3,12 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background: #090909;
+    background: #151515;
 }
 
 nav {
-    width: 60vw;
+    max-width: 50vw;
     height: 5vh;
     border: 2px solid #282828;
     border-radius: 16px;
@@ -43,6 +42,7 @@ li a:hover {
 }
 
 .container {
+    margin: auto;
     width: 60vw;
     height: 80vh;
     gap: 15px;
@@ -66,14 +66,14 @@ li a:hover {
 }
 
 .box {
-    border: 1px solid #282828;
+    border: 1px solid #383838;
     border-radius: 16px;
     transition: 0.5s;
-    background-color: #151515;
+    background-color: #222222;
 }
 
 .box:hover {
-    background-color: #242424;
+    background-color: #282828;
 }
 
 .flex2 {
@@ -82,8 +82,4 @@ li a:hover {
 
 .flex3 {
     flex: 3;
-}
-
-.red {
-    border: 2px solid red;
 }
