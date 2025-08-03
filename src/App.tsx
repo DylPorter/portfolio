@@ -21,7 +21,7 @@ function App() {
   return (
     <div className={`${theme === "dark" ? "dark" : ""} bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full pb-16`}>
       <header 
-        className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-700 max-w-lg md:max-w-xl" : "duration-500 max-w-3xl"}`}>
+        className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-1000 md:duration-500 max-w-3xl"}`}>
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-8">
             <li><a 
