@@ -1,18 +1,60 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@keyframes dropdownEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownLeave {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+button > span {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dropdown-enter {
+  animation: dropdownEnter 500ms ease forwards;
+}
+
+.dropdown-leave {
+  animation: dropdownLeave 300ms ease forwards;
+}
+
 .card {
   @apply border-1 rounded-2xl border-stone-200 dark:border-stone-800 shadow dark:shadow-lg/50 dark:shadow-black bg-stone-100/75 dark:bg-stone-900/75 backdrop-blur;
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
 }
 
 .link {
   @apply hover:text-stone-700 dark:hover:text-stone-300 text-stone-500 dark:text-stone-400; 
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
 }
 
 .button {
-  @apply text-stone-500 dark:text-stone-400 inline-flex items-center border-1 rounded-lg border-stone-400 dark:border-stone-500 hover:bg-stone-200 hover:bg-stone-800 dark:shadow-lg/50 dark:shadow-black;
+  @apply text-stone-500 dark:text-stone-400 inline-flex items-center justify-center border-1 rounded-lg border-stone-400 dark:border-stone-500 hover:bg-stone-200 dark:hover:bg-stone-800 dark:shadow-lg/50 dark:shadow-black;
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
 }
 
 .hover-button {
-   @apply text-stone-500 dark:text-stone-400 inline-flex items-center text-stone-500 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-lg;
+  @apply text-stone-500 dark:text-stone-400 inline-flex items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-lg;
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
 }

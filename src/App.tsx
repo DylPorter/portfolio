@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
-import { LuSun, LuMoon } from "react-icons/lu";
+import { LuSun, LuMoon, LuCopy, LuSend, LuCopyCheck } from "react-icons/lu";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope } from "react-icons/fa6";
 
 function App() {
   const [ theme, setTheme ] = useState('dark');
   const [ scrolled, setScrolled ] = useState(false);
+  const [emailDropdownOpen, setEmailDropdownOpen] = useState(false);
+  const [dropdownAnimating, setDropdownAnimating] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const email = "thiendylanporter@gmail.com"
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
@@ -23,8 +28,45 @@ function App() {
     if(el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  const toggleEmailDropdown = () => {
+    if (!emailDropdownOpen) {
+      setEmailDropdownOpen(true);
+      setDropdownAnimating(true);
+      setCopied(false);
+    } else {
+      setDropdownAnimating(false);
+      setTimeout(() => setEmailDropdownOpen(false), 150);
+    }
+  };
+
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText(email);
+    setCopied(true);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        (e.target as HTMLElement).closest("#email-dropdown-button") === null &&
+        (e.target as HTMLElement).closest("#email-dropdown-menu") === null
+      ) {
+        setDropdownAnimating(false);
+
+        setTimeout(() => {
+          setEmailDropdownOpen(false);
+        }, 150);
+
+        setTimeout(() => setCopied(false), 100);
+      }
+    };
+
+    if (emailDropdownOpen) window.addEventListener("click", handleClickOutside);
+    else window.removeEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("click", handleClickOutside);
+  }, [emailDropdownOpen]);
+
   return (
-    <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full`}>
+    <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full transition-colors duration-500`}>
       <header className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-1000 md:duration-500 max-w-3xl"}`}>
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-8">
@@ -53,11 +95,8 @@ function App() {
               }}
             >Contact</a></li>
           </ul>
-          <button
-            onClick={toggleTheme} 
-            className="p-3 hover-button"
-          >
-          {theme === "dark" ? <LuMoon /> : <LuSun />}
+          <button onClick={toggleTheme} className="p-3 hover-button">
+            {theme === "dark" ? <LuMoon /> : <LuSun />}
           </button>
         </nav>
       </header>
@@ -77,21 +116,49 @@ function App() {
             <h1 className="text-5xl font-bold">Hi, I'm Dylan.</h1>
             <div className="mt-5 flex flex-row flex-wrap gap-x-6 md:flex-col items-center justify-center md:items-start">
               <p>Developer
-                <a href="https://collectiveglobal.net" target="_blank" className="link"> @ Collective Global</a>
+                <a href="https://collectiveglobal.net" target="_blank" className="link">{" "}@ Collective Global</a>
               </p>
               <p>Instructor
-                <a href="https://bsd.education" target="_blank" className="link"> @ BSD Education</a>
+                <a href="https://bsd.education" target="_blank" className="link">{" "}@ BSD Education</a>
               </p>
               <p>Student
-                <a href="https://hku.hk" target="_blank" className="link"> @ The University of Hong Kong</a>
+                <a href="https://hku.hk" target="_blank" className="link">{" "}@ The University of Hong Kong</a>
               </p>
             </div>
             <p className="mt-4 text-balance text-center md:text-left">I develop solutions for startup companies, teach students throughout Hong Kong, and study computer science in university.</p>
             <div className="flex flex-wrap items-center gap-2 mt-5">
-              <a href="#" className="px-4 py-2 text-sm button">Résumé</a>
+              <a href="/resume.pdf" target="_blank" className="px-4 py-2 text-sm button">Résumé</a>
               <a href="https://linkedin.com/in/tdporter" target="_blank" className="p-3 hover-button"><FaLinkedinIn /></a>
               <a href="https://github.com/dylporter" target="_blank" className="p-3 hover-button"><FaGithub/></a>
-              <a href="#" className="p-3 hover-button"><FaRegEnvelope/></a>
+
+              <div className="relative inline-block text-center">
+                <button id="email-dropdown-button" onClick={toggleEmailDropdown} className="p-3 hover-button">
+                  <FaRegEnvelope />
+                </button>
+
+                {emailDropdownOpen && (
+                  <div
+                    id="email-dropdown-menu"
+                    className={`card p-3 absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-auto z-20
+                      ${dropdownAnimating ? "dropdown-enter" : "dropdown-leave"}
+                    `}
+                  >
+                    <div className="p-3 text-sm break-words text-stone-500 dark:text-stone-400">{email}</div>
+                    <div className="flex gap-1 text-sm items-center justify-center">
+                      <button
+                        onClick={copyEmail}
+                        className="w-full py-2 hover-button flex justify-center items-center gap-2"
+                      >
+                        {copied ? <LuCopyCheck className="text-stone-700 dark:text-stone-300"/> : <LuCopy />}
+                        {copied ? <span className="text-stone-700 dark:text-stone-300">Copied!</span> : "Copy"}
+                      </button>
+                      <a href={`mailto:${email}`} className="w-full py-2 hover-button gap-2">
+                        <LuSend />Send
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -179,14 +246,14 @@ function App() {
 
       <footer className="mx-auto p-8 mt-8 md:max-w-3xl">
         <div className="card p-6 text-center text-stone-500 dark:text-stone-400 text-sm">
-          <p>© 2025 <a 
+          <p>© 2025<a 
             href="" 
             className="link"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("top");
             }}
-          >tdporter.dev</a></p>
+          >{" "}tdporter.dev</a></p>
           <p>Last updated: August 4th, 2025</p>
         </div>
       </footer>
