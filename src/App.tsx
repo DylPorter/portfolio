@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`${theme === "dark" ? "dark" : ""} bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full pb-16`}>
+    <div className={`${theme === "dark" ? "dark" : ""} bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full pb-16`}>
       <header 
         className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-1000 md:duration-500 max-w-3xl"}`}>
         <nav className="card flex pl-8 p-4 items-center justify-between">
@@ -70,7 +70,7 @@ function App() {
             </div>
             <p className="mt-4 text-balance text-center md:text-left">I develop solutions for startup companies, teach students throughout Hong Kong, and study computer science in university.</p>
             <div className="flex flex-wrap items-center gap-2 mt-5">
-              <a href="#" className="px-4 py-2 text-sm button">Resume</a>
+              <a href="#" className="px-4 py-2 text-sm button">Résumé</a>
               <a href="https://linkedin.com/in/tdporter" target="_blank" className="p-3 hover-button"><FaLinkedinIn /></a>
               <a href="https://github.com/dylporter" target="_blank" className="p-3 hover-button"><FaGithub/></a>
               <a href="#" className="p-3 hover-button"><FaRegEnvelope/></a>
@@ -86,32 +86,32 @@ function App() {
             </div>
           </div>
 
-          <div className="flex justify-between gap-4 h-[800px]">
+          <div className="flex justify-between gap-4 h-[710px]">
             <div className="flex flex-col w-full gap-4">
               <div className="card h-full w-full p-8">
                 <div className="w-full h-1/2 overflow-hidden rounded-xl">
                   <img
                     className="w-full h-full object-cover"
                     alt="Project image"
-                    src="https://i0.wp.com/www.coalitionrc.com/wp-content/uploads/2017/01/placeholder.jpg?resize=300%2C300&ssl=1"
+                    src="src/assets/sourcinggpt.png"
                   />
                 </div>
-                <h3 className="text-2xl font-bold mt-4">SourcingGPT.ai</h3>
-                <p className="mt-2">bla bla bla bla blab la blab lab la</p>
+                <h3 className="text-2xl font-bold mt-5">SourcingGPT.ai</h3>
+                <p className="mt-3 text-balance">An agentic AI system designed to automate and enhance the sourcing process.</p>
                 <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
               </div>
 
-              <div className="card h-2/3 w-full p-8">
+              <div className="card h-1/2 w-full p-8">
                 <h3 className="text-2xl font-bold">TwinToys</h3>
-                <p className="mt-2">bla bla bla bla blab la blab lab la</p>
+                <p className="mt-3 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
                 <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
               </div>
             </div>
 
             <div className="flex flex-col w-full gap-4">
-              <div className="card h-2/3 w-full p-8">
+              <div className="card h-1/2 w-full p-8">
                 <h3 className="text-2xl font-bold">ARFixit</h3>
-                <p className="mt-2">bla bla bla bla blab la blab lab la</p>
+                <p className="mt-3 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
                 <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
               </div>
 
@@ -120,11 +120,11 @@ function App() {
                   <img
                     className="w-full h-full object-cover"
                     alt="Project image"
-                    src="https://i0.wp.com/www.coalitionrc.com/wp-content/uploads/2017/01/placeholder.jpg?resize=300%2C300&ssl=1"
+                    src="src/assets/vetsage.png"
                   />
                 </div>
-                <h3 className="text-2xl font-bold mt-4">VETsage</h3>
-                <p className="mt-2">bla bla bla bla bla bla bla bla blab la bla</p>
+                <h3 className="text-2xl font-bold mt-5">VETsage</h3>
+                <p className="mt-3 text-balance">A retrieval-augmented generation AI system created to streamline veterinary workflows.</p>
                 <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
               </div>
             </div>
