@@ -86,47 +86,48 @@ function App() {
             </div>
           </div>
 
-          <div className="flex justify-between gap-4 h-[710px]">
-            <div className="flex flex-col w-full gap-4">
-              <div className="card h-full w-full p-8">
-                <div className="w-full h-1/2 overflow-hidden rounded-xl">
-                  <img
-                    className="w-full h-full object-cover"
-                    alt="Project image"
-                    src="src/assets/sourcinggpt.png"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mt-5">SourcingGPT.ai</h3>
-                <p className="mt-3 text-balance">An agentic AI system designed to automate and enhance the sourcing process.</p>
-                <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
-              </div>
+          <div className="grid grid-cols-2 gap-4 w-full" style={{ gridAutoRows: 'auto' }}>
 
-              <div className="card h-1/2 w-full p-8">
-                <h3 className="text-2xl font-bold">TwinToys</h3>
-                <p className="mt-3 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
-                <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
+            {/* SourcingGPT */}
+            <div className="card p-8 flex flex-col row-span-2 col-start-1 col-end-2" style={{ gridRowStart: 1, gridRowEnd: 3 }}>
+              <div className="w-full h-1/2 overflow-hidden rounded-xl">
+                <img
+                  className="w-full h-full object-cover"
+                  alt="Project image"
+                  src="src/assets/sourcinggpt.png"
+                />
               </div>
+              <h3 className="text-2xl font-bold mt-5">SourcingGPT</h3>
+              <p className="mt-3 text-balance">An agentic AI system designed to automate and enhance the sourcing process.</p>
+              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
-            <div className="flex flex-col w-full gap-4">
-              <div className="card h-1/2 w-full p-8">
-                <h3 className="text-2xl font-bold">ARFixit</h3>
-                <p className="mt-3 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
-                <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
-              </div>
+            {/* TwinToys */}
+            <div className="card p-8 flex flex-col col-start-1 col-end-2" style={{ gridRowStart: 3 }}>
+              <h3 className="text-2xl font-bold">TwinToys</h3>
+              <p className="mt-3 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
+              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
+            </div>
 
-              <div className="card h-full w-full p-8">
-                <div className="w-full h-1/2 overflow-hidden rounded-xl">
-                  <img
-                    className="w-full h-full object-cover"
-                    alt="Project image"
-                    src="src/assets/vetsage.png"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mt-5">VETsage</h3>
-                <p className="mt-3 text-balance">A retrieval-augmented generation AI system created to streamline veterinary workflows.</p>
-                <a href="#" className="px-4 py-2 text-sm button mt-5">View</a>
+            {/* ARFixit */}
+            <div className="card p-8 flex flex-col col-start-2 col-end-3" style={{ gridRowStart: 1 }}>
+              <h3 className="text-2xl font-bold">ARFixit</h3>
+              <p className="mt-3 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
+              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
+            </div>
+
+            {/* VETsage */}
+            <div className="card p-8 flex flex-col row-span-2 col-start-2 col-end-3" style={{ gridRowStart: 2, gridRowEnd: 4 }}>
+              <div className="w-full h-1/2 overflow-hidden rounded-xl">
+                <img
+                  className="w-full h-full object-cover"
+                  alt="Project image"
+                  src="src/assets/vetsage.png"
+                />
               </div>
+              <h3 className="text-2xl font-bold mt-5">VETsage</h3>
+              <p className="mt-3 text-balance">A retrieval-augmented generation AI system created to streamline veterinary workflows.</p>
+              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
           </div>
         </section>
