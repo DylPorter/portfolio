@@ -18,22 +18,40 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  function scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
-    <div className={`${theme === "dark" ? "dark" : ""} bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full pb-16`}>
-      <header 
-        className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-1000 md:duration-500 max-w-3xl"}`}>
+    <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full`}>
+      <header className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-1000 md:duration-500 max-w-3xl"}`}>
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-8">
             <li><a 
-              href="#" 
+              href="" 
               className="link"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                scrollToSection("top");
               }}
             >Home</a></li>
-            <li><a href="#projects" className="link">Projects</a></li>
-            <li><a href="#contact" className="link">Contact</a></li>
+            <li><a 
+              href="" 
+              className="link"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("projects");
+              }}
+            >Projects</a></li>
+            <li><a 
+              href="" 
+              className="link"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("contact");
+              }}
+            >Contact</a></li>
           </ul>
           <button
             onClick={toggleTheme} 
@@ -59,13 +77,13 @@ function App() {
             <h1 className="text-5xl font-bold">Hi, I'm Dylan.</h1>
             <div className="mt-5 flex flex-row flex-wrap gap-x-6 md:flex-col items-center justify-center md:items-start">
               <p>Developer
-                <a href="https://collectiveglobal.net/" target="_blank" className="link"> @ Collective Global</a>
+                <a href="https://collectiveglobal.net" target="_blank" className="link"> @ Collective Global</a>
               </p>
               <p>Instructor
-                <a href="https://bsd.education/" target="_blank" className="link"> @ BSD Education</a>
+                <a href="https://bsd.education" target="_blank" className="link"> @ BSD Education</a>
               </p>
               <p>Student
-                <a href="https://hku.hk/" target="_blank" className="link"> @ The University of Hong Kong</a>
+                <a href="https://hku.hk" target="_blank" className="link"> @ The University of Hong Kong</a>
               </p>
             </div>
             <p className="mt-4 text-balance text-center md:text-left">I develop solutions for startup companies, teach students throughout Hong Kong, and study computer science in university.</p>
@@ -79,13 +97,7 @@ function App() {
         </section>
         
         <section id="projects" className="pt-32 -mt-24 flex flex-col gap-8">
-          <div className="flex justify-between">
-            <h2 className="text-3xl font-bold">Projects</h2>
-            <div className="flex items-center">
-              <a href="#" className="link">View More</a>
-            </div>
-          </div>
-
+          <h2 className="text-3xl font-bold">Projects</h2>
           <div className="grid grid-cols-2 gap-4 w-full" style={{ gridAutoRows: 'auto' }}>
 
             {/* SourcingGPT */}
@@ -99,21 +111,21 @@ function App() {
               </div>
               <h3 className="text-2xl font-bold mt-5">SourcingGPT</h3>
               <p className="mt-3 text-balance">An agentic AI system designed to automate and enhance the sourcing process.</p>
-              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
+              <a href="https://app.sourcinggpt.ai" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
             {/* TwinToys */}
             <div className="card p-8 flex flex-col col-start-1 col-end-2" style={{ gridRowStart: 3 }}>
               <h3 className="text-2xl font-bold">TwinToys</h3>
               <p className="mt-3 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
-              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
+              <a href="https://twintoys.co" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
             {/* ARFixit */}
             <div className="card p-8 flex flex-col col-start-2 col-end-3" style={{ gridRowStart: 1 }}>
               <h3 className="text-2xl font-bold">ARFixit</h3>
               <p className="mt-3 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
-              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
+              <a href="https://arfixit.co" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
             {/* VETsage */}
@@ -127,12 +139,13 @@ function App() {
               </div>
               <h3 className="text-2xl font-bold mt-5">VETsage</h3>
               <p className="mt-3 text-balance">A retrieval-augmented generation AI system created to streamline veterinary workflows.</p>
-              <a href="#" className="self-start px-4 py-2 text-sm button mt-5">View</a>
+              <a href="https://app.vetsage.ai" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="pt-32 -mt-24 flex flex-col gap-8">
+        {/* Blog Section
+        <section id="blog" className="pt-32 -mt-24 flex flex-col gap-8">
           <div className="flex justify-between">
             <h2 className="text-3xl font-bold">Blog Posts</h2>
             <div className="flex items-center">
@@ -146,8 +159,37 @@ function App() {
             <div className="card h-[150px]"></div>
           </div>
         </section>
+        */}
+
+        <section id="contact" className="pt-32 -mt-24 flex flex-col gap-8">
+          <h2 className="text-3xl font-bold">Contact Me</h2>
+          <div>
+            <div className="card p-8">
+              <h1 className="text-5xl font-bold">Reach out to me!</h1>
+              <div className="mt-5">
+                <p>Need something built?</p>
+                <p>Want to have a chat?</p>
+                <p>Need some answers to questions?</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
       </main>
+
+      <footer className="mx-auto p-8 mt-8 md:max-w-3xl">
+        <div className="card p-6 text-center text-stone-500 dark:text-stone-400 text-sm">
+          <p>© 2025 <a 
+            href="" 
+            className="link"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("top");
+            }}
+          >tdporter.dev</a></p>
+          <p>Last updated: August 4th, 2025</p>
+        </div>
+      </footer>
     </div>
   )
 }
