@@ -75,3 +75,35 @@ button > span {
   background: oklch(55.6% 0 0);
   color: white;
 }
+
+@media (min-width: 768px) { /* md breakpoint */
+  .sourcinggpt-span {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  .twintoys-span {
+    grid-row-start: 3;
+    grid-row-end: 4; /* or just auto if single row */
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  .arfixit-span {
+    grid-row-start: 1;
+    grid-row-end: 2; /* or auto if single */
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .vetsage-span {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+}
+
+/* On small screens, these classes do not apply */

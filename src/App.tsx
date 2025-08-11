@@ -111,7 +111,7 @@ function App() {
 
   return (
     <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen w-full transition-colors duration-500`}>
-      <header className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-600 md:duration-500 max-w-3xl"}`}>
+      <header className={`sticky top-0 z-50 mx-auto p-4 md:p-8 transition-all ${scrolled ? "duration-1200 md:duration-700 max-w-sm md:max-w-xl" : "duration-900 md:duration-500 max-w-3xl"}`}>
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-8">
             <li><a 
@@ -145,14 +145,14 @@ function App() {
         </nav>
       </header>
 
-      <main id="home" className="max-w-3xl px-8 mx-auto flex flex-col gap-8">
+      <main id="home" className="max-w-3xl px-4 md:px-8 mx-auto flex flex-col gap-4">
 
         <section className="card p-10 flex flex-col md:flex-row justify-between gap-8 md:gap-12 items-center">
           <div className="w-full md:w-2/5 flex-shrink-0 h-[275px] md:h-[300px] overflow-hidden rounded-xl">
             <img
               className="w-full h-full object-cover md:scale-140 object-[50%_25%] md:translate-y-8 md:-translate-x-2"
               alt="Photo of me" 
-              src="/IMG-20250131-WA0057.jpg"
+              src="public/IMG-20250131-WA0057.jpg"
             />
           </div>
           
@@ -208,16 +208,16 @@ function App() {
         </section>
         
         <section id="projects" className="pt-32 -mt-24 flex flex-col gap-8">
-          <h2 className="text-3xl font-bold">Projects</h2>
-          <div className="grid grid-cols-2 gap-4 w-full" style={{ gridAutoRows: 'auto' }}>
+          <h2 className="text-3xl font-bold text-center md:text-start">Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full" style={{ gridAutoRows: 'auto' }}>
 
             {/* SourcingGPT */}
-            <div className="card p-8 flex flex-col row-span-2 col-start-1 col-end-2" style={{ gridRowStart: 1, gridRowEnd: 3 }}>
-              <div className="w-full h-1/2 overflow-hidden rounded-xl">
+            <div className="card p-8 flex flex-col sourcinggpt-span order-1">
+              <div className="w-full overflow-hidden rounded-xl h-60 md:h-auto object-[90%_65%]">
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-[50%_0%]"
                   alt="Project image"
-                  src="/sourcinggpt.png"
+                  src="public/sourcinggpt.png"
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">SourcingGPT</h3>
@@ -236,7 +236,7 @@ function App() {
             </div>
 
             {/* TwinToys */}
-            <div className="card p-8 flex flex-col col-start-1 col-end-2" style={{ gridRowStart: 3 }}>
+            <div className="card p-8 flex flex-col twintoys-span order-4">
               <h3 className="text-2xl font-bold">TwinToys</h3>
               <p className="mt-3 mb-4 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
               <div className="flex flex-row flex-wrap text-xs gap-1">
@@ -250,7 +250,7 @@ function App() {
             </div>
 
             {/* ARFixit */}
-            <div className="card p-8 flex flex-col col-start-2 col-end-3" style={{ gridRowStart: 1 }}>
+            <div className="card p-8 flex flex-col arfixit-span order-2">
               <h3 className="text-2xl font-bold">ARFixit</h3>
               <p className="mt-3 mb-4 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
               <div className="flex flex-row flex-wrap text-xs gap-1">
@@ -264,12 +264,12 @@ function App() {
             </div>
 
             {/* VETsage */}
-            <div className="card p-8 flex flex-col row-span-2 col-start-2 col-end-3" style={{ gridRowStart: 2, gridRowEnd: 4 }}>
-              <div className="w-full h-1/2 overflow-hidden rounded-xl">
+            <div className="card p-8 flex flex-col vetsage-span order-3">
+              <div className="w-full overflow-hidden rounded-xl h-60 md:h-auto object-[90%_65%]">
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-[50%_0%]"
                   alt="Project image"
-                  src="/vetsage.png"
+                  src="public/vetsage.png"
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">VETsage</h3>
@@ -307,12 +307,12 @@ function App() {
         */}
 
         <section id="contact" className="pt-32 -mt-24 flex flex-col gap-8">
-          <h2 className="text-3xl font-bold">Contact</h2>
+          <h2 className="text-3xl font-bold text-center md:text-start">Contact</h2>
           <div className="card p-10">
 
             <div className="mb-6 text-center">
-              <h1 className="text-5xl font-bold mb-4">Contact Me.</h1>
-              <p className="text-balance">I’m available for projects, discussions, and inquiries.</p>
+              <h1 className="text-5xl font-bold mb-5">Contact Me.</h1>
+              <p className="text-balance mb-2">I’m available for projects, discussions, and inquiries.</p>
               <p className="mb-4 text-balance">Email me at 
                 <a href={`mailto:${email}`}
                 className="link"
@@ -359,7 +359,7 @@ function App() {
 
       </main>
 
-      <footer className="mx-auto p-8 mt-8 md:max-w-3xl">
+      <footer className="mx-auto p-4 md:p-8 mt-4 md:mt-8 md:max-w-3xl">
         <div className="card p-6 text-center text-neutral-500 dark:text-neutral-400 text-sm">
           <p>© 2025
             <a href="" 
