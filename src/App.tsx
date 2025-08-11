@@ -152,7 +152,7 @@ function App() {
             <img
               className="w-full h-full object-cover md:scale-140 object-[50%_25%] md:translate-y-8 md:-translate-x-2"
               alt="Photo of me" 
-              src="public/IMG-20250131-WA0057.jpg"
+              src="./IMG-20250131-WA0057.jpg"
             />
           </div>
           
@@ -171,7 +171,7 @@ function App() {
             </div>
             <p className="mt-4 text-balance text-center md:text-left">I develop solutions for startup companies, teach students throughout Hong Kong, and study computer science in university.</p>
             <div className="flex flex-wrap items-center gap-2 mt-5">
-              <a href="/resume.pdf" target="_blank" className="px-4 py-2 text-sm button">Résumé</a>
+              <a href="./resume.pdf" target="_blank" className="px-4 py-2 text-sm button">Résumé</a>
               <a href="https://linkedin.com/in/tdporter" target="_blank" className="p-3 hover-button"><FaLinkedinIn /></a>
               <a href="https://github.com/dylporter" target="_blank" className="p-3 hover-button"><FaGithub/></a>
 
@@ -217,7 +217,7 @@ function App() {
                 <img
                   className="w-full h-full object-cover object-[50%_0%]"
                   alt="Project image"
-                  src="public/sourcinggpt.png"
+                  src="./sourcinggpt.png"
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">SourcingGPT</h3>
@@ -269,7 +269,7 @@ function App() {
                 <img
                   className="w-full h-full object-cover object-[50%_0%]"
                   alt="Project image"
-                  src="public/vetsage.png"
+                  src="./vetsage.png"
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">VETsage</h3>
