@@ -183,7 +183,7 @@ function App() {
                 {emailDropdownOpen && (
                   <div
                     id="email-dropdown-menu"
-                    className={`card p-3 absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-auto z-20
+                    className={`card p-3 absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-50 z-20
                       ${dropdownAnimating ? "dropdown-enter" : "dropdown-leave"}
                     `}
                   >
