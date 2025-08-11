@@ -16,7 +16,7 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const email = "thiendylanporter@gmail.com"
+  const email = "info@tdporter.dev"
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
