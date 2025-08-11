@@ -152,7 +152,7 @@ function App() {
             <img
               className="w-full h-full object-cover md:scale-140 object-[50%_25%] md:translate-y-8 md:-translate-x-2"
               alt="Photo of me" 
-              src="src/assets/IMG-20250131-WA0057.jpg"
+              src="/IMG-20250131-WA0057.jpg"
             />
           </div>
           
@@ -217,7 +217,7 @@ function App() {
                 <img
                   className="w-full h-full object-cover"
                   alt="Project image"
-                  src="src/assets/sourcinggpt.png"
+                  src="/sourcinggpt.png"
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">SourcingGPT</h3>
@@ -269,7 +269,7 @@ function App() {
                 <img
                   className="w-full h-full object-cover"
                   alt="Project image"
-                  src="src/assets/vetsage.png"
+                  src="/vetsage.png"
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">VETsage</h3>
