@@ -3,11 +3,18 @@ import { LuSun, LuMoon, LuCopy, LuSend, LuCopyCheck } from "react-icons/lu";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope } from "react-icons/fa6";
 
 function App() {
-  const [ theme, setTheme ] = useState('dark');
-  const [ scrolled, setScrolled ] = useState(false);
+  const [theme, setTheme] = useState('dark');
+  const [scrolled, setScrolled] = useState(false);
   const [emailDropdownOpen, setEmailDropdownOpen] = useState(false);
   const [dropdownAnimating, setDropdownAnimating] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const email = "thiendylanporter@gmail.com"
 
@@ -17,7 +24,7 @@ function App() {
 
   useEffect(() => {
     function onScroll() {
-      setScrolled(window.scrollY > 100);
+      setScrolled(window.scrollY > 50);
     }
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -44,6 +51,43 @@ function App() {
     setCopied(true);
   };
 
+  // Modified handleSubmit with UI state instead of alert
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitted(false);
+
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('message', formData.message);
+
+    try {
+      const res = await fetch('https://formspree.io/f/mjkojdpk', {
+        method: 'POST',
+        body: form,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+
+        setSubmitting(false);
+
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 10000);
+      } else {
+        setSubmitting(false);
+        console.log("res not ok");
+      }
+    } catch (error) {
+      setSubmitting(false);
+      console.log("error caught");
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -66,12 +110,12 @@ function App() {
   }, [emailDropdownOpen]);
 
   return (
-    <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen w-full transition-colors duration-500`}>
-      <header className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-1000 md:duration-500 max-w-3xl"}`}>
+    <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen w-full transition-colors duration-500`}>
+      <header className={`sticky top-0 z-50 mx-auto p-8 transition-all ${scrolled ? "duration-1000 md:duration-700 max-w-lg md:max-w-xl" : "duration-600 md:duration-500 max-w-3xl"}`}>
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-8">
             <li><a 
-              href="" 
+              href="/" 
               className="link"
               onClick={(e) => {
                 e.preventDefault();
@@ -79,7 +123,7 @@ function App() {
               }}
             >Home</a></li>
             <li><a 
-              href="" 
+              href="#projects" 
               className="link"
               onClick={(e) => {
                 e.preventDefault();
@@ -87,7 +131,7 @@ function App() {
               }}
             >Projects</a></li>
             <li><a 
-              href="" 
+              href="#contact" 
               className="link"
               onClick={(e) => {
                 e.preventDefault();
@@ -143,14 +187,14 @@ function App() {
                       ${dropdownAnimating ? "dropdown-enter" : "dropdown-leave"}
                     `}
                   >
-                    <div className="p-3 text-sm break-words text-stone-500 dark:text-stone-400">{email}</div>
+                    <div className="p-3 text-sm break-words text-neutral-500 dark:text-neutral-400">{email}</div>
                     <div className="flex gap-1 text-sm items-center justify-center">
                       <button
                         onClick={copyEmail}
                         className="w-full py-2 hover-button flex justify-center items-center gap-2"
                       >
-                        {copied ? <LuCopyCheck className="text-stone-700 dark:text-stone-300"/> : <LuCopy />}
-                        {copied ? <span className="text-stone-700 dark:text-stone-300">Copied!</span> : "Copy"}
+                        {copied ? <LuCopyCheck className="text-neutral-700 dark:text-neutral-300"/> : <LuCopy />}
+                        {copied ? <span className="text-neutral-700 dark:text-neutral-300">Copied!</span> : "Copy"}
                       </button>
                       <a href={`mailto:${email}`} className="w-full py-2 hover-button gap-2">
                         <LuSend />Send
@@ -177,21 +221,45 @@ function App() {
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">SourcingGPT</h3>
-              <p className="mt-3 text-balance">An agentic AI system designed to automate and enhance the sourcing process.</p>
+              <p className="mt-3 mb-4 text-balance">An agentic AI system designed to automate and enhance the sourcing process.</p>
+              <div className="flex flex-row flex-wrap text-xs gap-1">
+                <div className="pill">LLMs</div>
+                <div className="pill">RAG</div>
+                <div className="pill">AWS</div>
+                <div className="pill">n8n</div>
+                <div className="pill">JavaScript</div>
+                <div className="pill">Firebase</div>
+                <div className="pill">React</div>
+                <div className="pill">PostgreSQL</div>
+              </div>
               <a href="https://app.sourcinggpt.ai" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
             {/* TwinToys */}
             <div className="card p-8 flex flex-col col-start-1 col-end-2" style={{ gridRowStart: 3 }}>
               <h3 className="text-2xl font-bold">TwinToys</h3>
-              <p className="mt-3 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
+              <p className="mt-3 mb-4 text-balance">An AI-powered tool to convert 2D images of toys into immersive and usable 3D models.</p>
+              <div className="flex flex-row flex-wrap text-xs gap-1">
+                <div className="pill">Python</div>
+                <div className="pill">JavaScript</div>
+                <div className="pill">AWS</div>
+                <div className="pill">Meshy API</div>
+                <div className="pill">WordPress</div>
+              </div>
               <a href="https://twintoys.co" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
             {/* ARFixit */}
             <div className="card p-8 flex flex-col col-start-2 col-end-3" style={{ gridRowStart: 1 }}>
               <h3 className="text-2xl font-bold">ARFixit</h3>
-              <p className="mt-3 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
+              <p className="mt-3 mb-4 text-balance">An augmented reality mobile application developed for do-it-yourself home repair solutions.</p>
+              <div className="flex flex-row flex-wrap text-xs gap-1">
+                <div className="pill">Unity</div>
+                <div className="pill">C#</div>
+                <div className="pill">Vuforia Engine</div>
+                <div className="pill">Vuforia MTG</div>
+                <div className="pill">3D Modelling</div>
+              </div>
               <a href="https://arfixit.co" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
 
@@ -205,7 +273,17 @@ function App() {
                 />
               </div>
               <h3 className="text-2xl font-bold mt-5">VETsage</h3>
-              <p className="mt-3 text-balance">A retrieval-augmented generation AI system created to streamline veterinary workflows.</p>
+              <p className="mt-3 mb-4 text-balance">A retrieval-augmented generation AI system created to streamline veterinary workflows.</p>
+              <div className="flex flex-row flex-wrap text-xs gap-1">
+                <div className="pill">LLMs</div>
+                <div className="pill">RAG</div>
+                <div className="pill">AWS</div>
+                <div className="pill">n8n</div>
+                <div className="pill">JavaScript</div>
+                <div className="pill">Python</div>
+                <div className="pill">React</div>
+                <div className="pill">PostgreSQL</div>
+              </div>
               <a href="https://app.vetsage.ai" target="_blank" className="self-start px-4 py-2 text-sm button mt-5">View</a>
             </div>
           </div>
@@ -229,32 +307,69 @@ function App() {
         */}
 
         <section id="contact" className="pt-32 -mt-24 flex flex-col gap-8">
-          <h2 className="text-3xl font-bold">Contact Me</h2>
-          <div>
-            <div className="card p-8">
-              <h1 className="text-5xl font-bold">Reach out to me!</h1>
-              <div className="mt-5">
-                <p>Need something built?</p>
-                <p>Want to have a chat?</p>
-                <p>Need some answers to questions?</p>
-              </div>
+          <h2 className="text-3xl font-bold">Contact</h2>
+          <div className="card p-10">
+
+            <div className="mb-6 text-center">
+              <h1 className="text-5xl font-bold mb-4">Contact Me.</h1>
+              <p className="text-balance">I’m available for projects, discussions, and inquiries.</p>
+              <p className="mb-4 text-balance">Email me at 
+                <a href={`mailto:${email}`}
+                className="link"
+                >{" "}{email},{" "}</a>
+              or reach out by filling out the form.</p>
             </div>
+
+            <form className="flex flex-col" autoComplete="off" onSubmit={handleSubmit}>
+              <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+                <input type="text" name="name" required 
+                  value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
+                  className="text-base input input-box w-full" placeholder="Your Name"
+                  />
+                <input type="email" name="email" required 
+                  pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                  title="Please enter a valid email address with a domain suffix of at least 2 letters"
+                  value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
+                  className="input input-box w-full" placeholder="you@email.com"
+                />
+              </div>
+              <textarea name="message" required rows={5} 
+                value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}
+                className="input input-box resize-none" placeholder="What would you like to talk about?"
+              />
+
+              <button type="submit" disabled={submitting} 
+                className="button mt-6 px-4 py-2 text-sm flex justify-center items-center gap-2 self-center min-w-[140px]"
+              >
+                {submitting ? (<span>Sending...</span>) : submitted ? (
+                  <>
+                    <span>Sent!</span>
+                  </>
+                ) : (
+                  <>
+                    <LuSend />
+                    <span>Send Message</span>
+                  </>
+                )}
+              </button>
+            </form>
+
           </div>
         </section>
 
       </main>
 
       <footer className="mx-auto p-8 mt-8 md:max-w-3xl">
-        <div className="card p-6 text-center text-stone-500 dark:text-stone-400 text-sm">
-          <p>© 2025<a 
-            href="" 
+        <div className="card p-6 text-center text-neutral-500 dark:text-neutral-400 text-sm">
+          <p>© 2025
+            <a href="" 
             className="link"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("top");
             }}
           >{" "}tdporter.dev</a></p>
-          <p>Last updated: August 4th, 2025</p>
+          <p>Last updated: August 11th, 2025</p>
         </div>
       </footer>
     </div>

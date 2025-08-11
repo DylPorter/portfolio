@@ -36,25 +36,42 @@ button > span {
 }
 
 .card {
-  @apply border-1 rounded-2xl border-stone-200 dark:border-stone-800 shadow dark:shadow-lg/50 dark:shadow-black bg-stone-100/75 dark:bg-stone-900/75 backdrop-blur;
+  @apply border-1 rounded-2xl border-neutral-200 dark:border-neutral-800 shadow dark:shadow-lg/50 dark:shadow-black bg-white/75 dark:bg-neutral-900/75 backdrop-blur;
   transition-property: color, background-color, box-shadow, border, text;
   transition-duration: 500ms;
 }
 
 .link {
-  @apply hover:text-stone-700 dark:hover:text-stone-300 text-stone-500 dark:text-stone-400; 
+  @apply hover:text-neutral-700 dark:hover:text-neutral-300 text-neutral-500 dark:text-neutral-400; 
   transition-property: color, background-color, box-shadow, border, text;
   transition-duration: 500ms;
 }
 
 .button {
-  @apply text-stone-500 dark:text-stone-400 inline-flex items-center justify-center border-1 rounded-lg border-stone-400 dark:border-stone-500 hover:bg-stone-200 dark:hover:bg-stone-800 dark:shadow-lg/50 dark:shadow-black;
+  @apply text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 inline-flex items-center justify-center border-1 rounded-lg border-neutral-400 dark:border-neutral-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow dark:shadow-lg/20 dark:shadow-black;
   transition-property: color, background-color, box-shadow, border, text;
   transition-duration: 500ms;
 }
 
 .hover-button {
-  @apply text-stone-500 dark:text-stone-400 inline-flex items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-lg;
+  @apply text-neutral-500 dark:text-neutral-400 inline-flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-lg;
   transition-property: color, background-color, box-shadow, border, text;
   transition-duration: 500ms;
+}
+
+.input-box {
+  @apply px-4 py-2 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-500;
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
+}
+
+.pill {
+  @apply px-1.5 py-0.5 bg-neutral-200 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 rounded-lg;
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
+}
+
+::selection {
+  background: oklch(55.6% 0 0);
+  color: white;
 }
