@@ -111,7 +111,7 @@ function App() {
 
   return (
     <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen w-full transition-colors duration-500`}>
-      <header className={`sticky top-0 z-50 mx-auto p-4 md:p-8 transition-all ${scrolled ? "duration-1200 md:duration-700 max-w-sm md:max-w-xl" : "duration-900 md:duration-500 max-w-3xl"}`}>
+      <header className={`sticky top-0 z-50 mx-auto p-4 md:p-8 transition-all ${scrolled ? "duration-1200 max-w-[370px] md:max-w-lg" : "duration-1200 max-w-full md:max-w-3xl"}`}> 
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-8">
             <li><a 
