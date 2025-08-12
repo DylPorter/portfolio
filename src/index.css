@@ -71,6 +71,12 @@ button > span {
   transition-duration: 500ms;
 }
 
+.icon {
+  @apply border-1 border-neutral-300 dark:border-neutral-700 size-12 rounded-full;
+  transition-property: color, background-color, box-shadow, border, text;
+  transition-duration: 500ms;
+}
+
 ::selection {
   background: oklch(55.6% 0 0);
   color: white;
