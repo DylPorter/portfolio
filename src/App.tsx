@@ -112,7 +112,7 @@ function App() {
 
   return (
     <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen w-full transition-colors duration-500`}>
-      <header className={`sticky top-0 z-50 mx-auto px-4 py-8 md:px-8 transition-all ${scrolled ? "duration-1200 max-w-[410px] md:max-w-lg" : "duration-1200 max-w-full md:max-w-3xl"}`}> 
+      <header className={`sticky top-0 z-50 mx-auto px-4 py-8 md:px-8 transition-all ${scrolled ? "duration-1200 max-w-[405px] md:max-w-[465px]" : "duration-1200 max-w-full md:max-w-3xl"}`}> 
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-6 md:gap-8">
             <li><a 
@@ -220,11 +220,11 @@ function App() {
           <div className="card p-2 mt-4">
             <div className="flex gap-2 w-full h-full rounded-lg">
               <button
-                className={`w-1/2 py-1.5 text-sm rounded-lg hover:cursor-pointer transition-colors duration-500 ${active === "experience" ? "bg-neutral-200 dark:bg-neutral-800" : "text-neutral-500 dark:text-neutral-400"}`}
+                className={`w-1/2 py-1.5 text-sm rounded-lg hover:cursor-pointer transition-colors duration-500 ${active === "experience" ? "bg-[oklch(0.95_0_0)] dark:bg-neutral-800" : "text-neutral-500 dark:text-neutral-400"}`}
                 onClick={() => setActive("experience")}
               >Experience</button>
               <button 
-                className={`w-1/2 py-1.5 text-sm rounded-lg hover:cursor-pointer transition-colors duration-500 ${active === "education" ? "bg-neutral-200 dark:bg-neutral-800" : "text-neutral-500 dark:text-neutral-400"}`}
+                className={`w-1/2 py-1.5 text-sm rounded-lg hover:cursor-pointer transition-colors duration-500 ${active === "education" ? "bg-[oklch(0.95_0_0)] dark:bg-neutral-800" : "text-neutral-500 dark:text-neutral-400"}`}
                 onClick={() => setActive("education")}
               >Education</button>
             </div>
@@ -244,7 +244,16 @@ function App() {
                     <p className="text-xs dark:text-neutral-400">Jul 2024 – Present</p>
                   </div>
                 </div>
-                <p className="ml-16">blablabla this is some of the cool stuff that i did hopefully that's useful for you</p>
+                <p className="ml-16 pr-10">
+                  <ul className="ml-3 list-disc list-outside flex flex-col gap-1">
+                    <li>
+                      Engineered scalable AWS backend systems integrating LLMs, RAG, and databases, enhancing data retrieval and automation using Python, JavaScript, and n8n
+                    </li>
+                    <li>
+                      Delivered performant frontend experiences with React, Tailwind, and Vite in TypeScript, boosting user engagement and secure authentication via Firebase
+                    </li>
+                  </ul>
+                </p>
               </div>
 
               <hr className="border-t border-neutral-300 dark:border-neutral-700 my-1" />
@@ -259,7 +268,16 @@ function App() {
                     <p className="text-xs dark:text-neutral-400">May 2025 – Present</p>
                   </div>
                 </div>
-                <p className="ml-16">I did teaching here it was very cool</p>
+                <p className="ml-16 pr-10">
+                  <ul className="ml-3 list-disc list-outside flex flex-col gap-1">
+                    <li>
+                      Guided K-12 students (ages 7-14) through online programming curriculum, fostering independent learning and project development in HTML, CSS, and JavaScript
+                    </li>
+                    <li>
+                      Collaborated with instructors to deliver engaging course material and manage classrooms, promoting student skill-building through guided exploration
+                    </li>
+                  </ul>
+                </p>
               </div>
 
               <hr className="border-t border-neutral-300 dark:border-neutral-700 my-1" />
@@ -274,7 +292,16 @@ function App() {
                     <p className="text-xs dark:text-neutral-400">Sep 2023 – Mar 2024</p>
                   </div>
                 </div>
-                <p className="ml-16">blablabla this is some of the cool stuff that i did hopefully that's useful for you</p>
+                <p className="ml-16 pr-10">
+                  <ul className="ml-3 list-disc list-outside flex flex-col gap-1">
+                    <li>
+                      Solely developed an AI chatbot for educators to enhance course planning using a local LLM hosted on AWS with llama.cpp, API management in Python, and a Gradio interface
+                    </li>
+                    <li>
+                      Deployed the chatbot on a custom website with HTML/CSS, reaching 150,000+ students across 26 countries and expanding educational impact globally
+                    </li>
+                  </ul>
+                </p>
               </div>
 
             </div>
@@ -292,7 +319,19 @@ function App() {
                     <p className="text-xs dark:text-neutral-400">Sep 2024 – Due Jun 2028</p>
                   </div>
                 </div>
-                <p className="ml-16">blablabla this is some of the cool stuff that i did hopefully that's useful for you</p>
+                <p className="ml-16 pr-10">
+                  <ul className="ml-3 list-disc list-outside flex flex-col gap-1">
+                    <li>
+                      Studying Python, C++, Java, R, with coursework in discrete mathematics, data structures & algorithms, and calculus
+                    </li>
+                    <li>
+                      Finalist in the GenAI Hackathon for SDGs 2024, competing among multiple Hong Kong universities
+                    </li>
+                    <li>
+                      IBM Z Student Ambassador involved in community outreach, speaking at IBM Community Day, and networking with other ambassadors globally
+                    </li>
+                  </ul>
+                </p>
               </div>
 
               <hr className="border-t border-neutral-300 dark:border-neutral-700 my-1" />
@@ -307,7 +346,16 @@ function App() {
                     <p className="text-xs dark:text-neutral-400">Jan 2017 – Jun 2024</p>
                   </div>
                 </div>
-                <p className="ml-16">blablabla this is some of the cool stuff that i did hopefully that's useful for you</p>
+                <p className="ml-16 pr-10">
+                  <ul className="ml-3 list-disc list-outside flex flex-col gap-1">
+                    <li>
+                      Graduated top of class; awarded Governor General's Academic Medal, Student of the Year 2024, and Harvard Prize Book
+                    </li>
+                    <li>
+                      Secretary General of Model United Nations club and active leader in the Maths club
+                    </li>
+                  </ul>
+                </p>
               </div>
             </div>
           </div>
