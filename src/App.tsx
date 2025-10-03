@@ -112,7 +112,7 @@ function App() {
 
   return (
     <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen w-full transition-colors duration-500`}>
-      <header className={`sticky top-0 z-50 mx-auto px-4 py-8 md:px-8 transition-all ${scrolled ? "duration-1200 max-w-[405px] md:max-w-[465px]" : "duration-1200 max-w-full md:max-w-3xl"}`}> 
+      <header className={`sticky top-0 z-50 mx-auto px-4 py-8 md:px-8 transition-all ${scrolled ? "duration-1000 max-w-[350px] md:max-w-[400px]" : "duration-1000 max-w-full md:max-w-3xl"}`}> 
         <nav className="card flex pl-8 p-4 items-center justify-between">
           <ul className="flex gap-6 md:gap-8">
             <li><a 
@@ -123,6 +123,7 @@ function App() {
                 scrollToSection("top");
               }}
             >Home</a></li>
+            {/* Skills Header
             <li><a 
               href="#skills" 
               className="link"
@@ -131,6 +132,7 @@ function App() {
                 scrollToSection("skills");
               }}
             >Skills</a></li>
+            */}
             <li><a 
               href="#projects" 
               className="link"
@@ -241,7 +243,7 @@ function App() {
                   <div className="flex flex-col gap-0.25">
                     <p className="font-bold text-base">Collective Global</p>
                     <p className="-mt-0.5">Full Stack Developer (Contract)</p>
-                    <p className="text-xs dark:text-neutral-400">Jul 2024 – Present</p>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">Jul 2024 – Present</p>
                   </div>
                 </div>
                 <p className="ml-16 pr-10">
@@ -256,7 +258,7 @@ function App() {
                 </p>
               </div>
 
-              <hr className="border-t border-neutral-300 dark:border-neutral-700 my-1" />
+              <hr className="border-t border-neutral-300 dark:border-neutral-700 transition-colors duration-500 my-1" />
 
               {/* BSD Teaching */}
               <div>
@@ -265,7 +267,7 @@ function App() {
                   <div className="flex flex-col gap-0.25">
                     <p className="font-bold text-base">BSD Education</p>
                     <p className="-mt-0.5">Coding Instructor (Part-time)</p>
-                    <p className="text-xs dark:text-neutral-400">May 2025 – Present</p>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">May 2025 – Present</p>
                   </div>
                 </div>
                 <p className="ml-16 pr-10">
@@ -280,7 +282,7 @@ function App() {
                 </p>
               </div>
 
-              <hr className="border-t border-neutral-300 dark:border-neutral-700 my-1" />
+              <hr className="border-t border-neutral-300 dark:border-neutral-700 transition-colors duration-500 my-1" />
 
               {/* BSD Intern */}
               <div>
@@ -289,7 +291,7 @@ function App() {
                   <div className="flex flex-col gap-0.25">
                     <p className="font-bold text-base">BSD Education</p>
                     <p className="-mt-0.5">Developer (Internship)</p>
-                    <p className="text-xs dark:text-neutral-400">Sep 2023 – Mar 2024</p>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">Sep 2023 – Mar 2024</p>
                   </div>
                 </div>
                 <p className="ml-16 pr-10">
@@ -316,7 +318,7 @@ function App() {
                   <div className="flex flex-col gap-0.25">
                     <p className="font-bold text-base">The University of Hong Kong</p>
                     <p className="-mt-0.5">BEng in Computer Science</p>
-                    <p className="text-xs dark:text-neutral-400">Sep 2024 – Due Jun 2028</p>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">Sep 2024 – Due Jun 2028</p>
                   </div>
                 </div>
                 <p className="ml-16 pr-10">
@@ -334,7 +336,7 @@ function App() {
                 </p>
               </div>
 
-              <hr className="border-t border-neutral-300 dark:border-neutral-700 my-1" />
+              <hr className="border-t border-neutral-300 dark:border-neutral-700 transition-colors duration-500 my-1" />
 
               {/* DSC */}
               <div>
@@ -343,7 +345,7 @@ function App() {
                   <div className="flex flex-col gap-0.25">
                     <p className="font-bold text-base">DSC International School</p>
                     <p className="-mt-0.5">Ontario Secondary School Diploma</p>
-                    <p className="text-xs dark:text-neutral-400">Jan 2017 – Jun 2024</p>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">Jan 2017 – Jun 2024</p>
                   </div>
                 </div>
                 <p className="ml-16 pr-10">
@@ -362,12 +364,25 @@ function App() {
 
         </section>
 
+        {/* Skills Section
         <section id="skills" className="pt-32 -mt-24 flex flex-col gap-8">
           <h2 className="text-3xl font-bold text-center md:text-start">Skills</h2>
-          <div className="card p-8">
-              
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4">
+              <div className="card flex-1 p-8"></div>
+              <div className="card flex-1 p-8"></div>
+              <div className="card flex-1 p-8"></div>
+              <div className="card flex-1 p-8"></div>
+            </div>
+            <div className="flex gap-4">
+              <div className="card flex-1 p-8"></div>
+              <div className="card flex-1 p-8"></div>
+              <div className="card flex-1 p-8"></div>
+              <div className="card flex-1 p-8"></div>
+            </div>
           </div>
         </section>
+        */}
         
         <section id="projects" className="pt-32 -mt-24 flex flex-col gap-8">
           <h2 className="text-3xl font-bold text-center md:text-start">Projects</h2>
