@@ -1,6 +1,38 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+html {
+  text-wrap: pretty;
+  background-color: #0a0a0a;
+  color-scheme: dark;
+}
+
+html.light {
+  background-color: #f5f5f5;
+  color-scheme: light;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #525252;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #737373;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #737373;
+}
+
 @keyframes dropdownEnter {
   0% {
     opacity: 0;
@@ -54,7 +86,7 @@ button > span {
 }
 
 .hover-button {
-  @apply text-neutral-500 dark:text-neutral-400 inline-flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 rounded-lg;
+  @apply text-neutral-500 dark:text-neutral-400 inline-flex items-center justify-center hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 rounded-lg;
   transition-property: color, background-color, box-shadow, border, text;
   transition-duration: 500ms;
 }
@@ -77,39 +109,12 @@ button > span {
   transition-duration: 500ms;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background: oklch(55.6% 0 0);
   color: white;
 }
 
-@media (min-width: 768px) { /* md breakpoint */
-  .sourcinggpt-span {
-    grid-row-start: 1;
-    grid-row-end: 3;
-    grid-column-start: 1;
-    grid-column-end: 2;
-  }
-
-  .twintoys-span {
-    grid-row-start: 3;
-    grid-row-end: 4; /* or just auto if single row */
-    grid-column-start: 1;
-    grid-column-end: 2;
-  }
-
-  .arfixit-span {
-    grid-row-start: 1;
-    grid-row-end: 2; /* or auto if single */
-    grid-column-start: 2;
-    grid-column-end: 3;
-  }
-
-  .vetsage-span {
-    grid-row-start: 2;
-    grid-row-end: 4;
-    grid-column-start: 2;
-    grid-column-end: 3;
-  }
-}
-
-/* On small screens, these classes do not apply */
