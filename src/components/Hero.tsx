@@ -18,7 +18,7 @@ export function Hero({ onAboutOpen }: { onAboutOpen: () => void }) {
   return (
     <motion.div variants={fadeUp} className="card p-10 items-center flex flex-col md:flex-row gap-8 md:gap-12 justify-between">
       <div className="w-full md:w-2/5 flex-shrink-0 h-[275px] md:h-auto md:self-stretch overflow-hidden rounded-xl">
-        <img className="w-full h-full object-cover md:scale-140 object-[50%_25%] md:translate-y-8 md:-translate-x-2" alt="Photo of me" src="./IMG-20250131-WA0057.jpg" />
+        <img className="w-full h-full object-cover" alt="Photo of me" src="./profile_pic.png" />
       </div>
       <div className="flex flex-col items-center md:items-stretch md:justify-center md:pt-2">
         <h1 className="text-5xl font-bold">Hi, I'm Dylan.</h1>
