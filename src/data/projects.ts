@@ -25,7 +25,7 @@ export const projects: Project[] = [
     ],
     tech: ["LLMs", "RAG", "AWS", "n8n", "TypeScript", "React", "Firebase", "PostgreSQL"],
     images: ["./sourcinggpt1.png", "./sourcinggpt2.png"],
-    url: "https://app.sourcinggpt.ai",
+    url: "https://sourcinggpt.ai",
   },
   {
     id: "vetsage",
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     ],
     tech: ["LLMs", "RAG", "AWS", "n8n", "Python", "React", "PostgreSQL"],
     images: ["./vetsage1.png", "./vetsage2.png"],
-    url: "https://app.vetsage.ai",
+    url: "https://vetsage.webflow.io/",
   },
   {
     id: "arfixit",
