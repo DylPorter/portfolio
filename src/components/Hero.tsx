@@ -30,7 +30,7 @@ export function Hero({ onAboutOpen }: { onAboutOpen: () => void }) {
         <p className="mt-4 text-balance text-center md:text-left">I build AI systems for startups and teach students in Hong Kong.</p>
         <div className="flex items-center gap-3 mt-5">
           <button onClick={onAboutOpen} className="px-4 py-2 text-sm button gap-2 hover:cursor-pointer"><LuUser size={14} />About</button>
-          <a href="./resume.pdf" target="_blank" className="px-4 py-2 text-sm button gap-2"><LuExternalLink size={14} />Résumé</a>
+          <a href="./Dylan_Porter_Resume.pdf" target="_blank" className="px-4 py-2 text-sm button gap-2"><LuExternalLink size={14} />Résumé</a>
         </div>
         <div className="flex items-center gap-3 mt-4">
           <a href="https://linkedin.com/in/tdporter" target="_blank" className="p-3 hover-button"><FaLinkedinIn /></a>
