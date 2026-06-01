@@ -12,6 +12,13 @@ html.light {
   color-scheme: light;
 }
 
+/* Display typeface — Fraunces on the hero (h1) and section + modal headings (h2) only.
+   Everything else (card titles, company names, nav, prose) stays the system sans. */
+h1, h2 {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  letter-spacing: -0.015em;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;

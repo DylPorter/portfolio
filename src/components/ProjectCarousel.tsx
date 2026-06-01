@@ -62,16 +62,17 @@ export function ProjectCarousel({ onSelect, onApi }: { onSelect: (id: string) =>
             transition={{ duration: 0.2 }}
             onClick={() => { if (!isDragging.current) onSelect(project.id); }}
           >
-            {project.images.length > 0 && (
+            {project.images.length > 0 ? (
               <div className="w-full overflow-hidden rounded-xl h-40 mb-4">
                 <img className="w-full h-full object-cover object-[50%_0%]" alt={project.title} src={project.images[0]} draggable={false} />
               </div>
+            ) : (
+              <div className="w-full rounded-xl h-40 mb-4 flex items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800/80 dark:to-neutral-950 border border-neutral-200 dark:border-neutral-800">
+                <span className="text-xs font-medium text-neutral-400 dark:text-neutral-500">{project.status ?? "Coming soon"}</span>
+              </div>
             )}
             <h3 className="text-xl font-bold">{project.title}</h3>
-            <p className="mt-2 mb-3 text-sm text-neutral-600 dark:text-neutral-400 transition-colors duration-500 leading-relaxed">{project.tagline}</p>
-            <div className="flex flex-row flex-wrap text-xs gap-1 mt-auto">
-              {project.tech.map((t) => <div key={t} className="pill">{t}</div>)}
-            </div>
+            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400 transition-colors duration-500 leading-relaxed">{project.tagline}</p>
           </motion.div>
         ))}
       </motion.div>
