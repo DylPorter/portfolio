@@ -21,7 +21,7 @@ export function Hero({ onAboutOpen }: { onAboutOpen: () => void }) {
         <img className="w-full h-full object-cover" alt="Photo of me" src="./profile_pic.webp" />
       </div>
       <div className="flex flex-col items-center md:items-stretch md:justify-center md:pt-2">
-        <h1 className="text-5xl font-bold">Hi, I'm Dylan.</h1>
+        <h1 className="text-5xl font-bold text-center md:text-left">Hi, I'm Dylan.</h1>
         <div className="mt-5 flex flex-row flex-wrap gap-x-6 md:flex-col items-center justify-center md:items-start">
           <p>Developer<a href="https://collectiveglobal.net" target="_blank" className="link">{" "}@ Collective Global</a></p>
           <p>Instructor<a href="https://bsd.education" target="_blank" className="link">{" "}@ BSD Education</a></p>
