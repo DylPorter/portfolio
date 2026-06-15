@@ -97,7 +97,7 @@ button > span {
 }
 
 .dropdown-enter {
-  animation: dropdownEnter 500ms ease forwards;
+  animation: dropdownEnter 200ms ease forwards;
 }
 
 .dropdown-leave {
@@ -107,13 +107,13 @@ button > span {
 .card {
   @apply border-1 rounded-2xl border-neutral-200 dark:border-neutral-800 shadow dark:shadow-lg/50 dark:shadow-black bg-white/75 dark:bg-neutral-900/75 backdrop-blur;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .link {
   @apply text-neutral-500 dark:text-neutral-400;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 .link:hover { color: var(--accent); }
 
@@ -125,15 +125,22 @@ button > span {
   text-decoration-color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-  transition: color 500ms ease;
+  transition: color 200ms ease;
 }
 .link-accent:hover { color: var(--accent); }
+
+/* Section eyebrow — small, tracked, accent-coloured kicker */
+.eyebrow {
+  @apply text-xs font-semibold uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
 
 /* Interactive boxes (projects, writing, future) — accent border + drop shadow on
    hover, NO transform/raise. Softer neutral variant for non-clickable cards. */
 .card-interactive {
   cursor: pointer;
-  transition: border-color 500ms ease, box-shadow 500ms ease;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 .card-interactive:hover {
   border-color: var(--card-hover-border);
@@ -151,7 +158,7 @@ button > span {
   @apply inline-flex items-center justify-center rounded-lg shadow;
   background-color: var(--accent);
   color: var(--accent-contrast);
-  transition: opacity 500ms ease, background-color 500ms ease, color 500ms ease;
+  transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease;
 }
 .button-accent:hover { opacity: 0.88; }
 
@@ -167,31 +174,31 @@ button > span {
 .button {
   @apply text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 inline-flex items-center justify-center border-1 rounded-lg border-neutral-400 dark:border-neutral-500 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 shadow dark:shadow-lg/20 dark:shadow-black;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .hover-button {
   @apply text-neutral-500 dark:text-neutral-400 inline-flex items-center justify-center hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 rounded-lg;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .input-box {
   @apply px-4 py-2 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-500;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .pill {
   @apply px-1.5 py-0.5 bg-[oklch(0.95_0_0)] dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 rounded-lg;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .icon {
   @apply border-1 border-neutral-300 dark:border-neutral-700 size-12 rounded-full;
   transition-property: color, background-color, box-shadow, border, text;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .hide-scrollbar::-webkit-scrollbar {

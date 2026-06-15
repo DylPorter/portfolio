@@ -27,17 +27,17 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
   return (
     <header
       className={`sticky top-0 z-50 w-full pointer-events-none transition-all duration-1000 md:mx-auto md:px-8 md:py-6 ${
-        scrolled ? "md:max-w-[520px]" : "md:max-w-3xl"
+        scrolled ? "md:max-w-[520px]" : "md:max-w-6xl"
       }`}
     >
       <div className="relative">
-        <nav className="flex items-center justify-between pointer-events-auto overflow-hidden px-4 py-3 bg-white/80 dark:bg-neutral-950/80 backdrop-blur border-b border-neutral-200 dark:border-neutral-800 transition-all duration-500 md:px-6 md:py-4 md:rounded-2xl md:border md:shadow md:dark:shadow-lg/50 md:dark:shadow-black md:bg-white/75 md:dark:bg-neutral-900/75">
+        <nav className="flex items-center justify-between pointer-events-auto overflow-hidden px-4 py-3 bg-white/80 dark:bg-neutral-950/80 backdrop-blur border-b border-neutral-200 dark:border-neutral-800 transition-all duration-200 md:px-6 md:py-4 md:rounded-2xl md:border md:shadow md:dark:shadow-lg/50 md:dark:shadow-black md:bg-white/75 md:dark:bg-neutral-900/75">
           <a
             href="#top"
             onClick={(e) => { e.preventDefault(); scrollToSection("top"); }}
-            className="wordmark text-xl font-bold leading-none relative -top-[2px] pl-2 hover:opacity-70 transition-opacity duration-500"
+            className="wordmark text-xl font-bold leading-none relative -top-[2px] pl-2 hover:opacity-70 transition-opacity duration-200"
           >
-            <span className="text-[var(--accent)] transition-colors duration-500">tdp</span><span className="text-[var(--ink)] transition-colors duration-500">orter</span>
+            <span className="text-[var(--accent)] transition-colors duration-200">tdp</span><span className="text-[var(--ink)] transition-colors duration-200">orter</span>
           </a>
 
           <div className="flex items-center gap-1 md:gap-4">
