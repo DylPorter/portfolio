@@ -41,8 +41,8 @@ export function BsdSection() {
       <div className="flex items-center mb-3">
         <img ref={logoRef} className="icon mr-4" src="./bsdeducation_logo.jpg" />
         <div className="flex flex-col gap-0.25">
-          <p className="font-bold text-base">BSD Education</p>
-          <p className="-mt-0.5">Coding Instructor</p>
+          <p className="font-bold text-base text-[var(--ink)]">BSD Education</p>
+          <p className="-mt-0.5 text-[var(--ink)]">Coding Instructor</p>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">May 2025 – Present</p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export function BsdSection() {
           <div ref={dotRef} className="w-2.5 h-2.5 rounded-full bg-neutral-400 dark:bg-neutral-600 transition-colors duration-500" />
         </div>
         <div className="flex flex-col gap-0.25">
-          <p>Software Engineering Intern</p>
+          <p className="text-[var(--ink)]">Software Engineering Intern</p>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">Sep 2023 – Mar 2024</p>
         </div>
       </div>

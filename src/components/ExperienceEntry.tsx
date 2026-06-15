@@ -10,8 +10,8 @@ export function ExperienceEntry({ logo, company, role, date, description }: {
       <div className="flex items-center mb-3">
         <img className="icon mr-4" src={logo} />
         <div className="flex flex-col gap-0.25">
-          <p className="font-bold text-base">{company}</p>
-          <p className="-mt-0.5">{role}</p>
+          <p className="font-bold text-base text-[var(--ink)]">{company}</p>
+          <p className="-mt-0.5 text-[var(--ink)]">{role}</p>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 transition-colors duration-500">{date}</p>
         </div>
       </div>

@@ -56,10 +56,8 @@ export function ProjectCarousel({ onSelect, onApi }: { onSelect: (id: string) =>
         {projects.map((project) => (
           <motion.div
             key={project.id}
-            className="card p-6 flex flex-col flex-shrink-0 hover:border-neutral-400 dark:hover:border-neutral-600 cursor-pointer select-none"
+            className="card card-interactive p-6 flex flex-col flex-shrink-0 select-none"
             style={{ width: "calc((100% - 16px) / 2)", minWidth: "280px" }}
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.2 }}
             onClick={() => { if (!isDragging.current) onSelect(project.id); }}
           >
             {project.images.length > 0 ? (

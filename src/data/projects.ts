@@ -25,7 +25,7 @@ export const projects: Project[] = [
       "The React and TypeScript app with Firebase auth on top, deployed on AWS.",
     ],
     tech: ["LLMs", "RAG", "n8n", "TypeScript", "React", "Firebase", "AWS", "PostgreSQL"],
-    images: ["./sourcinggpt1.png", "./sourcinggpt2.png"],
+    images: ["./sourcinggpt1.png"],
     url: "https://sourcinggpt.ai",
   },
   {
@@ -41,13 +41,13 @@ export const projects: Project[] = [
       "Deployed and running in production for veterinary clinics across multiple countries.",
     ],
     tech: ["LLMs", "RAG", "OCR", "Python", "n8n", "React", "AWS"],
-    images: ["./vetsage1.png", "./vetsage2.png"],
+    images: ["./vetsage1.png"],
     url: "https://vetsage.webflow.io/",
   },
   {
     id: "pacl",
     title: "PACL",
-    tagline: "Proactive Agent Coordination Layer — when everyone on a team runs their own AI agent, PACL is the intermediary that watches the whole picture and pushes back coordination nobody asked for.",
+    tagline: "An intermediary that watches a whole team of AI agents and pushes back coordination nobody asked for.",
     description: "Everyone on a team now runs their own AI agent, and the richest part of each person's work — what they're doing and why — lives inside that agent and dies at every handoff. PACL makes it visible and acts on it: agents connect over MCP and report what they're working on, and a central Gemini intermediary reasons over the combined state — flagging when two agents are about to do the same work, turning an escalation into a structured ticket, handing a newly-started agent the context an earlier one already produced. Built solo for the Google Cloud Rapid Agent Hackathon, Arize track.",
     role: "Solo project",
     highlights: [
@@ -57,7 +57,7 @@ export const projects: Project[] = [
       "Came out of a problem I kept hitting in real work — context dying every time it crosses from one person's agent to another's.",
     ],
     tech: ["LLMs", "MCP", "Python", "Gemini", "Phoenix", "Cloud Run"],
-    images: [],
+    images: ["./pacl1.png"],
     url: "https://github.com/DylPorter/pacl",
     status: "Shipped · open source",
   },

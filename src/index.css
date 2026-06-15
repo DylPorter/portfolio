@@ -5,19 +5,49 @@ html {
   text-wrap: pretty;
   background-color: #0a0a0a;
   color-scheme: dark;
+  /* Accent — muted sage in dark mode (reads on #0a0a0a without glowing) */
+  --accent: #84b594;
+  /* Maroon alternative (dark): #c35d6b — see the full maroon kit in the light block below */
+  --accent-contrast: #0a0a0a;
+  /* Headers + links — soft off-white (Nickey's --ink feel) */
+  --ink: #e5e5e5;
+  /* Body text — a step dimmer than ink (Vadim: body grey, headers/links strong) */
+  --body: #b8b8b8;
+  /* Subtle, monochrome card-hover border (not brash) */
+  --card-hover-border: #404040;
 }
 
 html.light {
   background-color: #f5f5f5;
   color-scheme: light;
+  /* Accent — forest green / mint, deep enough for contrast on #f5f5f5 */
+  --accent: #4aa377;
+  /* ── MAROON ALTERNATIVE (one-line swap back) ─────────────────────────────
+     light --accent: #8a2e3b   (deep wine — Dylan's "perfect" light shade)
+     dark  --accent: #c35d6b   (tuned: #c46b76 read too pink, #c24f60 too striking)
+     favicon + tdp-logo fill:  #a8505f   (currently green #4f9e6a)
+     Note: looked great as text / links / wordmark, but keep the CTA + buttons
+     NEUTRAL (a filled red/maroon button reads as a "danger" button).
+     ─────────────────────────────────────────────────────────────────────── */
+  /* light-mode button green is the darker one → white text reads on it */
+  --accent-contrast: #ffffff;
+  /* Headers + links — soft off-black */
+  --ink: #1f1f1f;
+  /* Body text — darkish grey (Vadim model: body grey, headers/links strong) */
+  --body: #525252;
+  /* Subtle, monochrome card-hover border */
+  --card-hover-border: #a3a3a3;
 }
 
 /* Display typeface — Fraunces on the hero (h1) and section + modal headings (h2) only.
    Everything else (card titles, company names, nav, prose) stays the system sans. */
-h1, h2 {
+h1, h2, .wordmark {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
   letter-spacing: -0.015em;
 }
+
+/* Headers + titles stay full-strength ink even though body text is dimmer grey */
+h1, h2, h3 { color: var(--ink); }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
@@ -81,10 +111,58 @@ button > span {
 }
 
 .link {
-  @apply hover:text-neutral-700 dark:hover:text-neutral-300 text-neutral-500 dark:text-neutral-400; 
+  @apply text-neutral-500 dark:text-neutral-400;
   transition-property: color, background-color, box-shadow, border, text;
   transition-duration: 500ms;
 }
+.link:hover { color: var(--accent); }
+
+/* Inline prose links — Vadim style: full-contrast text + underline at rest,
+   gaining the accent colour only on hover (underline follows currentColor) */
+.link-accent {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 500ms ease;
+}
+.link-accent:hover { color: var(--accent); }
+
+/* Interactive boxes (projects, writing, future) — accent border + drop shadow on
+   hover, NO transform/raise. Softer neutral variant for non-clickable cards. */
+.card-interactive {
+  cursor: pointer;
+  transition: border-color 500ms ease, box-shadow 500ms ease;
+}
+.card-interactive:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.22);
+}
+.card-soft {
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.card-soft:hover {
+  border-color: var(--color-neutral-400);
+  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.30);
+}
+
+.button-accent {
+  @apply inline-flex items-center justify-center rounded-lg shadow;
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+  transition: opacity 500ms ease, background-color 500ms ease, color 500ms ease;
+}
+.button-accent:hover { opacity: 0.88; }
+
+/* Icon/outline-button hover tints toward the accent (low opacity) instead of going grey */
+.hover-button:hover { color: color-mix(in srgb, var(--accent) 78%, transparent); }
+.button:hover {
+  color: color-mix(in srgb, var(--accent) 82%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Nav items use the body font (Dylan: mono/sans best for nav; Fraunces too chunky). */
 
 .button {
   @apply text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 inline-flex items-center justify-center border-1 rounded-lg border-neutral-400 dark:border-neutral-500 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 shadow dark:shadow-lg/20 dark:shadow-black;
@@ -121,7 +199,7 @@ button > span {
 }
 
 ::selection {
-  background: oklch(55.6% 0 0);
-  color: white;
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--ink);
 }
 
