@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { LuSun, LuMoon, LuX, LuMenu } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navItems = [["Home", "top"], ["Projects", "projects"], ["Writing", "writing"]] as const;
+const navItems = [["Home", "top"], ["Projects", "projects"]] as const;
 
 export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
   const [scrolled, setScrolled] = useState(false);

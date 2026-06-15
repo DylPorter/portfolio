@@ -97,7 +97,9 @@ function App() {
           </motion.div>
         </Section>
 
-        {/* ── Writing ────────────────────────────────── */}
+        {/* ── Writing ──────────────────────────────────
+            Hidden until the first real post lands. Restore this block + the
+            ["Writing", "writing"] nav item in Nav.tsx when there's something to show.
         <Section id="writing" className="pt-32 -mt-24 flex flex-col gap-8">
           <motion.div variants={fadeUp} className="flex justify-between items-center">
             <h2 className="text-3xl font-bold">Writing</h2>
@@ -107,6 +109,7 @@ function App() {
             <p className="text-neutral-500 dark:text-neutral-400 text-sm">Coming soon — documenting what I'm learning as I build.</p>
           </motion.div>
         </Section>
+        ──────────────────────────────────────────────── */}
 
       </main>
 
