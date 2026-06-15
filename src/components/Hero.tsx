@@ -23,7 +23,7 @@ export function Hero({ onAboutOpen }: { onAboutOpen: () => void }) {
       <div className="flex flex-col items-center md:items-stretch md:justify-center md:pt-2">
         <h1 className="text-5xl font-bold text-center md:text-left">Hi, I'm Dylan.</h1>
         <div className="mt-5 flex flex-row flex-wrap gap-x-6 md:flex-col items-center justify-center md:items-start">
-          <p>Developer<a href="https://collectiveglobal.net" target="_blank" className="link">{" "}@ Collective Global</a></p>
+          <p>Developer<a href="https://www.collectiveglobal.net/" target="_blank" className="link">{" "}@ Collective Global</a></p>
           <p>Instructor<a href="https://bsd.education" target="_blank" className="link">{" "}@ BSD Education</a></p>
           <p>Student<a href="https://hku.hk" target="_blank" className="link">{" "}@ The University of Hong Kong</a></p>
         </div>
