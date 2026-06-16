@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useSearchParams, useNavigate } from "react-router-dom";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/fa6";
 import { motion, MotionConfig, useInView } from "framer-motion";
 
@@ -89,8 +89,19 @@ function Footer() {
 }
 
 function Home() {
-  const [projectModal, setProjectModal] = useState<string | null>(null);
+  // Project modal state lives in the URL (?project=id) so the browser/phone back
+  // button closes it instead of leaving the site, and links are shareable.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const projectModal = searchParams.get("project");
   const activeProject = projects.find((p) => p.id === projectModal);
+
+  const openProject = useCallback((id: string) => setSearchParams({ project: id }), [setSearchParams]);
+  const closeProject = useCallback(() => {
+    // Pop the pushed entry if we opened it in-session; else just clear the param.
+    if ((window.history.state?.idx ?? 0) > 0) navigate(-1);
+    else setSearchParams({}, { replace: true });
+  }, [navigate, setSearchParams]);
 
   const featuredProject = projects.find((p) => p.id === "sourcinggpt") ?? projects[0];
   const otherProjects = projects.filter((p) => p.id !== featuredProject.id);
@@ -113,7 +124,7 @@ function Home() {
             {/* Featured */}
             <motion.button
               variants={fadeUp}
-              onClick={() => setProjectModal(featuredProject.id)}
+              onClick={() => openProject(featuredProject.id)}
               className="card card-interactive border-l-2 border-l-[var(--accent)] overflow-hidden text-left flex flex-col lg:flex-row"
             >
               <div className="lg:w-1/2 h-60 lg:h-auto lg:min-h-[280px] flex-shrink-0 overflow-hidden">
@@ -136,7 +147,7 @@ function Home() {
                 <motion.button
                   key={p.id}
                   variants={fadeUp}
-                  onClick={() => setProjectModal(p.id)}
+                  onClick={() => openProject(p.id)}
                   className="card card-interactive p-6 text-left flex flex-col gap-2"
                 >
                   <span className="eyebrow">{p.role}</span>
@@ -200,7 +211,7 @@ function Home() {
 
       </main>
 
-      <ProjectModal project={activeProject} onClose={useCallback(() => setProjectModal(null), [])} />
+      <ProjectModal project={activeProject} onClose={closeProject} />
     </>
   );
 }
