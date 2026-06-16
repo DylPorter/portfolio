@@ -23,9 +23,9 @@ const EDUCATION = [
   { logo: "/dsc_logo.jpg", name: "DSC International School", role: "Ontario Secondary School Diploma", date: "2017 — 2024", note: "Top of the graduating class · Governor General's Medal." },
 ];
 
-function SectionHead({ id, eyebrow, title }: { id?: string; eyebrow: string; title: string }) {
+function SectionHead({ id, eyebrow, title, align = "left" }: { id?: string; eyebrow: string; title: string; align?: "left" | "right" }) {
   return (
-    <motion.div id={id} variants={fadeUp} className="flex flex-col gap-1.5 scroll-mt-28">
+    <motion.div id={id} variants={fadeUp} className={`flex flex-col gap-1.5 scroll-mt-28 ${align === "right" ? "md:items-end md:text-right" : ""}`}>
       <span className="eyebrow">{eyebrow}</span>
       <h2 className="text-3xl md:text-4xl font-medium tracking-[-0.02em]">{title}</h2>
     </motion.div>
@@ -163,9 +163,9 @@ function Home() {
           </div>
         </Band>
 
-        {/* ── WRITING ──────────────────────────────────── */}
+        {/* ── WRITING (staggered right — left/right/left rhythm) ───────── */}
         <Band>
-          <SectionHead id="writing" eyebrow="Notes" title="Writing" />
+          <SectionHead id="writing" eyebrow="Notes" title="Writing" align="right" />
           {featuredPost && (
             <motion.div variants={fadeUp}>
               <Link
@@ -178,7 +178,7 @@ function Home() {
               </Link>
             </motion.div>
           )}
-          <motion.a variants={fadeUp} href="https://tdporter.substack.com" target="_blank" rel="noopener noreferrer" className="link-accent text-sm w-fit">
+          <motion.a variants={fadeUp} href="https://tdporter.substack.com" target="_blank" rel="noopener noreferrer" className="link-accent text-sm w-fit md:self-end">
             More notes on Substack →
           </motion.a>
         </Band>
@@ -216,7 +216,7 @@ function Home() {
             <div className="flex flex-col justify-center gap-5 items-start text-left">
               <div className="flex flex-col gap-2">
                 <span className="eyebrow">Available</span>
-                <p className="text-[var(--body)] leading-relaxed">Open to freelance and new projects, remote or in Hong Kong (UTC+8).</p>
+                <p className="text-[var(--body)] leading-relaxed">Open to freelance, startups, and new projects,<br />remote or in Hong Kong (UTC+8).</p>
               </div>
               <a href={`mailto:${EMAIL}`} className="px-5 py-2.5 button gap-2 text-sm w-fit">
                 <FaRegEnvelope size={13} />{EMAIL}
