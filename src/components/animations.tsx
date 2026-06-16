@@ -12,7 +12,7 @@ export const stagger = {
 
 export function Section({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
     <motion.section
       ref={ref}

@@ -15,13 +15,18 @@ html {
   --body: #b8b8b8;
   /* Subtle, monochrome card-hover border (not brash) */
   --card-hover-border: #404040;
+  /* Alternating section band — barely off the base #0a0a0a (Vadim-style rhythm) */
+  --section-alt: #111111;
+  /* Hairline section-break divider */
+  --section-border: #1c1c1c;
 }
 
 html.light {
   background-color: #f5f5f5;
   color-scheme: light;
-  /* Accent — forest green / mint, deep enough for contrast on #f5f5f5 */
-  --accent: #4aa377;
+  /* Accent — deeper forest green for better contrast on #f5f5f5 (~4:1, near WCAG-AA
+     for small text; was #4aa377 ≈ 2.5:1). Nudge lighter toward #4aa377 if too dark. */
+  --accent: #2f8257;
   /* ── MAROON ALTERNATIVE (one-line swap back) ─────────────────────────────
      light --accent: #8a2e3b   (deep wine — Dylan's "perfect" light shade)
      dark  --accent: #c35d6b   (tuned: #c46b76 read too pink, #c24f60 too striking)
@@ -37,13 +42,19 @@ html.light {
   --body: #525252;
   /* Subtle, monochrome card-hover border */
   --card-hover-border: #a3a3a3;
+  /* Alternating section band — barely off the base #f5f5f5 (Vadim's white → faint grey) */
+  --section-alt: #efefef;
+  /* Hairline section-break divider */
+  --section-border: #e4e4e4;
 }
 
 /* Display typeface — Fraunces on the hero (h1) and section + modal headings (h2) only.
    Everything else (card titles, company names, nav, prose) stays the system sans. */
-h1, h2, .wordmark {
+h1, h2, .wordmark, .serif {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
   letter-spacing: -0.015em;
+  /* Engage the opsz axis we're already loading — let Fraunces size optically */
+  font-optical-sizing: auto;
 }
 
 /* Headers + titles stay full-strength ink even though body text is dimmer grey */
@@ -106,13 +117,13 @@ button > span {
 
 .card {
   @apply border-1 rounded-2xl border-neutral-200 dark:border-neutral-800 shadow dark:shadow-lg/50 dark:shadow-black bg-white/75 dark:bg-neutral-900/75 backdrop-blur;
-  transition-property: color, background-color, box-shadow, border, text;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
 }
 
 .link {
   @apply text-neutral-500 dark:text-neutral-400;
-  transition-property: color, background-color, box-shadow, border, text;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
 }
 .link:hover { color: var(--accent); }
@@ -128,6 +139,16 @@ button > span {
   transition: color 200ms ease;
 }
 .link-accent:hover { color: var(--accent); }
+
+/* Full highlight behind the hero name — a clean accent wash over the whole word. */
+.name-highlight {
+  background-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: 0.08em;
+  padding: 0.02em 0.1em;
+  margin-inline: -0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 
 /* Section eyebrow — small, tracked, accent-coloured kicker */
 .eyebrow {
@@ -146,12 +167,16 @@ button > span {
   border-color: var(--card-hover-border);
   box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.22);
 }
-.card-soft {
-  transition: border-color 300ms ease, box-shadow 300ms ease;
-}
-.card-soft:hover {
-  border-color: var(--color-neutral-400);
-  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.30);
+
+/* Keyboard focus — visible accent ring on interactive surfaces (mouse users unaffected) */
+.card-interactive:focus-visible,
+.button:focus-visible,
+.hover-button:focus-visible,
+.link:focus-visible,
+.link-accent:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .button-accent {
@@ -172,32 +197,46 @@ button > span {
 /* Nav items use the body font (Dylan: mono/sans best for nav; Fraunces too chunky). */
 
 .button {
-  @apply text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 inline-flex items-center justify-center border-1 rounded-lg border-neutral-400 dark:border-neutral-500 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 shadow dark:shadow-lg/20 dark:shadow-black;
-  transition-property: color, background-color, box-shadow, border, text;
+  @apply text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 inline-flex items-center justify-center border-1 rounded-lg border-neutral-300 dark:border-neutral-700 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 shadow dark:shadow-lg/20 dark:shadow-black;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
 }
+/* Opt-out used only by the hero Résumé button (sits next to shadowless icons) */
+.button-flat { box-shadow: none; }
 
 .hover-button {
   @apply text-neutral-500 dark:text-neutral-400 inline-flex items-center justify-center hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800 rounded-lg;
-  transition-property: color, background-color, box-shadow, border, text;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
+}
+
+/* Bordered icon button — shares the outlined-button language (hero Résumé, cards).
+   Encapsulates social/contact icons in a square so they read as deliberate controls. */
+.icon-button {
+  @apply inline-flex items-center justify-center size-9 rounded-lg border-1 border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800;
+  transition-property: color, background-color, border-color;
+  transition-duration: 200ms;
+}
+.icon-button:hover {
+  color: color-mix(in srgb, var(--accent) 82%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
 .input-box {
   @apply px-4 py-2 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-500;
-  transition-property: color, background-color, box-shadow, border, text;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
 }
 
 .pill {
   @apply px-1.5 py-0.5 bg-[oklch(0.95_0_0)] dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 rounded-lg;
-  transition-property: color, background-color, box-shadow, border, text;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
 }
 
 .icon {
   @apply border-1 border-neutral-300 dark:border-neutral-700 size-12 rounded-full;
-  transition-property: color, background-color, box-shadow, border, text;
+  transition-property: color, background-color, box-shadow, border-color;
   transition-duration: 200ms;
 }
 
@@ -208,5 +247,16 @@ button > span {
 ::selection {
   background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--ink);
+}
+
+/* Respect users who asked for less motion — neutralises CSS transitions/animations.
+   Framer Motion is handled separately via <MotionConfig reducedMotion="user">. */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 

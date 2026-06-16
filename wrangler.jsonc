@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "compatibility_date": "2026-06-15",
+  "assets": {
+    "directory": "./dist/",
+    // Serve index.html (200) for any path that isn't a built asset, so client-side
+    // routes like /writing/:slug work on hard refresh / deep links.
+    "not_found_handling": "single-page-application"
+  }
+}
