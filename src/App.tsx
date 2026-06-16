@@ -208,7 +208,7 @@ function Home() {
             {/* Left — the pitch (right-aligns toward the divider on desktop, left on mobile) */}
             <div className="flex flex-col gap-5 items-start text-left md:items-end md:text-right">
               <h2 className="text-4xl font-bold tracking-[-0.02em]">Let's build<br />something <span className="text-[var(--accent)]">together</span>.</h2>
-              <p className="text-[var(--body)] leading-relaxed">If you've got something in mind, whether it's a product, a hard AI problem, or an idea that needs shipping, I'd like to hear about it.</p>
+              <p className="text-[var(--body)] leading-relaxed max-w-sm">If you've got something in mind, whether it's a product, a hard AI problem, or an idea that needs shipping, I'd like to hear about it.</p>
             </div>
             {/* Right — availability + contact (always left-aligned) */}
             <div className="flex flex-col gap-5 items-start text-left md:pl-14 md:border-l md:border-neutral-200 md:dark:border-neutral-800">
