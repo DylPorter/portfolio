@@ -134,8 +134,8 @@ button > span {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
   transition: color 200ms ease;
 }
 .link-accent:hover { color: var(--accent); }

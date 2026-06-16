@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Routes, Route, Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useSearchParams, useNavigate, useNavigationType } from "react-router-dom";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/fa6";
 import { motion, MotionConfig, useInView } from "framer-motion";
 
@@ -50,6 +50,9 @@ function ResumeEntry({ logo, name, role, date, note }: { logo: string; name: str
 function Band({ id, alt = false, first = false, inner = "py-12 md:py-20 gap-8", children }: { id?: string; alt?: boolean; first?: boolean; inner?: string; children: React.ReactNode }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  // On back/forward (POP) the home remounts — render sections instantly (no
+  // re-played fade-in) so returning from a post looks like you never left.
+  const restored = useNavigationType() === "POP";
   return (
     <section
       id={id}
@@ -57,8 +60,8 @@ function Band({ id, alt = false, first = false, inner = "py-12 md:py-20 gap-8", 
     >
       <motion.div
         ref={ref}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        initial={restored ? false : "hidden"}
+        animate={restored || inView ? "visible" : "hidden"}
         variants={stagger}
         className={`max-w-6xl mx-auto px-6 md:px-8 flex flex-col ${inner}`}
       >
@@ -71,9 +74,10 @@ function Band({ id, alt = false, first = false, inner = "py-12 md:py-20 gap-8", 
 function Footer() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const restored = useNavigationType() === "POP";
   return (
     <footer className="w-full border-t border-[var(--section-border)] transition-colors duration-200">
-      <motion.div ref={ref} initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp} className="max-w-6xl mx-auto px-6 md:px-8 pt-8 pb-10">
+      <motion.div ref={ref} initial={restored ? false : "hidden"} animate={restored || inView ? "visible" : "hidden"} variants={fadeUp} className="max-w-6xl mx-auto px-6 md:px-8 pt-8 pb-10">
         <div className="flex flex-col-reverse items-center md:flex-row md:justify-between gap-4">
           <span className="text-neutral-400 dark:text-neutral-500 text-xs">© 2026 Dylan Porter · Hong Kong</span>
           <div className="flex items-center gap-2.5">
