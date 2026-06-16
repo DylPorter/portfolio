@@ -8,15 +8,15 @@ const EMAIL = "info@tdporter.dev";
 export function Hero() {
   return (
     <motion.div variants={fadeUp} className="flex flex-col md:flex-row gap-8 md:gap-14 items-center">
-      <div className="w-full md:w-[38%] md:order-last flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
+      <div className="w-full md:w-[44%] md:order-last flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
         <img className="w-full h-full object-cover object-top" alt="Dylan Porter" src="/profile_pic.webp" />
       </div>
       <div className="flex flex-col md:flex-1 items-center text-center md:items-start md:text-left">
         <h1 className="text-6xl md:text-7xl font-bold tracking-[-0.03em] leading-[0.95]">Hi, I'm Dylan.</h1>
-        <p className="mt-7 text-lg md:text-xl leading-relaxed text-[var(--body)] max-w-xl">
+        <p className="mt-7 text-lg md:text-xl leading-relaxed text-[var(--body)] max-w-2xl">
           I build production AI systems across sourcing, healthcare, and education as a full-stack AI engineer in Hong Kong.
         </p>
-        <p className="mt-3 text-base leading-relaxed text-neutral-500 dark:text-neutral-500 max-w-xl">
+        <p className="mt-3 text-base leading-relaxed text-neutral-500 dark:text-neutral-500 max-w-2xl">
           I ship your products end to end — agentic pipelines, AWS infrastructure, React frontends — and write about how they actually get made.
         </p>
         <div className="mt-6 flex flex-row flex-wrap items-center gap-x-4 md:gap-x-2.5 gap-y-1 justify-center md:justify-start text-sm text-[var(--body)]">
