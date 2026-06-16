@@ -8,7 +8,7 @@ const EMAIL = "info@tdporter.dev";
 export function Hero() {
   return (
     <motion.div variants={fadeUp} className="flex flex-col md:flex-row gap-8 md:gap-14 items-center">
-      <div className="w-full md:w-[38%] flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
+      <div className="w-full md:w-[38%] md:order-last flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
         <img className="w-full h-full object-cover object-top" alt="Dylan Porter" src="/profile_pic.webp" />
       </div>
       <div className="flex flex-col items-center text-center md:items-start md:text-left">
