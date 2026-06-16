@@ -1,11 +1,14 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigationType } from "react-router-dom";
 
-/* On route change: jump to top. If the target carries a hash (e.g. "/#writing"),
-   smooth-scroll to that section once the page has rendered. */
+/* On forward navigation: jump to top, or smooth-scroll to a "/#hash" target.
+   On back/forward (POP), do nothing — let the browser restore the prior scroll
+   position, so returning from a post lands you back where you were. */
 export function ScrollManager() {
   const { pathname, hash } = useLocation();
+  const navType = useNavigationType();
   useEffect(() => {
+    if (navType === "POP") return;
     if (hash) {
       const id = hash.slice(1);
       requestAnimationFrame(() => {
@@ -16,6 +19,6 @@ export function ScrollManager() {
       return;
     }
     window.scrollTo(0, 0);
-  }, [pathname, hash]);
+  }, [pathname, hash, navType]);
   return null;
 }
