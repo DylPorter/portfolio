@@ -204,14 +204,16 @@ function Home() {
 
         {/* ── CTA ──────────────────────────────────────── */}
         <Band inner="py-12 md:py-20">
-          <motion.div variants={fadeUp} className="card p-10 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <motion.div variants={fadeUp} className="card p-10 md:p-16 grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-10 md:gap-14 md:items-stretch">
             {/* Left — the pitch (right-aligns toward the divider on desktop, left on mobile) */}
-            <div className="flex flex-col gap-5 items-start text-left md:items-end md:text-right">
+            <div className="flex flex-col justify-center gap-5 items-start text-left md:items-end md:text-right">
               <h2 className="text-4xl font-bold tracking-[-0.02em]">Let's build<br />something <span className="text-[var(--accent)]">together</span>.</h2>
               <p className="text-[var(--body)] leading-relaxed max-w-sm">If you've got something in mind, whether it's a product, a hard AI problem, or an idea that needs shipping, I'd like to hear about it.</p>
             </div>
+            {/* Centered divider (desktop only) */}
+            <div className="hidden md:block bg-neutral-200 dark:bg-neutral-800" />
             {/* Right — availability + contact (always left-aligned) */}
-            <div className="flex flex-col gap-5 items-start text-left md:pl-14 md:border-l md:border-neutral-200 md:dark:border-neutral-800">
+            <div className="flex flex-col justify-center gap-5 items-start text-left">
               <div className="flex flex-col gap-2">
                 <span className="eyebrow">Available</span>
                 <p className="text-[var(--body)] leading-relaxed">Open to freelance and new projects, remote or in Hong Kong (UTC+8).</p>
