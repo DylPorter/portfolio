@@ -207,7 +207,7 @@ function Home() {
           <motion.div variants={fadeUp} className="card p-10 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
             {/* Left — the pitch */}
             <div className="flex flex-col gap-5">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.02em]">Let's build something <span className="text-[var(--accent)]">together</span>.</h2>
+              <h2 className="text-4xl font-bold tracking-[-0.02em]">Let's build something <span className="text-[var(--accent)]">together</span>.</h2>
               <p className="text-[var(--body)] leading-relaxed">If you've got something in mind, whether it's a product, a hard AI problem, or an idea that needs shipping, I'd like to hear about it.</p>
             </div>
             {/* Right — availability + contact */}
