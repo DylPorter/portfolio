@@ -163,9 +163,9 @@ function Home() {
           </div>
         </Band>
 
-        {/* ── WRITING (staggered right — left/right/left rhythm) ───────── */}
+        {/* ── WRITING ──────────────────────────────────── */}
         <Band>
-          <SectionHead id="writing" eyebrow="Notes" title="Writing" align="right" />
+          <SectionHead id="writing" eyebrow="Notes" title="Writing" />
           {featuredPost && (
             <motion.div variants={fadeUp}>
               <Link
@@ -178,7 +178,7 @@ function Home() {
               </Link>
             </motion.div>
           )}
-          <motion.a variants={fadeUp} href="https://tdporter.substack.com" target="_blank" rel="noopener noreferrer" className="link-accent text-sm w-fit md:self-end">
+          <motion.a variants={fadeUp} href="https://tdporter.substack.com" target="_blank" rel="noopener noreferrer" className="link-accent text-sm w-fit">
             More notes on Substack →
           </motion.a>
         </Band>
@@ -216,7 +216,7 @@ function Home() {
             <div className="flex flex-col justify-center gap-5 items-start text-left">
               <div className="flex flex-col gap-2">
                 <span className="eyebrow">Available</span>
-                <p className="text-[var(--body)] leading-relaxed">Open to freelance, startups, and new projects,<br />remote or in Hong Kong (UTC+8).</p>
+                <p className="text-[var(--body)] leading-relaxed max-w-sm">Open to freelance, startups, and new projects, remote or in Hong Kong (UTC+8).</p>
               </div>
               <a href={`mailto:${EMAIL}`} className="px-5 py-2.5 button gap-2 text-sm w-fit">
                 <FaRegEnvelope size={13} />{EMAIL}
