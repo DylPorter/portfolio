@@ -211,7 +211,7 @@ function Home() {
               <p className="text-[var(--body)] leading-relaxed">If you've got something in mind, whether it's a product, a hard AI problem, or an idea that needs shipping, I'd like to hear about it.</p>
             </div>
             {/* Right — availability + contact */}
-            <div className="flex flex-col gap-5 md:pl-14 md:border-l md:border-neutral-200 md:dark:border-neutral-800">
+            <div className="flex flex-col gap-5 items-start text-left md:items-end md:text-right md:pl-14 md:border-l md:border-neutral-200 md:dark:border-neutral-800">
               <div className="flex flex-col gap-2">
                 <span className="eyebrow">Available</span>
                 <p className="text-[var(--body)] leading-relaxed">Open to freelance and new projects, remote or in Hong Kong (UTC+8).</p>
