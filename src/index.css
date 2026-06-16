@@ -140,6 +140,15 @@ button > span {
 }
 .link-accent:hover { color: var(--accent); }
 
+/* Marker highlight — a green swipe across the lower part of a word (CTA accent). */
+.marker {
+  background-image: linear-gradient(transparent 56%, color-mix(in srgb, var(--accent) 34%, transparent) 56%);
+  padding-inline: 0.05em;
+  margin-inline: -0.05em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 /* Full highlight behind the hero name — a clean accent wash over the whole word. */
 .name-highlight {
   background-color: color-mix(in srgb, var(--accent) 22%, transparent);
