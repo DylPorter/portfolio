@@ -204,9 +204,9 @@ function Home() {
 
         {/* ── CTA ──────────────────────────────────────── */}
         <Band inner="py-12 md:py-20">
-          <motion.div variants={fadeUp} className="card p-10 md:p-20 flex flex-col items-center text-center gap-5">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.02em] max-w-2xl">Let's build something <span className="marker">together</span>.</h2>
-            <p className="text-[var(--body)] max-w-md leading-relaxed">If you're working on something interesting, I'd like to hear about it — whether that's building it together or just trading ideas.</p>
+          <motion.div variants={fadeUp} className="card w-full max-w-3xl mx-auto p-10 md:p-16 flex flex-col items-center text-center gap-5">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.02em]">Let's build something <span className="text-[var(--accent)]">together</span>.</h2>
+            <p className="text-[var(--body)] max-w-md leading-relaxed">If you've got something in mind, whether it's a product, a hard AI problem, or an idea that needs shipping, I'd like to hear about it.</p>
             <a href={`mailto:${EMAIL}`} className="px-5 py-2.5 button gap-2 text-sm mt-1">
               <FaRegEnvelope size={13} />{EMAIL}
             </a>
