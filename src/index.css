@@ -263,30 +263,28 @@ button > span {
   display: none;
 }
 
-/* Hero role list — "·" separator between roles, centered in the gutter to each
-   role's left (an absolute ::before spanning the gap, glyph centered). The row is
-   horizontal + wrapping at all widths (centered on mobile, left-aligned on desktop).
-   On desktop it clips its overflow, so a role that wraps to a new line pushes its dot
-   into clipped negative space and it disappears — no dangling dot. (Mobile is
-   centered, where the clip can't catch a centered wrap, so dots just stay visible.) */
-.role-list > * { position: relative; }
-.role-list > * + *::before {
+/* Hero role list — roles separated by "·" dots. Each role except the first draws its
+   dot as an ABSOLUTELY-positioned ::before centred in the flex column-gap, so the dot
+   carries zero layout width. A layout effect in Hero.tsx flags the first role on each
+   visual line (data-first-on-line) and we drop that role's leading dot — so a dot can
+   never orphan at the start of a wrapped/centred line (the mobile bug). Because the dots
+   have no layout width, toggling one never reflows the row: no wrap flip-flop, and hidden
+   dots leave no phantom gutter (the prior visibility:hidden bug). md:+ stays single-line
+   so every dot shows. The constant gap-x-6 on the wrapper provides the real spacing. */
+.role-list .role { position: relative; }
+.role-list .role:not(:first-child)::before {
   content: "·";
   position: absolute;
+  left: -0.75rem;            /* half the 1.5rem (gap-x-6) column-gap → dot sits mid-gutter */
   top: 50%;
-  right: 100%;           /* box's right edge meets the role's left edge */
-  width: 1.5rem;         /* spans the full gap-x-6 (1.5rem) gutter — keep in sync if the gap changes */
-  text-align: center;    /* centers the dot in the gutter, independent of glyph width → equal space both sides */
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   color: var(--role-dot);
   font-size: 1.4em;
   font-weight: 600;
   line-height: 0;
   pointer-events: none;
 }
-@media (min-width: 768px) {
-  .role-list { overflow: clip; overflow-clip-margin: 4px; }
-}
+.role-list .role[data-first-on-line]::before { display: none; }
 
 ::selection {
   background: color-mix(in srgb, var(--accent) 30%, transparent);
