@@ -57,7 +57,7 @@ export function Hero() {
             </p>
           ))}
         </div>
-        <div className="flex items-center gap-3 mt-8">
+        <div className="flex items-center gap-3 mt-8 justify-center md:justify-start">
           <a href="/Dylan_Porter_Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm button button-flat gap-2"><LuExternalLink size={14} />Résumé</a>
           <a href={`mailto:${EMAIL}`} className="icon-button" title={EMAIL} aria-label="Email"><FaRegEnvelope size={15} /></a>
           <a href="https://x.com/tdporterdev" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="icon-button"><FaXTwitter size={15} /></a>
