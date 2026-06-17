@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 
 // Scroll position per history entry. Module-level so it survives route remounts.
@@ -11,28 +11,36 @@ const positions = new Map<string, number>();
      frames in case the page is still growing (images/layout settling)
    - PUSH/REPLACE with a #hash: smooth-scroll to that section; otherwise top. */
 export function ScrollManager() {
-  const { key, hash } = useLocation();
+  const { key, pathname, hash } = useLocation();
   const navType = useNavigationType();
+  const prevPathname = useRef(pathname);
 
   useLayoutEffect(() => {
     if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
   }, []);
 
   useLayoutEffect(() => {
-    const saved = positions.get(key);
-    if (navType === "POP" && saved != null) {
-      let frame = 0;
-      const restore = () => {
-        window.scrollTo(0, saved);
-        if (Math.abs(window.scrollY - saved) > 1 && frame++ < 20) requestAnimationFrame(restore);
-      };
-      restore();
-    } else if (hash) {
-      const el = document.getElementById(hash.slice(1));
-      if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
-      else window.scrollTo(0, 0);
-    } else {
-      window.scrollTo(0, 0);
+    // Same-pathname history changes are modal open/close (?project=…), not page navs —
+    // leave the scroll position alone so the background doesn't jump.
+    const samePage = pathname === prevPathname.current;
+    prevPathname.current = pathname;
+
+    if (!samePage) {
+      const saved = positions.get(key);
+      if (navType === "POP" && saved != null) {
+        let frame = 0;
+        const restore = () => {
+          window.scrollTo(0, saved);
+          if (Math.abs(window.scrollY - saved) > 1 && frame++ < 20) requestAnimationFrame(restore);
+        };
+        restore();
+      } else if (hash) {
+        const el = document.getElementById(hash.slice(1));
+        if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
+        else window.scrollTo(0, 0);
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
     // Save this entry's scroll on the way out, before the next route's scroll runs.
     return () => { positions.set(key, window.scrollY); };

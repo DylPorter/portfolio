@@ -19,11 +19,9 @@ export function Hero() {
         <p className="mt-3 text-base leading-relaxed text-neutral-500 dark:text-neutral-500 max-w-2xl">
           I ship your products end to end — agentic pipelines, AWS infrastructure, React frontends — and write about how they actually get made.
         </p>
-        <div className="mt-6 flex flex-row flex-wrap items-center gap-x-4 md:gap-x-2.5 gap-y-1 justify-center md:justify-start text-sm text-[var(--body)]">
+        <div className="role-list mt-6 flex flex-row flex-wrap items-center gap-x-6 gap-y-2 justify-center md:justify-start text-sm text-[var(--body)]">
           <p>Developer @{" "}<a href="https://www.collectiveglobal.net/" target="_blank" rel="noopener noreferrer" className="link-accent">Collective Global</a></p>
-          <span className="hidden md:inline text-neutral-300 dark:text-neutral-600" aria-hidden="true">·</span>
           <p>Instructor @{" "}<a href="https://bsd.education" target="_blank" rel="noopener noreferrer" className="link-accent">BSD Education</a></p>
-          <span className="hidden md:inline text-neutral-300 dark:text-neutral-600" aria-hidden="true">·</span>
           <p>Student @{" "}<a href="https://hku.hk" target="_blank" rel="noopener noreferrer" className="link-accent">HKU</a></p>
         </div>
         <div className="flex items-center gap-3 mt-8">

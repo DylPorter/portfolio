@@ -3,6 +3,9 @@
 
 html {
   text-wrap: pretty;
+  /* Deliberate darkness floor — pure / near-pure black (#000–#030303) was tested and
+     rejected as "too black" (void/smear look on OLED). Do NOT take any dark surface
+     below #0a0a0a; there is no headroom beneath it for a recessed alt band. */
   background-color: #0a0a0a;
   color-scheme: dark;
   /* Accent — muted sage in dark mode (reads on #0a0a0a without glowing) */
@@ -15,10 +18,15 @@ html {
   --body: #b8b8b8;
   /* Subtle, monochrome card-hover border (not brash) */
   --card-hover-border: #404040;
-  /* Alternating section band — barely off the base #0a0a0a (Vadim-style rhythm) */
+  /* Alternating section band — barely off the base #0a0a0a (Vadim-style rhythm).
+     Stays slightly ABOVE base (lighter): base is at the darkness floor so the band
+     can't recess below it (see base-bg note). The mild card-on-band contrast hit in
+     Projects is an accepted trade vs going borders-only (decided 2026-06-17). */
   --section-alt: #111111;
   /* Hairline section-break divider */
   --section-border: #1c1c1c;
+  /* Hero role-list separator dot — dim grey on near-black */
+  --role-dot: #757575;
 }
 
 html.light {
@@ -46,6 +54,8 @@ html.light {
   --section-alt: #efefef;
   /* Hairline section-break divider */
   --section-border: #e4e4e4;
+  /* Hero role-list separator dot — mid grey on #f5f5f5 */
+  --role-dot: #888888;
 }
 
 /* Display typeface — Fraunces on the hero (h1) and section + modal headings (h2) only.
@@ -251,6 +261,31 @@ button > span {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Hero role list — "·" separator between roles, centered in the gutter to each
+   role's left (an absolute ::before spanning the gap, glyph centered). The row is
+   horizontal + wrapping at all widths (centered on mobile, left-aligned on desktop).
+   On desktop it clips its overflow, so a role that wraps to a new line pushes its dot
+   into clipped negative space and it disappears — no dangling dot. (Mobile is
+   centered, where the clip can't catch a centered wrap, so dots just stay visible.) */
+.role-list > * { position: relative; }
+.role-list > * + *::before {
+  content: "·";
+  position: absolute;
+  top: 50%;
+  right: 100%;           /* box's right edge meets the role's left edge */
+  width: 1.5rem;         /* spans the full gap-x-6 (1.5rem) gutter — keep in sync if the gap changes */
+  text-align: center;    /* centers the dot in the gutter, independent of glyph width → equal space both sides */
+  transform: translateY(-50%);
+  color: var(--role-dot);
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 0;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .role-list { overflow: clip; overflow-clip-margin: 4px; }
 }
 
 ::selection {
