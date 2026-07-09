@@ -43,7 +43,7 @@ export function Hero() {
         <img className="w-full h-full object-cover object-top" alt="Dylan Porter" src="/profile_pic.webp" />
       </div>
       <div className="flex flex-col md:flex-1 items-center text-center md:items-start md:text-left">
-        <h1 className="text-6xl md:text-7xl font-bold tracking-[-0.03em] leading-[0.95]">Hi, I'm Dylan.</h1>
+        <h1 className="text-6xl md:text-7xl font-bold tracking-[-0.03em] leading-[0.95]">Dylan Porter</h1>
         <p className="mt-7 text-lg md:text-xl leading-relaxed text-[var(--body)] max-w-2xl">
           I build production AI systems across sourcing, healthcare, and education as a full-stack AI engineer in Hong Kong.
         </p>
@@ -58,7 +58,7 @@ export function Hero() {
           ))}
         </div>
         <div className="flex items-center gap-3 mt-8 justify-center md:justify-start">
-          <a href="/Dylan_Porter_Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm button button-flat gap-2"><LuExternalLink size={14} />Résumé</a>
+          <a href="/Dylan_Porter_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-chunky text-sm"><span className="btn-ico"><LuExternalLink size={14} /></span>Résumé</a>
           <a href={`mailto:${EMAIL}`} className="icon-button" title={EMAIL} aria-label="Email"><FaRegEnvelope size={15} /></a>
           <a href="https://x.com/tdporterdev" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="icon-button"><FaXTwitter size={15} /></a>
           <a href="https://linkedin.com/in/tdporter" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="icon-button"><FaLinkedinIn size={15} /></a>

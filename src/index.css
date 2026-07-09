@@ -27,6 +27,17 @@ html {
   --section-border: #1c1c1c;
   /* Hero role-list separator dot — dim grey on near-black */
   --role-dot: #757575;
+
+  /* Chunky-button surfaces (dark): raised face + a 3D "wall" rim that must sit
+     BETWEEN the face and the bg in lightness (darker than face so it reads as a
+     wall, lighter than the #0a0a0a base so it's actually visible). */
+  --btn-face: #2c2c2c;
+  --btn-border: #464646;
+  --btn-rim: #1a1a1a;
+  --btn-shadow: rgba(0, 0, 0, 0.5);
+  /* Guide-line drop shadow — dark like the cards, kept very subtle (reads most where
+     it crosses the lighter alt-band sections). */
+  --line-shadow: rgb(0 0 0 / 0.5);
 }
 
 html.light {
@@ -56,14 +67,55 @@ html.light {
   --section-border: #e4e4e4;
   /* Hero role-list separator dot — mid grey on #f5f5f5 */
   --role-dot: #888888;
+
+  /* Chunky-button surfaces (light): white face + a soft light-grey wall. Kept
+     light — a dark rim/shadow reads as heavy on the #f5f5f5 field. */
+  --btn-face: #ffffff;
+  --btn-border: #e4e4e4;
+  --btn-rim: #dcdcdc;
+  --btn-shadow: rgba(0, 0, 0, 0.12);
+  /* Guide-line drop shadow (light mode) — nudged a hair darker (black is maxed, so
+     opacity is the only darkness lever; smallest bump that reads). */
+  --line-shadow: rgb(0 0 0 / 0.03);
 }
 
-/* Display typeface — Fraunces on the hero (h1) and section + modal headings (h2) only.
-   Everything else (card titles, company names, nav, prose) stays the system sans. */
+/* Self-hosted Libertinus (the maintained Linux Libertine). size-adjust nudges its
+   small optical size up to sit closer to Fraunces' presence. */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url("/fonts/libertinus-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap; size-adjust: 115%;
+}
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url("/fonts/libertinus-serif-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap; size-adjust: 115%;
+}
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url("/fonts/libertinus-serif-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap; size-adjust: 115%;
+}
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url("/fonts/libertinus-serif-latin-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap; size-adjust: 115%;
+}
+
+/* Shared easing + display-font knob (the serif switcher overrides --font-display) */
+:root {
+  --font-display: "Libertinus Serif", "Fraunces", Georgia, "Times New Roman", serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Display typeface — driven by --font-display (swappable live via the dev serif
+   switcher). Applies to the hero (h1) + section/modal headings (h2), wordmark and
+   .serif card titles only. Everything else stays the system sans. */
 h1, h2, .wordmark, .serif {
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   letter-spacing: -0.015em;
-  /* Engage the opsz axis we're already loading — let Fraunces size optically */
+  /* Engage the opsz axis on variable serifs (Fraunces/Newsreader) — sizes optically */
   font-optical-sizing: auto;
 }
 
@@ -138,17 +190,23 @@ button > span {
 }
 .link:hover { color: var(--accent); }
 
-/* Inline prose links — Vadim style: full-contrast text + underline at rest,
-   gaining the accent colour only on hover (underline follows currentColor) */
+/* Inline prose links — accent underline at rest that SWIPES AWAY on hover (the
+   underline is a background gradient anchored left; hover shrinks it to 0 so it
+   retracts, while the text itself takes the accent colour as the line leaves). */
 .link-accent {
   color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  transition: color 200ms ease;
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 2px;
+  padding-bottom: 3px;
+  transition: background-size 320ms var(--ease-out), color 200ms ease;
 }
-.link-accent:hover { color: var(--accent); }
+.link-accent:hover {
+  background-size: 0% 2px;
+  color: var(--accent);
+}
 
 /* Marker highlight — a green swipe across the lower part of a word (CTA accent). */
 .marker {
@@ -229,17 +287,46 @@ button > span {
   transition-duration: 200ms;
 }
 
-/* Bordered icon button — shares the outlined-button language (hero Résumé, cards).
-   Encapsulates social/contact icons in a square so they read as deliberate controls. */
+/* Icon button — now a CHUNKY square: same 3D toy language as .btn-chunky, icon-only.
+   Used for the hero + footer socials and the modal close, so the tactile press is
+   universal across the site. Rim → accent + icon boops on hover; depresses on press. */
 .icon-button {
-  @apply inline-flex items-center justify-center size-9 rounded-lg border-1 border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 hover:bg-[oklch(0.95_0_0)] dark:hover:bg-neutral-800;
-  transition-property: color, background-color, border-color;
-  transition-duration: 200ms;
+  --edge: 4px;
+  --rim: var(--btn-rim);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--btn-border);
+  border-radius: 12px;
+  background: var(--btn-face);
+  color: var(--body);
+  transform: translateY(0);
+  box-shadow:
+    0 var(--edge) 0 0 var(--rim),
+    0 calc(var(--edge) + 5px) 12px -6px var(--btn-shadow);
+  transition:
+    transform 110ms var(--ease-out),
+    box-shadow 110ms var(--ease-out),
+    background-color 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 .icon-button:hover {
-  color: color-mix(in srgb, var(--accent) 82%, transparent);
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  /* No lift on hover — accent rim/icon only; press still snaps via :active. */
+  --rim: var(--accent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--btn-border));
 }
+.icon-button:active {
+  /* bottom anchored: 4px edge → 1px = 3px sink */
+  --edge: 1px;
+  transform: translateY(3px);
+  box-shadow: 0 var(--edge) 0 0 var(--rim), 0 2px 5px -4px var(--btn-shadow);
+  transition: transform 34ms, box-shadow 34ms;
+}
+/* Icon "boop" — the glyph tips + grows with spring easing on hover */
+.icon-button svg { transition: transform 150ms var(--ease-spring); }
+.icon-button:hover svg { transform: rotate(-8deg) scale(1.12); }
 
 .input-box {
   @apply px-4 py-2 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-500;
@@ -289,6 +376,312 @@ button > span {
 ::selection {
   background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--ink);
+}
+
+/* ============================================================================
+   CHUNKY 3D BUTTON — Josh Comeau's 3D-button physics (joshwcomeau.com/animation/
+   3d-button): a slow SETTLE at rest, a springy LIFT on hover (overshoot easing),
+   and a near-instant SNAP on press. Adapted to a single element: the hard
+   box-shadow is the side "edge/wall", the soft shadow is the ground shadow that
+   grows as the button lifts; --edge collapses on press so it reads as pushed flat.
+   Rim + text flash the accent on hover/press (Dylan's "accent on press").
+   ========================================================================== */
+.btn-chunky {
+  --edge: 5px;
+  --rim: var(--btn-rim);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.7em 1.1em;
+  border: 1px solid var(--btn-border);
+  border-radius: 14px;
+  background: var(--btn-face);
+  color: var(--ink);
+  transform: translateY(0);
+  box-shadow:
+    0 var(--edge) 0 0 var(--rim),
+    0 calc(var(--edge) + 7px) 14px -6px var(--btn-shadow);
+  /* Snappy both ways — release settles fast (not a slow mushy Comeau easing) while
+     the press stays instant via :active. */
+  transition:
+    transform 110ms var(--ease-out),
+    box-shadow 110ms var(--ease-out),
+    background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+.btn-chunky:hover {
+  /* No lift on hover (Dylan) — rim + border + text flash accent (same as the icon
+     buttons). The press still snaps down via :active below. */
+  --rim: var(--accent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--btn-border));
+}
+.btn-chunky:active {
+  /* bottom anchored: face sinks by exactly the wall collapse (5px edge → 1px = 4px). */
+  --edge: 1px;
+  transform: translateY(4px);
+  box-shadow:
+    0 var(--edge) 0 0 var(--rim),
+    0 2px 6px -4px var(--btn-shadow);
+  transition: transform 34ms, box-shadow 34ms;
+}
+.btn-chunky:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* leading square icon chip that "boops" on hover */
+.btn-chunky .btn-ico {
+  display: grid;
+  place-items: center;
+  width: 1.55em;
+  height: 1.55em;
+  margin: -0.2em 0.1em -0.2em -0.3em;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  transition: transform 150ms var(--ease-spring);
+}
+.btn-chunky:hover .btn-ico { transform: rotate(-8deg) scale(1.12); }
+
+/* ============================================================================
+   NAV MEGA-MENU — the "Work" trigger opens a bento of project tiles. CSS-driven
+   (hover + focus-within) so it serves mouse, keyboard and touch-focus alike.
+   ========================================================================== */
+/* Glass bar layer — carries the nav's blur/tint so the mega dropdown (a sibling in
+   the DOM, not a descendant of a backdrop-filtered element) keeps a clean page
+   backdrop and blurs identically. Matches bg-white/75 · neutral-900/75 + blur(8px). */
+.nav-bar {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: rgba(23, 23, 23, 0.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid #262626;
+  box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+  transition: background-color 200ms ease, border-color 200ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+html.light .nav-bar {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: #e5e5e5;
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-group { position: relative; }
+.nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  /* NB: do NOT use `font: inherit` here — it's unlayered and would override the
+     layered `.text-sm` utility, making Work bigger than Writing. Inherit family
+     only; size/weight come from the utility classes on the element. */
+  font-family: inherit;
+}
+.nav-chev { transition: transform 220ms var(--ease-out); }
+.nav-group:hover .nav-chev,
+.nav-group:focus-within .nav-chev { transform: rotate(180deg); }
+
+.mega {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  width: min(90vw, 30rem);
+  transform: translateX(-50%);
+  visibility: hidden;
+  translate: 0 8px;
+  /* No opacity fade — animating opacity on this (the backdrop-blurred panel's ancestor)
+     makes the blur pop in only at the end. Slide + visibility keeps blur on from frame 1. */
+  transition: translate 200ms var(--ease-out), visibility 200ms;
+  z-index: 60;
+}
+/* invisible bridge so the pointer can cross the trigger→panel gap without closing */
+.mega::before {
+  content: "";
+  position: absolute;
+  top: -18px; left: 0; right: 0; height: 18px;
+}
+.nav-group:hover .mega,
+.nav-group:focus-within .mega {
+  visibility: visible;
+  translate: 0 0;
+}
+/* Frosted to MATCH the nav bar: same neutral-900/75 · white/75 + blur + rounding. */
+.mega-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid #262626;
+  background: rgba(23, 23, 23, 0.75);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.5);
+}
+html.light .mega-grid {
+  border-color: #e5e5e5;
+  background: rgba(255, 255, 255, 0.75);
+}
+/* On mobile there's no room to centre under the trigger — pin it across the viewport
+   just under the nav bar instead. */
+@media (max-width: 700px) {
+  .mega {
+    position: fixed;
+    top: 3.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    transform: none;
+  }
+  .mega::before { display: none; }
+}
+.mega-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 13px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.mega-tile:hover { background: var(--section-alt); border-color: var(--card-hover-border); }
+.mega-name { font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+.mega-role { font-size: 0.75rem; color: var(--body); }
+.mega-arrow {
+  position: absolute;
+  top: 12px; right: 12px;
+  opacity: 0;
+  transform: translate(-3px, 3px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  color: var(--accent);
+}
+.mega-tile:hover .mega-arrow { opacity: 1; transform: translate(0, 0); }
+/* "Also built" — now a normal 4th cell in the 2×2 grid (was a full-width row). */
+.mega-github {
+  position: absolute;
+  top: 12px; right: 12px;
+  color: var(--body);
+  transition: color 160ms ease, transform 160ms ease;
+}
+.mega-all:hover .mega-github { color: var(--ink); transform: translate(1px, -1px); }
+
+/* ============================================================================
+   STAGGERED VERTICAL GUIDE LINES (GitHub-Universe blueprint feel) — each section
+   drops a faint full-height rule in the side gutter; alternating sections hug
+   opposite sides so the line jogs left↔right as you scroll. Wide screens only
+   (there's no gutter to live in on narrow ones), theme-aware via --section-border.
+   ========================================================================== */
+.band-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--section-border);
+  pointer-events: none;
+  z-index: 0;
+  transition: background-color 200ms ease;
+}
+/* A gradient STRIP, not a box-shadow — box-shadow with negative spread on a 1px line
+   renders nothing. Each line bleeds a soft NEUTRAL shade to one side (left line →
+   leftward, right line → rightward); the left↔right alternation steps down the page. */
+.band-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+}
+.band-line-left  { left:  calc(50% - 38.5rem); }
+.band-line-right { right: calc(50% - 38.5rem); }
+.band-line-left::before  { right: 0; background: linear-gradient(to left,  var(--line-shadow), transparent); }
+.band-line-right::before { left:  0; background: linear-gradient(to right, var(--line-shadow), transparent); }
+@media (max-width: 1180px) { .band-line { display: none; } }
+/* Alt-band sections show the black shadow more (their lighter fill has more to darken),
+   so halve it there in dark mode to match the level on the base-black sections. */
+html.dark .band-alt { --line-shadow: rgb(0 0 0 / 0.25); }
+
+/* ============================================================================
+   TOY BUTTONS (easter egg) — vibrant chunky squircles under the contact box,
+   revealed with the ` key. Pure play: bold face + hard same-hue rim, depresses
+   on press with a spring pop (see ButtonToy.tsx).
+   ========================================================================== */
+.toy-key {
+  --edge: 6px;
+  --rim: var(--toy-rim);
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  color: hsl(150 40% 12%);
+  background: var(--toy-bg);
+  border: none;
+  border-radius: 16px;
+  transform: translateY(0);
+  box-shadow:
+    0 var(--edge) 0 0 var(--rim),
+    0 calc(var(--edge) + 7px) 14px -6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  /* same snappy press physics as .btn-chunky / .icon-button */
+  transition:
+    transform 110ms var(--ease-out),
+    box-shadow 110ms var(--ease-out),
+    filter 160ms ease;
+}
+.toy-key:hover { filter: brightness(1.06); }
+.toy-key:active {
+  /* bottom anchored: 6px edge → 1px = 5px sink */
+  --edge: 1px;
+  transform: translateY(5px);
+  box-shadow: 0 var(--edge) 0 0 var(--rim), 0 2px 6px -4px rgba(0, 0, 0, 0.45);
+  transition: transform 34ms, box-shadow 34ms;
+}
+.toy-key:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The discoverable trigger — three muted dots that light up + wiggle on hover. */
+.toy-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 200ms ease;
+}
+.toy-trigger:hover,
+.toy-trigger:focus-visible { opacity: 1; outline: none; }
+.toy-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--role-dot);
+  transition: background-color 200ms ease, transform 220ms var(--ease-spring);
+}
+.toy-trigger:hover .toy-dot,
+.toy-trigger:focus-visible .toy-dot { background: var(--accent); }
+.toy-trigger:hover .toy-dot:nth-child(2) { transform: translateY(-3px); }
+.toy-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 999px; }
+
+/* Secret combo (4·3·2·5·1) → a billboard colour cycle: the sage gradient spins
+   through the spectrum a few times, staggered across the row like chasing lights,
+   then settles back to sage when the animation ends. */
+@keyframes billboardCycle {
+  from { filter: hue-rotate(0deg) saturate(1.6) brightness(1.05); }
+  to   { filter: hue-rotate(360deg) saturate(1.6) brightness(1.05); }
+}
+.billboard .toy-key { animation: billboardCycle 0.8s linear 3; }
+.billboard .toy-key:nth-child(2) { animation-delay: 0.06s; }
+.billboard .toy-key:nth-child(3) { animation-delay: 0.12s; }
+.billboard .toy-key:nth-child(4) { animation-delay: 0.18s; }
+.billboard .toy-key:nth-child(5) { animation-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) {
+  .billboard .toy-key { animation: none; }
 }
 
 /* Respect users who asked for less motion — neutralises CSS transitions/animations.

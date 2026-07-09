@@ -24,12 +24,12 @@ export function PostPage() {
           <button onClick={goBack} className="link inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium mb-8 cursor-pointer">
             <LuArrowLeft size={13} /> Writing
           </button>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 font-medium mb-3">{post.date} · {post.readingTime}</p>
-          <h1 className="text-3xl md:text-4xl font-medium tracking-[-0.02em] mb-8">{post.title}</h1>
+          <p className="eyebrow mb-3">{post.date}</p>
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] mb-8">{post.title}</h1>
           <div className="flex flex-col gap-4">
             {post.body.map((block, i) =>
               block.type === "h" ? (
-                <h2 key={i} className="serif text-xl font-medium text-[var(--ink)] mt-6">{block.text}</h2>
+                <h2 key={i} className="serif text-xl font-semibold text-[var(--ink)] mt-6">{block.text}</h2>
               ) : (
                 <p key={i} className="leading-relaxed text-[var(--body)]">{block.text}</p>
               )
