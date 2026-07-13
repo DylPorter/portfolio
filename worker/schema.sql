@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS columns (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  position REAL NOT NULL,
+  created_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS cards (
+  id TEXT PRIMARY KEY,
+  column_id TEXT NOT NULL REFERENCES columns(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  author TEXT NOT NULL DEFAULT '',
+  body TEXT NOT NULL DEFAULT '',
+  position REAL NOT NULL,
+  version INTEGER NOT NULL DEFAULT 1,
+  done INTEGER NOT NULL DEFAULT 0,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_cards_column ON cards(column_id);

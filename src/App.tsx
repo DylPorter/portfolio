@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Routes, Route, Link, useNavigationType } from "react-router-dom";
+import { Routes, Route, Link, useNavigationType, useLocation } from "react-router-dom";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/fa6";
 import { LuArrowUpRight } from "react-icons/lu";
 import { motion, MotionConfig, useInView } from "framer-motion";
@@ -13,6 +13,7 @@ import { ProjectsPage } from "./components/ProjectsPage";
 import { ProjectPage } from "./components/ProjectPage";
 import { PostPage } from "./components/PostPage";
 import { ScrollManager } from "./components/ScrollManager";
+import { GmdStudios } from "./gmd/GmdStudios";
 import { projects } from "./data/projects";
 import { posts } from "./data/posts";
 
@@ -237,6 +238,8 @@ function Home() {
 }
 
 function App() {
+  // The GMD Studios kanban is a standalone app surface — no site chrome.
+  const isGmd = useLocation().pathname.startsWith("/gmd-studios");
   // Default dark; honour the visitor's persisted choice (set pre-paint in index.html to avoid FOUC)
   const [theme, setTheme] = useState(() =>
     (typeof localStorage !== "undefined" && localStorage.getItem("theme")) || "dark"
@@ -261,14 +264,15 @@ function App() {
     <MotionConfig reducedMotion="user">
       <ScrollManager />
       <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-[var(--body)] min-h-screen w-full transition-colors duration-200`}>
-        <Nav theme={theme} toggleTheme={toggleTheme} />
+        {!isGmd && <Nav theme={theme} toggleTheme={toggleTheme} />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/writing/:slug" element={<PostPage />} />
+          <Route path="/gmd-studios" element={<GmdStudios />} />
         </Routes>
-        <Footer />
+        {!isGmd && <Footer />}
         {import.meta.env.DEV && <FontSwitcher />}
       </div>
     </MotionConfig>

@@ -2,10 +2,22 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolio",
   "compatibility_date": "2026-06-15",
+  // Worker script — /api/* is handled by the Worker, everything else falls
+  // through to the static SPA via the ASSETS binding (see worker/index.ts).
+  "main": "worker/index.ts",
   "assets": {
+    "binding": "ASSETS",
     "directory": "./dist/",
     // Serve index.html (200) for any path that isn't a built asset, so client-side
     // routes like /writing/:slug work on hard refresh / deep links.
     "not_found_handling": "single-page-application"
-  }
+  },
+  // D1 database for the GMD Studios kanban board.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "gmd-kanban",
+      "database_id": "101c098f-0e78-4ca2-9f8d-f7cdf76da60b"
+    }
+  ]
 }
