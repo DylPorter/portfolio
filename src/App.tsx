@@ -14,6 +14,7 @@ import { ProjectPage } from "./components/ProjectPage";
 import { PostPage } from "./components/PostPage";
 import { ScrollManager } from "./components/ScrollManager";
 import { GmdStudios } from "./gmd/GmdStudios";
+import { PaclLanding } from "./pacl/PaclLanding";
 import { projects } from "./data/projects";
 import { posts } from "./data/posts";
 
@@ -240,6 +241,9 @@ function Home() {
 function App() {
   // The GMD Studios kanban is a standalone app surface — no site chrome.
   const isGmd = useLocation().pathname.startsWith("/gmd-studios");
+  // The PACL landing page is a standalone product identity — no site chrome either.
+  const isPacl = useLocation().pathname.startsWith("/pacl");
+  const bare = isGmd || isPacl;
   // Default dark; honour the visitor's persisted choice (set pre-paint in index.html to avoid FOUC)
   const [theme, setTheme] = useState(() =>
     (typeof localStorage !== "undefined" && localStorage.getItem("theme")) || "dark"
@@ -264,15 +268,16 @@ function App() {
     <MotionConfig reducedMotion="user">
       <ScrollManager />
       <div id="top" className={`${theme === "dark" ? "dark" : ""} bg-neutral-100 dark:bg-neutral-950 text-[var(--body)] min-h-screen w-full transition-colors duration-200`}>
-        {!isGmd && <Nav theme={theme} toggleTheme={toggleTheme} />}
+        {!bare && <Nav theme={theme} toggleTheme={toggleTheme} />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/writing/:slug" element={<PostPage />} />
           <Route path="/gmd-studios" element={<GmdStudios />} />
+          <Route path="/pacl" element={<PaclLanding />} />
         </Routes>
-        {!isGmd && <Footer />}
+        {!bare && <Footer />}
         {import.meta.env.DEV && <FontSwitcher />}
       </div>
     </MotionConfig>

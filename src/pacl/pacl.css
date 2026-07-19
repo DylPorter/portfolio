@@ -1,0 +1,329 @@
+/* ============================================================================
+   PACL landing page — fully self-contained theme.
+   Namespaced under `.pacl` so NOTHING here touches the portfolio's own tokens
+   (sage/maroon dark system in index.css). This page is a standalone product
+   identity that happens to live on tdporter.dev — different everything.
+
+   Type: Space Grotesk (display + body) + Space Mono (eyebrows / labels / code).
+   Palette: warm paper, near-black ink, one electric blue. That's the whole kit.
+   ========================================================================== */
+
+/* self-hosted (matches the portfolio's Libertinus pattern — woff2 in /public/fonts) */
+@font-face {
+  font-family: "Space Grotesk Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("/fonts/space-grotesk-latin-wght-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("/fonts/space-mono-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("/fonts/space-mono-latin-700-normal.woff2") format("woff2");
+}
+
+/* The portfolio's app shell defaults to a dark background; force the paper shell
+   behind this standalone page so nothing dark peeks through at the edges. */
+html:has(.pacl), body:has(.pacl) { background: #f3f1ec !important; }
+
+.pacl {
+  overflow-x: clip;
+  /* --- palette --- */
+  --pp-paper: #f3f1ec;      /* warm paper base */
+  --pp-paper-2: #eceae3;    /* faint step for insets */
+  --pp-card: #ffffff;       /* card surface */
+  --pp-ink: #14151b;        /* near-black display/text */
+  --pp-body: #55565f;       /* body grey */
+  --pp-muted: #8b8c93;      /* captions / secondary */
+  --pp-hair: #e3e0d7;       /* warm hairline */
+  --pp-hair-strong: #d6d3c8;
+  --pp-blue: #2a44e6;       /* electric blue — the one accent */
+  --pp-blue-ink: #2138c9;   /* blue for text on paper (a touch deeper) */
+  --pp-blue-tint: #ebeeff;  /* blue pill bg */
+  --pp-dark: #0b0c11;       /* full-bleed dark band */
+  --pp-dark-2: #14151d;
+  --pp-dark-ink: #f4f4f6;   /* text on dark */
+  --pp-dark-body: #a4a6b2;  /* body on dark */
+  --pp-blue-lift: #7d90ff;  /* lighter blue that reads on the dark band */
+  --pp-dark-hair: #23242e;
+
+  /* --- type --- */
+  --pp-display: "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
+  --pp-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* --- rhythm --- */
+  --pp-max: 1120px;
+  --pp-pad: clamp(20px, 5vw, 56px);
+
+  font-family: var(--pp-display);
+  background: var(--pp-paper);
+  color: var(--pp-body);
+  color-scheme: light;
+  min-height: 100vh;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+}
+
+.pacl *,
+.pacl *::before,
+.pacl *::after { box-sizing: border-box; }
+
+.pacl-wrap {
+  max-width: var(--pp-max);
+  margin: 0 auto;
+  padding-inline: var(--pp-pad);
+}
+
+/* ── shared type atoms ─────────────────────────────────────────────────────── */
+.pacl .eyebrow {
+  font-family: var(--pp-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pp-blue-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: 400;
+}
+.pacl .eyebrow--muted { color: var(--pp-muted); }
+.pacl .eyebrow--lift { color: var(--pp-blue-lift); }
+.pacl .eyebrow .tick { width: 22px; height: 1px; background: currentColor; opacity: 0.7; }
+
+/* font-family set explicitly: the portfolio's global `h1/h2/h3` serif rule matches
+   these elements directly, which beats font-family inherited from `.pacl`. */
+.pacl h1, .pacl h2, .pacl h3 { font-family: var(--pp-display); color: var(--pp-ink); font-weight: 600; margin: 0; letter-spacing: -0.02em; }
+.pacl .blue { color: var(--pp-blue-ink); }
+.pacl .lift { color: var(--pp-blue-lift); }
+.pacl .mono { font-family: var(--pp-mono); }
+.pacl .code {
+  font-family: var(--pp-mono);
+  font-size: 0.82em;
+  color: var(--pp-muted);
+}
+
+/* ── top bar ───────────────────────────────────────────────────────────────── */
+.pacl-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-block: clamp(20px, 3vw, 30px);
+}
+.pacl-mark { display: inline-flex; align-items: center; gap: 0.55em; font-weight: 700; letter-spacing: -0.01em; color: var(--pp-ink); font-size: 1.02rem; }
+.pacl-mark .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pp-blue); }
+.pacl-top .meta { font-family: var(--pp-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--pp-muted); }
+
+/* ── hero ──────────────────────────────────────────────────────────────────── */
+.pacl-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  padding-block: clamp(36px, 6vw, 76px) clamp(44px, 6vw, 84px);
+}
+.pacl-hero h1 {
+  font-size: clamp(2.35rem, 5.4vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-top: 1.1rem;
+  text-wrap: balance;
+}
+.pacl-hero .lede {
+  margin-top: 1.35rem;
+  max-width: 30rem;
+  font-size: 1.02rem;
+  color: var(--pp-body);
+}
+
+/* email capture */
+.pacl-capture { margin-top: 1.9rem; display: flex; flex-direction: column; gap: 0.7rem; max-width: 30rem; }
+.pacl-field { display: flex; gap: 0.5rem; }
+.pacl-input {
+  flex: 1; min-width: 0;
+  font-family: var(--pp-display);
+  font-size: 0.96rem;
+  color: var(--pp-ink);
+  background: var(--pp-card);
+  border: 1px solid var(--pp-hair-strong);
+  border-radius: 9px;
+  padding: 0.72rem 0.9rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pacl-input::placeholder { color: var(--pp-muted); }
+.pacl-input:focus-visible {
+  outline: none;
+  border-color: var(--pp-blue);
+  box-shadow: 0 0 0 3px rgba(42, 68, 230, 0.16);
+}
+.pacl-hint { font-family: var(--pp-mono); font-size: 0.72rem; color: var(--pp-muted); letter-spacing: 0.01em; }
+
+/* buttons */
+.pacl-btn {
+  font-family: var(--pp-display);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: 9px;
+  padding: 0.72rem 1.15rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  white-space: nowrap;
+  transition: transform 0.12s ease, background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+.pacl-btn:active { transform: translateY(1px); }
+.pacl-btn--dark { background: var(--pp-ink); color: #fff; }
+.pacl-btn--dark:hover { background: #000; }
+.pacl-btn--blue { background: var(--pp-blue); color: #fff; }
+.pacl-btn--blue:hover { background: var(--pp-blue-ink); }
+.pacl-btn--ghost { background: var(--pp-card); color: var(--pp-ink); border-color: var(--pp-hair-strong); }
+.pacl-btn--ghost:hover { border-color: var(--pp-ink); }
+.pacl-btn--wide { width: 100%; padding-block: 0.82rem; }
+.pacl-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(42, 68, 230, 0.28); }
+
+/* ── hero diagram card (the signature) ─────────────────────────────────────── */
+.pacl-diagram {
+  background: var(--pp-card);
+  border: 1px solid var(--pp-hair);
+  border-radius: 16px;
+  padding: clamp(18px, 2.2vw, 26px);
+  box-shadow: 0 24px 48px -34px rgba(20, 21, 27, 0.35);
+}
+.pacl-diagram .dhead {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--pp-mono); font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--pp-muted);
+}
+.pacl-diagram .dhead .live { color: var(--pp-blue-ink); display: inline-flex; align-items: center; gap: 0.5em; }
+.pacl-diagram .dhead .live .pip { width: 7px; height: 7px; border-radius: 50%; background: var(--pp-blue); }
+.pacl-diagram svg { width: 100%; height: auto; display: block; margin-block: 0.6rem; }
+.pacl-diagram .dcap {
+  border-top: 1px solid var(--pp-hair);
+  padding-top: 0.85rem; margin-top: 0.4rem;
+  font-size: 0.83rem; color: var(--pp-body);
+}
+.pacl-diagram .dcap b { color: var(--pp-ink); font-weight: 700; }
+
+/* diagram nodes */
+.pnode { fill: var(--pp-card); stroke: var(--pp-hair-strong); stroke-width: 1.5; }
+.pnode-label { font-family: var(--pp-mono); font-size: 10px; fill: var(--pp-muted); letter-spacing: 0.04em; }
+.pwire { stroke: var(--pp-hair-strong); stroke-width: 1.4; stroke-dasharray: 4 4; fill: none; }
+.pcore { fill: var(--pp-blue); }
+.pcore-label { font-family: var(--pp-display); font-size: 11px; font-weight: 600; fill: #fff; }
+.pcore-sub { font-family: var(--pp-mono); font-size: 8px; fill: rgba(255,255,255,0.85); }
+.pcore-halo { fill: var(--pp-blue); opacity: 0.16; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .pcore-halo { animation: pacl-pulse 2.6s ease-in-out infinite; }
+}
+@keyframes pacl-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.16; }
+  50% { transform: scale(1.35); opacity: 0.05; }
+}
+
+/* ── full-bleed section dividers ───────────────────────────────────────────── */
+.pacl-rule { border-top: 1px solid var(--pp-hair); }
+
+/* ── works-with strip ──────────────────────────────────────────────────────── */
+.pacl-works { padding-block: clamp(30px, 4vw, 46px); }
+.pacl-works .row {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 1.4rem;
+  margin-top: 1rem;
+  font-size: 1.05rem; font-weight: 600; color: var(--pp-ink);
+}
+.pacl-works .row .any { color: var(--pp-muted); font-family: var(--pp-mono); font-size: 0.92rem; font-weight: 400; }
+.pacl-works .note { margin-top: 0.9rem; font-size: 0.82rem; color: var(--pp-muted); max-width: 34rem; }
+
+/* ── dark band: what the intermediary does ─────────────────────────────────── */
+.pacl-dark {
+  background: var(--pp-dark);
+  color: var(--pp-dark-body);
+  margin-top: clamp(20px, 4vw, 40px);
+}
+.pacl-dark .grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px);
+  padding-block: clamp(56px, 8vw, 104px);
+  align-items: start;
+}
+.pacl-dark h2 { color: var(--pp-dark-ink); font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.08; letter-spacing: -0.025em; }
+.pacl-dark h2 .lift { color: var(--pp-blue-lift); }
+.pacl-feats { display: flex; flex-direction: column; gap: 1.7rem; }
+.pacl-feat .ft { display: flex; align-items: center; gap: 0.6em; color: var(--pp-dark-ink); font-weight: 600; font-size: 1.02rem; }
+.pacl-feat .ft .fdot { width: 7px; height: 7px; border-radius: 50%; background: var(--pp-blue-lift); flex: none; }
+.pacl-feat p { margin: 0.4rem 0 0 1.3em; font-size: 0.92rem; color: var(--pp-dark-body); max-width: 27rem; }
+.pacl-feat .arrow { color: var(--pp-blue-lift); }
+
+/* ── free vs hosted ────────────────────────────────────────────────────────── */
+.pacl-plans { padding-block: clamp(52px, 7vw, 96px); }
+.pacl-plans .lede { margin-top: 1rem; max-width: 34rem; color: var(--pp-body); }
+.pacl-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 22px);
+  margin-top: clamp(28px, 4vw, 44px);
+  align-items: start;
+}
+.pacl-card {
+  background: var(--pp-card);
+  border: 1px solid var(--pp-hair);
+  border-radius: 16px;
+  padding: clamp(22px, 2.4vw, 30px);
+  display: flex; flex-direction: column; gap: 1.1rem;
+}
+.pacl-card--hosted { border-color: #c9cfff; box-shadow: 0 22px 46px -34px rgba(42, 68, 230, 0.4); }
+.pacl-card .kicker { font-family: var(--pp-mono); font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--pp-muted); }
+.pacl-card .tier { display: flex; align-items: center; gap: 0.7rem; }
+.pacl-card .tier h3 { font-size: 1.5rem; letter-spacing: -0.02em; }
+.pacl-card .tier-note { font-size: 0.9rem; color: var(--pp-body); margin: 0; }
+
+.pacl-pill {
+  font-family: var(--pp-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.25em 0.6em; border-radius: 999px; font-weight: 700; white-space: nowrap;
+}
+.pacl-pill--now { background: var(--pp-blue-tint); color: var(--pp-blue-ink); }
+.pacl-pill--planned { background: var(--pp-paper-2); color: var(--pp-muted); }
+.pacl-pill--mini { font-size: 0.55rem; padding: 0.16em 0.5em; }
+
+/* feature lists */
+.pacl-group + .pacl-group { margin-top: 1.1rem; }
+.pacl-group .gh { font-family: var(--pp-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pp-muted); margin-bottom: 0.55rem; }
+.pacl-feature { display: flex; align-items: flex-start; gap: 0.6rem; padding-block: 0.4rem; border-top: 1px solid var(--pp-hair); font-size: 0.9rem; color: var(--pp-ink); }
+.pacl-feature:first-of-type { border-top: none; }
+.pacl-feature .mk { flex: none; margin-top: 0.06rem; }
+.pacl-feature .mk--yes { color: var(--pp-blue); }
+.pacl-feature .mk--no { color: var(--pp-muted); }
+.pacl-feature .fbody { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.55rem; }
+.pacl-feature.is-off { color: var(--pp-muted); }
+.pacl-feature .fsub { width: 100%; font-family: var(--pp-mono); font-size: 0.72rem; color: var(--pp-muted); }
+
+.pacl-card .foot { margin-top: auto; padding-top: 0.4rem; font-family: var(--pp-mono); font-size: 0.74rem; color: var(--pp-muted); }
+
+/* success state */
+.pacl-done { display: flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; color: var(--pp-ink); background: var(--pp-blue-tint); border-radius: 9px; padding: 0.72rem 0.9rem; }
+.pacl-done .mk { color: var(--pp-blue); flex: none; }
+.pacl-err { font-family: var(--pp-mono); font-size: 0.74rem; color: #b4372f; }
+
+/* ── footer ────────────────────────────────────────────────────────────────── */
+.pacl-foot { border-top: 1px solid var(--pp-hair); padding-block: clamp(28px, 4vw, 44px); }
+.pacl-foot .row { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: flex-start; justify-content: space-between; }
+.pacl-foot p { max-width: 26rem; font-size: 0.82rem; color: var(--pp-muted); margin: 0; }
+.pacl-foot a { color: var(--pp-body); text-decoration: none; font-family: var(--pp-mono); font-size: 0.78rem; }
+.pacl-foot a:hover { color: var(--pp-ink); }
+.pacl-foot .fright { text-align: right; display: flex; flex-direction: column; gap: 0.35rem; }
+
+/* ── responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .pacl-hero { grid-template-columns: 1fr; gap: 34px; }
+  .pacl-hero .pacl-diagram { order: 2; }
+  .pacl-dark .grid { grid-template-columns: 1fr; gap: 30px; }
+  .pacl-cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 460px) {
+  .pacl-field { flex-direction: column; }
+  .pacl-btn--dark { width: 100%; }
+}

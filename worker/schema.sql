@@ -17,3 +17,12 @@ CREATE TABLE IF NOT EXISTS cards (
   updated_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_cards_column ON cards(column_id);
+
+-- PACL hosted-tier waitlist (public capture from /pacl). Email is UNIQUE so a
+-- repeat signup is a no-op, not a duplicate row.
+CREATE TABLE IF NOT EXISTS pacl_waitlist (
+  id TEXT PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  created_at INTEGER NOT NULL,
+  source TEXT NOT NULL DEFAULT 'landing'
+);

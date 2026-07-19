@@ -104,6 +104,33 @@ async function ensureSeeded(env: Env): Promise<void> {
   await env.DB.batch(stmts);
 }
 
+// ── Public: PACL waitlist capture ─────────────────────────────────────────────
+// No auth — the /pacl landing page posts here. Idempotent on email (UNIQUE), with
+// a honeypot field bots tend to fill. Kept deliberately boring: one row per email.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+async function handleWaitlist(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as { email?: string; hp?: string };
+  // Honeypot: a real user never fills this; if present, pretend success and drop it.
+  if (body.hp && body.hp.trim()) return json({ ok: true });
+  const email = (body.email || "").trim().toLowerCase();
+  if (!email || email.length > 254 || !EMAIL_RE.test(email)) {
+    return json({ error: "invalid email" }, 400);
+  }
+  try {
+    await env.DB.prepare(
+      "INSERT INTO pacl_waitlist (id, email, created_at, source) VALUES (?, ?, ?, 'landing') " +
+        "ON CONFLICT(email) DO NOTHING",
+    )
+      .bind(crypto.randomUUID(), email, Date.now())
+      .run();
+  } catch {
+    // Table missing (pre-migration) or transient — never leak internals to the page.
+    return json({ error: "unavailable" }, 503);
+  }
+  return json({ ok: true }, 201);
+}
+
 // ── Route handlers ────────────────────────────────────────────────────────────
 async function handleAuth(request: Request, env: Env): Promise<Response> {
   const body = (await request.json().catch(() => ({}))) as { passphrase?: string };
@@ -259,8 +286,9 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
   const path = url.pathname;
   const method = request.method;
 
-  // Public: passphrase exchange.
+  // Public: passphrase exchange + PACL waitlist capture.
   if (path === "/api/auth" && method === "POST") return handleAuth(request, env);
+  if (path === "/api/waitlist" && method === "POST") return handleWaitlist(request, env);
 
   // Everything else requires a valid signed cookie.
   if (!(await isAuthed(request, env))) return json({ error: "unauthorized" }, 401);
