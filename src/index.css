@@ -234,7 +234,7 @@ button > span {
   color: var(--accent);
 }
 
-/* Interactive boxes (projects, writing, future) — accent border + drop shadow on
+/* Interactive boxes (projects, future) — accent border + drop shadow on
    hover, NO transform/raise. Softer neutral variant for non-clickable cards. */
 .card-interactive {
   cursor: pointer;
@@ -476,7 +476,7 @@ html.light .nav-bar {
   border: 0;
   cursor: pointer;
   /* NB: do NOT use `font: inherit` here — it's unlayered and would override the
-     layered `.text-sm` utility, making Work bigger than Writing. Inherit family
+     layered `.text-sm` utility, making Work bigger than Contact. Inherit family
      only; size/weight come from the utility classes on the element. */
   font-family: inherit;
 }

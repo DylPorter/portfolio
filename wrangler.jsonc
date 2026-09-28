@@ -9,7 +9,7 @@
     "binding": "ASSETS",
     "directory": "./dist/",
     // Serve index.html (200) for any path that isn't a built asset, so client-side
-    // routes like /writing/:slug work on hard refresh / deep links.
+    // routes like /projects/:slug work on hard refresh / deep links.
     "not_found_handling": "single-page-application"
   },
   // D1 database for the GMD Studios kanban board.

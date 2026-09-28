@@ -54,7 +54,7 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
           <span className="text-[var(--accent)] transition-colors duration-200">tdp</span><span className="text-[var(--ink)] transition-colors duration-200">orter</span>
         </Link>
 
-        {/* Center — Work · Writing · Contact (absolutely centered on desktop, inline on mobile) */}
+        {/* Center — Work · Contact (absolutely centered on desktop, inline on mobile) */}
         <ul className="relative z-10 flex items-center gap-4 md:gap-7 md:absolute md:left-1/2 md:-translate-x-1/2">
           <li className="nav-group">
             <button
@@ -90,9 +90,6 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
             </div>
           </li>
 
-          <li>
-            <Link to="/#writing" className="link text-sm font-medium" onClick={(e) => goToSection(e, "writing")}>Writing</Link>
-          </li>
           <li>
             <Link to="/#contact" className="link text-sm font-medium" onClick={(e) => goToSection(e, "contact")}>Contact</Link>
           </li>

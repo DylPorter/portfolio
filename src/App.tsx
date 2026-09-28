@@ -11,11 +11,9 @@ import { ButtonToy } from "./components/ButtonToy";
 import { Hero } from "./components/Hero";
 import { ProjectsPage } from "./components/ProjectsPage";
 import { ProjectPage } from "./components/ProjectPage";
-import { PostPage } from "./components/PostPage";
 import { ScrollManager } from "./components/ScrollManager";
 import { GmdStudios } from "./gmd/GmdStudios";
 import { projects } from "./data/projects";
-import { posts } from "./data/posts";
 
 const EMAIL = "info@tdporter.dev";
 
@@ -110,7 +108,6 @@ function Footer() {
 function Home() {
   const featuredProject = projects.find((p) => p.id === "sourcinggpt") ?? projects[0];
   const otherProjects = projects.filter((p) => p.id !== featuredProject.id);
-  const featuredPost = posts[0];
 
   return (
     <>
@@ -167,26 +164,8 @@ function Home() {
           </div>
         </Band>
 
-        {/* ── WRITING ──────────────────────────────────── */}
-        <Band line="right">
-          <SectionHead id="writing" title="Writing" />
-          {featuredPost && (
-            <motion.div variants={fadeUp}>
-              <Link to={`/writing/${featuredPost.slug}`} className="card card-interactive p-8 md:p-10 text-left flex flex-col gap-3">
-                <span className="eyebrow">{featuredPost.date}</span>
-                <span className="serif text-2xl md:text-3xl font-semibold text-[var(--ink)]">{featuredPost.title}</span>
-                <span className="text-[var(--body)] leading-relaxed max-w-2xl">{featuredPost.summary}</span>
-              </Link>
-            </motion.div>
-          )}
-          <motion.a variants={fadeUp} href="https://tdporter.substack.com" target="_blank" rel="noopener noreferrer" className="group link-accent text-sm w-fit inline-flex items-center gap-1">
-            More notes on Substack
-            <LuArrowUpRight size={14} className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </motion.a>
-        </Band>
-
         {/* ── BACKGROUND ───────────────────────────────── */}
-        <Band alt line="left" inner="py-12 md:py-20 gap-12">
+        <Band line="right" inner="py-12 md:py-20 gap-12">
           <SectionHead title="Experience & Education" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
             <motion.div variants={fadeUp} className="flex flex-col gap-6">
@@ -206,7 +185,7 @@ function Home() {
         </Band>
 
         {/* ── CTA ──────────────────────────────────────── */}
-        <Band id="contact" line="right" inner="py-12 md:py-20 gap-6">
+        <Band id="contact" alt line="left" inner="py-12 md:py-20 gap-6">
           <motion.div variants={fadeUp} className="card p-10 md:p-16 grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-10 md:gap-14 md:items-stretch">
             {/* Left — the pitch (centered on mobile, right-aligns toward the divider on desktop) */}
             <div className="flex flex-col justify-center gap-4 items-center text-center md:items-end md:text-right">
@@ -269,7 +248,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
-          <Route path="/writing/:slug" element={<PostPage />} />
           <Route path="/gmd-studios" element={<GmdStudios />} />
         </Routes>
         {!isGmd && <Footer />}
