@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LuSun, LuMoon, LuChevronDown, LuArrowUpRight } from "react-icons/lu";
 import { projects } from "../data/projects";
@@ -8,6 +8,16 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const onHome = pathname === "/";
+
+  // On a route change the page jumps to its new scroll position in one frame. Snap the
+  // bar to match instead of animating its width, which read as a flash on every nav.
+  const [instant, setInstant] = useState(false);
+  useLayoutEffect(() => {
+    setInstant(true);
+    setScrolled(window.scrollY > 50);
+    const id = requestAnimationFrame(() => requestAnimationFrame(() => setInstant(false)));
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 50); }
@@ -34,7 +44,7 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full pointer-events-none px-2 pt-2 md:px-8 md:pt-6 mx-auto transition-[max-width] duration-500 ease-out ${
+      className={`sticky top-0 z-50 w-full pointer-events-none px-2 pt-2 md:px-8 md:pt-6 mx-auto ${instant ? "" : "transition-[max-width] duration-500 ease-out"} ${
         scrolled ? "md:max-w-3xl" : "md:max-w-6xl"
       }`}
     >

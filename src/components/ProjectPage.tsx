@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { LuArrowLeft, LuExternalLink, LuLock, LuExpand } from "react-icons/lu";
 import { motion } from "framer-motion";
-import { fadeUp } from "./animations";
+import { fadeUp, stagger } from "./animations";
 import { Lightbox } from "./Lightbox";
 import { projects } from "../data/projects";
 
@@ -29,21 +29,23 @@ export function ProjectPage() {
 
   return (
     <main className="max-w-3xl px-6 md:px-8 mx-auto pt-8 pb-20">
-      <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <motion.div initial="hidden" animate="visible" variants={stagger}>
+        <motion.div variants={fadeUp}>
         <button onClick={goBack} className="link inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium mb-8 cursor-pointer">
           <LuArrowLeft size={13} /> Projects
         </button>
+        </motion.div>
 
         {project.images.length > 0 && (
-          <button
+          <motion.button variants={fadeUp}
             onClick={() => setLightbox(project.images[0])}
             aria-label={`Expand ${project.title} screenshot`}
-            className="group relative block w-full mb-8 rounded-2xl overflow-hidden max-h-96 cursor-zoom-in border border-neutral-200 dark:border-neutral-800"
+            className="group relative block w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden cursor-zoom-in border border-neutral-200 dark:border-neutral-800 bg-neutral-200 dark:bg-neutral-900"
           >
             <img
               src={project.images[0]}
               alt={project.title}
-              loading="lazy"
+              fetchPriority="high"
               decoding="async"
               className="w-full h-full object-cover object-[50%_0%] transition-transform duration-500 group-hover:scale-[1.03]"
               draggable={false}
@@ -53,9 +55,10 @@ export function ProjectPage() {
                 <LuExpand size={13} /> Expand
               </span>
             </span>
-          </button>
+          </motion.button>
         )}
 
+        <motion.div variants={fadeUp}>
         <div className="flex items-baseline gap-3 mb-2 flex-wrap">
           <h1 className="serif text-4xl font-semibold tracking-[-0.02em] text-[var(--ink)]">{project.title}</h1>
           <span className="text-sm text-neutral-500 dark:text-neutral-400">{project.role}</span>
@@ -63,12 +66,16 @@ export function ProjectPage() {
         {project.status && <p className="eyebrow mb-4">{project.status}</p>}
 
         <p className="leading-relaxed text-[var(--body)] mb-8">{project.description}</p>
+        </motion.div>
 
+        <motion.div variants={fadeUp}>
         <h2 className="serif text-2xl font-semibold text-[var(--ink)] mb-3">What I built</h2>
         <ul className="list-disc list-outside ml-4 flex flex-col gap-2 mb-10 text-[var(--body)] leading-relaxed">
           {project.highlights.map((h, i) => <li key={i}>{h}</li>)}
         </ul>
+        </motion.div>
 
+        <motion.div variants={fadeUp}>
         {project.url ? (
           <a href={project.url} target="_blank" rel="noopener noreferrer" className="btn-chunky text-sm">
             <span className="btn-ico"><LuExternalLink size={14} /></span>Visit {project.title}
@@ -78,6 +85,7 @@ export function ProjectPage() {
             <LuLock size={14} />Private during the build
           </span>
         )}
+        </motion.div>
       </motion.div>
 
       <Lightbox src={lightbox} alt={project.title} onClose={() => setLightbox(null)} />
