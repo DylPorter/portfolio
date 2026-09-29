@@ -3,12 +3,12 @@
 
 html {
   text-wrap: pretty;
-  /* Deliberate darkness floor — pure / near-pure black (#000–#030303) was tested and
-     rejected as "too black" (void/smear look on OLED). Do NOT take any dark surface
-     below #0a0a0a; there is no headroom beneath it for a recessed alt band. */
-  background-color: #0a0a0a;
+  /* Charcoal, not black — lifted from #0a0a0a (2026-09-29, "want it greyer", after
+     tomtau.be's #1c1917). Pure black (#000–#030303) was rejected earlier as a void on
+     OLED. The whole neutral 700–950 ladder is lifted with it (see `.dark` below). */
+  background-color: #1a1a1a;
   color-scheme: dark;
-  /* Accent — muted sage in dark mode (reads on #0a0a0a without glowing) */
+  /* Accent — muted sage in dark mode (reads on the charcoal base without glowing) */
   --accent: #84b594;
   /* Maroon alternative (dark): #c35d6b — see the full maroon kit in the light block below */
   --accent-contrast: #0a0a0a;
@@ -18,26 +18,36 @@ html {
   --body: #b8b8b8;
   /* Subtle, monochrome card-hover border (not brash) */
   --card-hover-border: #404040;
-  /* Alternating section band — barely off the base #0a0a0a (Vadim-style rhythm).
+  /* Alternating section band — barely off the base #1a1a1a (Vadim-style rhythm).
      Stays slightly ABOVE base (lighter): base is at the darkness floor so the band
      can't recess below it (see base-bg note). The mild card-on-band contrast hit in
      Projects is an accepted trade vs going borders-only (decided 2026-06-17). */
-  --section-alt: #111111;
+  --section-alt: #1f1f1f;
   /* Hairline section-break divider */
-  --section-border: #1c1c1c;
+  --section-border: #2a2a2a;
   /* Hero role-list separator dot — dim grey on near-black */
   --role-dot: #757575;
 
   /* Chunky-button surfaces (dark): raised face + a 3D "wall" rim that must sit
      BETWEEN the face and the bg in lightness (darker than face so it reads as a
-     wall, lighter than the #0a0a0a base so it's actually visible). */
-  --btn-face: #2c2c2c;
-  --btn-border: #464646;
-  --btn-rim: #1a1a1a;
+     wall, lighter than the #1a1a1a base so it's actually visible). */
+  --btn-face: #363636;
+  --btn-border: #505050;
+  --btn-rim: #242424;
   --btn-shadow: rgba(0, 0, 0, 0.5);
   /* Guide-line drop shadow — dark like the cards, kept very subtle (reads most where
      it crosses the lighter alt-band sections). */
   --line-shadow: rgb(0 0 0 / 0.5);
+}
+
+/* Lift Tailwind's dark neutrals by the same step as the base so every dark: surface
+   (cards, nav, modals, borders) keeps its tuned contrast against the new charcoal.
+   Scoped to .dark, so light-mode neutral text/borders are untouched. */
+.dark {
+  --color-neutral-950: #1a1a1a;
+  --color-neutral-900: #242424;
+  --color-neutral-800: #313131;
+  --color-neutral-700: #4a4a4a;
 }
 
 html.light {

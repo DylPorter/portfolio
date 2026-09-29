@@ -227,7 +227,7 @@ function App() {
   // Keep <html> in sync with state on mount (covers a stored light theme)
   useEffect(() => {
     document.documentElement.className = theme;
-    document.documentElement.style.backgroundColor = theme === "dark" ? "#0a0a0a" : "#f5f5f5";
+    document.documentElement.style.backgroundColor = theme === "dark" ? "#1a1a1a" : "#f5f5f5";
   }, [theme]);
 
   // After the first mount, later POP navigations are genuine in-app back/forward.
