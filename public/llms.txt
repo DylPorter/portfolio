@@ -15,7 +15,7 @@ Contact: info@tdporter.dev · X: [@tdporterdev](https://x.com/tdporterdev) · [L
 ## Experience
 
 - Founding Lead Engineer, SourcingGPT (Antler Inception SG20), Apr 2025 to present
-- AI Engineer, Client Deployments, Collective Global, Jul 2024 to present
+- Full Stack AI Engineer, Collective Global, Jul 2024 to present
 - Coding Instructor, BSD Education, May 2025 to present
 - IBM Z Student Ambassador, IBM, Sep 2025 to May 2026
 - Software Engineering Intern, BSD Education, Sep 2023 to Mar 2024: deployed a local LLaMA-2 chatbot for 500+ educators on a platform reaching 150,000+ students

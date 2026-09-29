@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
+import { routeHistory } from "./routeHistory";
 
 // Scroll position per history entry. Module-level so it survives route remounts.
 const positions = new Map<string, number>();
@@ -23,6 +24,7 @@ export function ScrollManager() {
     // Same-pathname history changes are modal open/close (?project=…), not page navs —
     // leave the scroll position alone so the background doesn't jump.
     const samePage = pathname === prevPathname.current;
+    if (!samePage) routeHistory.previous = prevPathname.current;
     prevPathname.current = pathname;
 
     if (!samePage) {

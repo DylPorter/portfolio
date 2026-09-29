@@ -1,15 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LuArrowLeft, LuArrowUpRight } from "react-icons/lu";
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "./animations";
 import { projects } from "../data/projects";
+import { routeHistory } from "./routeHistory";
 
 export function ProjectsPage() {
+  const navigate = useNavigate();
+  // Same as the project page: real history-back restores the home page where you left
+  // it, with no replayed fades. A direct visit has no history, so go to the section.
+  const goHome = (e: React.MouseEvent) => {
+    if (routeHistory.previous === "/" && (window.history.state?.idx ?? 0) > 0) { e.preventDefault(); navigate(-1); }
+  };
+
   return (
     <main className="max-w-6xl px-6 md:px-8 mx-auto pt-8 pb-20">
       <motion.div initial="hidden" animate="visible" variants={stagger}>
         <motion.div variants={fadeUp}>
-          <Link to="/#projects" className="link inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium mb-8">
+          <Link to="/#projects" onClick={goHome} className="link inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium mb-8">
             <LuArrowLeft size={13} /> Home
           </Link>
           <h1 className="serif text-4xl md:text-5xl font-semibold tracking-[-0.02em] text-[var(--ink)] mb-2">Projects</h1>
