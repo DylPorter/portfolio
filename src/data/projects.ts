@@ -9,11 +9,14 @@ export type Project = {
   images: string[];
   url: string;
   status?: string;
+  // Shown on the home page and in the Work menu. The rest live on /projects only.
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
     id: "sourcinggpt",
+    featured: true,
     title: "SourcingGPT",
     tagline: "A B2B sourcing agent that finds and ranks suppliers from a product request, then drafts the outreach email.",
     description: "B2B sourcing usually means hours in search tabs and supplier directories, then copy-pasting cold emails. SourcingGPT does the whole loop: it reads a product request, searches and ranks suppliers against it, and drafts the first outreach. I built it as a founding engineer through Antler Inception SG20.",
@@ -30,6 +33,7 @@ export const projects: Project[] = [
   },
   {
     id: "vetsage",
+    featured: true,
     title: "VETsage",
     tagline: "Turns a vet clinic's messy records — scanned PDFs, photos, handwriting — into structured clinical reports.",
     description: "Vet clinics sit on piles of unstructured records: scanned patient histories, lab PDFs, photos of handwritten notes. VETsage reads all of it and produces a clean, structured clinical report a vet can actually work from. I built it end to end at Collective Global, and it's used by veterinary clinics across multiple countries.",
@@ -46,6 +50,7 @@ export const projects: Project[] = [
   },
   {
     id: "pacl",
+    featured: true,
     title: "PACL",
     tagline: "An intermediary that watches a whole team of AI agents and pushes back coordination nobody asked for.",
     description: "Everyone on a team now runs their own AI agent, and the context dies at every handoff. PACL makes it visible: agents connect over MCP and report what they're working on, and a central Gemini intermediary reasons over the combined state — flagging overlapping work, turning blockers into tickets, and handing new agents the context an earlier one already produced. Built solo for the Google Cloud Rapid Agent Hackathon, Arize track.",

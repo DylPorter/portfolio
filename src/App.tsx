@@ -31,11 +31,14 @@ const EDUCATION = [
 
 // Kicker copy should ADD something (a stance / a claim), not restate the title —
 // the Devansh/Vadim "subheader that has something to say" pattern.
-function SectionHead({ id, kicker, title, align = "left" }: { id?: string; kicker?: string; title: string; align?: "left" | "right" }) {
+function SectionHead({ id, kicker, title, align = "left", action }: { id?: string; kicker?: string; title: string; align?: "left" | "right"; action?: React.ReactNode }) {
   return (
     <Reveal as="div" id={id} className={`flex flex-col gap-2 scroll-mt-28 ${align === "right" ? "md:items-end md:text-right" : ""}`}>
       {kicker && <span className="eyebrow">✦ {kicker}</span>}
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em]">{title}</h2>
+      <div className="flex items-end justify-between gap-4">
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em]">{title}</h2>
+        {action}
+      </div>
     </Reveal>
   );
 }
@@ -91,7 +94,7 @@ function Footer() {
 
 function Home() {
   const featuredProject = projects.find((p) => p.id === "sourcinggpt") ?? projects[0];
-  const otherProjects = projects.filter((p) => p.id !== featuredProject.id);
+  const otherProjects = projects.filter((p) => p.featured && p.id !== featuredProject.id);
 
   return (
     <>
@@ -104,7 +107,15 @@ function Home() {
 
         {/* ── PROJECTS — cards link to /projects/:id (no more popup modals) ─── */}
         <Band alt line="left">
-          <SectionHead id="projects" title="Projects" />
+          <SectionHead
+            id="projects"
+            title="Projects"
+            action={
+              <Link to="/projects" className="link inline-flex items-center gap-1 text-sm font-medium pb-1">
+                See more <LuArrowUpRight size={14} />
+              </Link>
+            }
+          />
 
           <div className="flex flex-col gap-5">
             {/* Featured */}

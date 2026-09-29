@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LuSun, LuMoon, LuChevronDown, LuArrowUpRight, LuGithub } from "react-icons/lu";
+import { LuSun, LuMoon, LuChevronDown, LuArrowUpRight } from "react-icons/lu";
 import { projects } from "../data/projects";
 
 export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
@@ -68,24 +68,18 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
 
             <div className="mega" role="menu">
               <div className="mega-grid">
-                {projects.map((p) => (
+                {projects.filter((p) => p.featured).map((p) => (
                   <Link key={p.id} to={`/projects/${p.id}`} role="menuitem" className="mega-tile">
                     <span className="mega-name">{p.title}</span>
                     <span className="mega-role">{p.role}</span>
                     <LuArrowUpRight className="mega-arrow" size={15} />
                   </Link>
                 ))}
-                <a
-                  href="https://github.com/dylporter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  role="menuitem"
-                  className="mega-tile mega-all"
-                >
-                  <LuGithub className="mega-github" size={15} />
+                <Link to="/projects" role="menuitem" className="mega-tile mega-all">
+                  <LuArrowUpRight className="mega-github" size={15} />
                   <span className="mega-name">Also built</span>
-                  <span className="mega-role">sims &amp; tools on GitHub</span>
-                </a>
+                  <span className="mega-role">every project</span>
+                </Link>
               </div>
             </div>
           </li>
