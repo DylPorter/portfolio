@@ -12,6 +12,13 @@ export const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
+// Sections already on screen at page load wait for the hero's cascade to finish
+// (6 pieces x 150ms), so the whole page reads top-down instead of every band at once.
+export const HERO_CASCADE = 0.9;
+export const bandStagger = {
+  visible: (delay = 0) => ({ transition: { staggerChildren: 0.15, delayChildren: delay } }),
+};
+
 export function Section({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });

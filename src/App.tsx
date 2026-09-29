@@ -4,7 +4,7 @@ import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/f
 import { LuArrowUpRight } from "react-icons/lu";
 import { motion, MotionConfig, useInView } from "framer-motion";
 
-import { fadeUp, stagger } from "./components/animations";
+import { fadeUp, bandStagger, HERO_CASCADE } from "./components/animations";
 import { Nav } from "./components/Nav";
 import { FontSwitcher } from "./components/FontSwitcher";
 import { ButtonToy } from "./components/ButtonToy";
@@ -65,6 +65,11 @@ function Band({ id, alt = false, first = false, line, inner = "py-12 md:py-20 ga
   // so gate on `appHasNavigated` — false until the first mount completes — otherwise
   // a hard refresh of home wrongly skipped every fade-in.
   const restored = appHasNavigated && useNavigationType() === "POP";
+  // In view within a moment of mounting = on the first screen, so queue behind the hero.
+  // Bands reached later by scrolling animate immediately.
+  const mountedAt = useRef(performance.now());
+  const onFirstScreen = useRef<boolean | null>(null);
+  if (inView && onFirstScreen.current === null) onFirstScreen.current = performance.now() - mountedAt.current < 300;
   return (
     <section
       id={id}
@@ -75,7 +80,8 @@ function Band({ id, alt = false, first = false, line, inner = "py-12 md:py-20 ga
         ref={ref}
         initial={restored ? false : "hidden"}
         animate={restored || inView ? "visible" : "hidden"}
-        variants={stagger}
+        variants={bandStagger}
+        custom={!first && onFirstScreen.current ? HERO_CASCADE : 0}
         className={`relative z-10 max-w-6xl mx-auto px-6 md:px-8 flex flex-col ${inner}`}
       >
         {children}
@@ -227,7 +233,7 @@ function App() {
   // Keep <html> in sync with state on mount (covers a stored light theme)
   useEffect(() => {
     document.documentElement.className = theme;
-    document.documentElement.style.backgroundColor = theme === "dark" ? "#1a1a1a" : "#f5f5f5";
+    document.documentElement.style.backgroundColor = theme === "dark" ? "#121212" : "#f5f5f5";
   }, [theme]);
 
   // After the first mount, later POP navigations are genuine in-app back/forward.

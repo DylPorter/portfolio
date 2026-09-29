@@ -39,6 +39,10 @@ export function Hero() {
 
   return (
     <motion.div variants={stagger} className="flex flex-col md:flex-row gap-8 md:gap-14 items-center">
+      {/* Photo first in the cascade so it lands with the name, not after the icons */}
+      <motion.div variants={fadeUp} className="w-full md:w-[44%] md:order-last flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
+        <img className="w-full h-full object-cover object-top" alt="Dylan Porter" src="/profile_pic.webp" />
+      </motion.div>
       <div className="flex flex-col md:flex-1 items-center text-center md:items-start md:text-left">
         <motion.h1 variants={fadeUp} className="text-6xl md:text-7xl font-bold tracking-[-0.03em] leading-[0.95]">Dylan Porter</motion.h1>
         <motion.p variants={fadeUp} className="mt-7 text-lg md:text-xl leading-relaxed text-[var(--body)] max-w-2xl">
@@ -62,9 +66,6 @@ export function Hero() {
           <a href="https://github.com/dylporter" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="icon-button"><FaGithub size={15} /></a>
         </motion.div>
       </div>
-      <motion.div variants={fadeUp} className="w-full md:w-[44%] order-first md:order-none flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
-        <img className="w-full h-full object-cover object-top" alt="Dylan Porter" src="/profile_pic.webp" />
-      </motion.div>
     </motion.div>
   );
 }
