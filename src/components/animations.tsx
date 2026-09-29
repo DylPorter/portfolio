@@ -1,13 +1,15 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
+// Tuned to tomtau.be: a short 12px rise over a long 700ms decelerate reads as a drift,
+// not a jump; 150ms between siblings makes the cascade legible.
 export const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0, 0, 0.2, 1] as const } },
 };
 
 export const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.15 } },
 };
 
 export function Section({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
