@@ -1,33 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" width="1400" height="1000">
-<rect width="1400" height="1000" fill="#121212"/>
-<text x="90" y="150" fill="#ededed" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="700">Asterisk</text>
-<text x="90" y="210" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="30">Fact-checking YouTube Shorts while you watch</text>
-<rect x="90" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="118" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Screen</text>
-<text x="118" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">title + channel</text>
-<text x="118" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">handle, via</text>
-<text x="118" y="504" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">accessibility</text>
-<line x1="366" y1="460.0" x2="398" y2="460.0" stroke="#d9d9d9" stroke-width="3"/>
-<path d="M398,451.0 L410,460.0 L398,469.0 Z" fill="#d9d9d9"/>
-<rect x="408" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="436" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Resolver</text>
-<text x="436" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">finds the video</text>
-<text x="436" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">and its captions</text>
-<line x1="683" y1="460.0" x2="715" y2="460.0" stroke="#d9d9d9" stroke-width="3"/>
-<path d="M715,451.0 L727,460.0 L715,469.0 Z" fill="#d9d9d9"/>
-<rect x="725" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="753" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Agent</text>
-<text x="753" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">Gemini + Exa</text>
-<text x="753" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">ranks claims,</text>
-<text x="753" y="504" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">3 searches</text>
-<line x1="1000" y1="460.0" x2="1032" y2="460.0" stroke="#d9d9d9" stroke-width="3"/>
-<path d="M1032,451.0 L1044,460.0 L1032,469.0 Z" fill="#d9d9d9"/>
-<rect x="1042" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="1070" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Badge</text>
-<text x="1070" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">1 to 5 score</text>
-<text x="1070" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">over the video,</text>
-<text x="1070" y="504" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">tap for sources</text>
-<text x="90" y="720" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="27">No screenshots, audio or recording: only text already on screen.</text>
-<text x="90" y="764" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="27">Unidentified videos, opinion content and low coverage get an</text>
-<text x="90" y="808" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="27">honest blank, not a confident score.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" width="1400" height="500">
+<rect width="1400" height="500" fill="#121212"/>
+<rect x="80" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="108" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Screen</text>
+<text x="108" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">title + channel</text>
+<text x="108" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">via accessibility</text>
+<line x1="358" y1="250.0" x2="392" y2="250.0" stroke="#d9d9d9" stroke-width="3"/>
+<path d="M392,240.0 L406,250.0 L392,260.0 Z" fill="#d9d9d9"/>
+<rect x="404" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="432" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Resolver</text>
+<text x="432" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">finds the video</text>
+<text x="432" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">and captions</text>
+<line x1="682" y1="250.0" x2="716" y2="250.0" stroke="#d9d9d9" stroke-width="3"/>
+<path d="M716,240.0 L730,250.0 L716,260.0 Z" fill="#d9d9d9"/>
+<rect x="728" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="756" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Agent</text>
+<text x="756" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">Gemini + Exa,</text>
+<text x="756" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">3 searches</text>
+<line x1="1006" y1="250.0" x2="1040" y2="250.0" stroke="#d9d9d9" stroke-width="3"/>
+<path d="M1040,240.0 L1054,250.0 L1040,260.0 Z" fill="#d9d9d9"/>
+<rect x="1052" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="1080" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Badge</text>
+<text x="1080" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">1 to 5 score,</text>
+<text x="1080" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">tap for sources</text>
 </svg>

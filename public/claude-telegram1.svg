@@ -1,30 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" width="1400" height="1000">
-<rect width="1400" height="1000" fill="#121212"/>
-<text x="90" y="150" fill="#ededed" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="700">claude-telegram</text>
-<text x="90" y="210" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="30">Claude Code in my pocket, over Telegram</text>
-<rect x="90" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="118" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Telegram</text>
-<text x="118" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">message from</text>
-<text x="118" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">my phone</text>
-<line x1="366" y1="460.0" x2="398" y2="460.0" stroke="#d9d9d9" stroke-width="3"/>
-<path d="M398,451.0 L410,460.0 L398,469.0 Z" fill="#d9d9d9"/>
-<rect x="408" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="436" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Bot</text>
-<text x="436" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">systemd service</text>
-<text x="436" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">one allowed user</text>
-<line x1="683" y1="460.0" x2="715" y2="460.0" stroke="#d9d9d9" stroke-width="3"/>
-<path d="M715,451.0 L727,460.0 L715,469.0 Z" fill="#d9d9d9"/>
-<rect x="725" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="753" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">claude -p</text>
-<text x="753" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">--resume &lt;id&gt;</text>
-<text x="753" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">per message</text>
-<line x1="1000" y1="460.0" x2="1032" y2="460.0" stroke="#d9d9d9" stroke-width="3"/>
-<path d="M1032,451.0 L1044,460.0 L1032,469.0 Z" fill="#d9d9d9"/>
-<rect x="1042" y="300" width="268" height="320" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
-<text x="1070" y="362" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700">Claude Code</text>
-<text x="1070" y="420" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">tools, memory,</text>
-<text x="1070" y="462" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="25">MCP, skills</text>
-<text x="90" y="720" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="27">Replies come back as one message per thinking cycle, each edited once.</text>
-<text x="90" y="764" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="27">Scheduled jobs push into the same chat: morning brief, job sift,</text>
-<text x="90" y="808" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="27">HK events, daily X drafts.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" width="1400" height="500">
+<rect width="1400" height="500" fill="#121212"/>
+<rect x="80" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="108" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Telegram</text>
+<text x="108" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">message from</text>
+<text x="108" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">my phone</text>
+<line x1="358" y1="250.0" x2="392" y2="250.0" stroke="#d9d9d9" stroke-width="3"/>
+<path d="M392,240.0 L406,250.0 L392,260.0 Z" fill="#d9d9d9"/>
+<rect x="404" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="432" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Bot</text>
+<text x="432" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">systemd service,</text>
+<text x="432" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">one allowed user</text>
+<line x1="682" y1="250.0" x2="716" y2="250.0" stroke="#d9d9d9" stroke-width="3"/>
+<path d="M716,240.0 L730,250.0 L716,260.0 Z" fill="#d9d9d9"/>
+<rect x="728" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="756" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">claude -p</text>
+<text x="756" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">--resume &lt;id&gt;</text>
+<text x="756" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">per message</text>
+<line x1="1006" y1="250.0" x2="1040" y2="250.0" stroke="#d9d9d9" stroke-width="3"/>
+<path d="M1040,240.0 L1054,250.0 L1040,260.0 Z" fill="#d9d9d9"/>
+<rect x="1052" y="120" width="268" height="260" rx="22" fill="#1b1b1b" stroke="#3a3a3a" stroke-width="2"/>
+<text x="1080" y="184" fill="#ededed" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700">Claude Code</text>
+<text x="1080" y="242" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">tools, memory,</text>
+<text x="1080" y="284" fill="#9a9a9a" font-family="Helvetica, Arial, sans-serif" font-size="26">MCP, skills</text>
 </svg>
