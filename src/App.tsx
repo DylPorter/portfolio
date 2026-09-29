@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { Routes, Route, Link, useNavigationType, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/fa6";
 import { LuArrowUpRight } from "react-icons/lu";
-import { motion, MotionConfig, useInView } from "framer-motion";
+import { MotionConfig } from "framer-motion";
 
-import { fadeUp, bandStagger, HERO_CASCADE } from "./components/animations";
+import { Reveal, appNav } from "./components/animations";
 import { Nav } from "./components/Nav";
 import { FontSwitcher } from "./components/FontSwitcher";
 import { ButtonToy } from "./components/ButtonToy";
@@ -19,7 +19,6 @@ const EMAIL = "info@tdporter.dev";
 
 // Flipped true once the app has mounted, so a genuine in-app back/forward (POP) can
 // skip the intro fade-in, while the initial load/refresh — also POP — still plays it.
-let appHasNavigated = false;
 
 const EXPERIENCE = [
   { logo: "/collective_logo.jpg", name: "Collective Global", role: "Full Stack AI Engineer", date: "2024 — Present", note: "Shipping production AI apps across healthcare, EdTech & SaaS." },
@@ -34,10 +33,10 @@ const EDUCATION = [
 // the Devansh/Vadim "subheader that has something to say" pattern.
 function SectionHead({ id, kicker, title, align = "left" }: { id?: string; kicker?: string; title: string; align?: "left" | "right" }) {
   return (
-    <motion.div id={id} variants={fadeUp} className={`flex flex-col gap-2 scroll-mt-28 ${align === "right" ? "md:items-end md:text-right" : ""}`}>
+    <Reveal as="div" id={id} className={`flex flex-col gap-2 scroll-mt-28 ${align === "right" ? "md:items-end md:text-right" : ""}`}>
       {kicker && <span className="eyebrow">✦ {kicker}</span>}
       <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em]">{title}</h2>
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -58,45 +57,24 @@ function ResumeEntry({ logo, name, role, date, note }: { logo: string; name: str
    `alt` tints the band a hair off the base bg; a hairline top border divides sections.
    `line` drops a staggered vertical guide-rule in the side gutter. */
 function Band({ id, alt = false, first = false, line, inner = "py-12 md:py-20 gap-8", children }: { id?: string; alt?: boolean; first?: boolean; line?: "left" | "right"; inner?: string; children: React.ReactNode }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  // Only skip the intro fade-in for a genuine IN-APP back/forward (returning from a
-  // subpage should look instant). A fresh load/refresh is also navigationType "POP",
-  // so gate on `appHasNavigated` — false until the first mount completes — otherwise
-  // a hard refresh of home wrongly skipped every fade-in.
-  const restored = appHasNavigated && useNavigationType() === "POP";
-  // In view within a moment of mounting = on the first screen, so queue behind the hero.
-  // Bands reached later by scrolling animate immediately.
-  const mountedAt = useRef(performance.now());
-  const onFirstScreen = useRef<boolean | null>(null);
-  if (inView && onFirstScreen.current === null) onFirstScreen.current = performance.now() - mountedAt.current < 300;
   return (
     <section
       id={id}
       className={`relative w-full transition-colors duration-200 ${line ? "overflow-x-clip" : ""} ${id ? "scroll-mt-24" : ""} ${alt ? "band-alt bg-[var(--section-alt)]" : ""} ${first ? "" : "border-t border-[var(--section-border)]"}`}
     >
       {line && <span className={`band-line band-line-${line}`} aria-hidden />}
-      <motion.div
-        ref={ref}
-        initial={restored ? false : "hidden"}
-        animate={restored || inView ? "visible" : "hidden"}
-        variants={bandStagger}
-        custom={!first && onFirstScreen.current ? HERO_CASCADE : 0}
-        className={`relative z-10 max-w-6xl mx-auto px-6 md:px-8 flex flex-col ${inner}`}
-      >
+      {/* Children reveal themselves (see Reveal) as each one enters the viewport */}
+      <div className={`relative z-10 max-w-6xl mx-auto px-6 md:px-8 flex flex-col ${inner}`}>
         {children}
-      </motion.div>
+      </div>
     </section>
   );
 }
 
 function Footer() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const restored = appHasNavigated && useNavigationType() === "POP";
   return (
     <footer className="w-full border-t border-[var(--section-border)] transition-colors duration-200">
-      <motion.div ref={ref} initial={restored ? false : "hidden"} animate={restored || inView ? "visible" : "hidden"} variants={fadeUp} className="max-w-6xl mx-auto px-6 md:px-8 pt-8 pb-10">
+      <Reveal className="max-w-6xl mx-auto px-6 md:px-8 pt-8 pb-10">
         <div className="flex flex-col-reverse items-center md:flex-row md:justify-between gap-4">
           <span className="text-neutral-400 dark:text-neutral-500 text-xs">© 2026 Dylan Porter · Hong Kong</span>
           <div className="flex items-center gap-2.5">
@@ -106,7 +84,7 @@ function Footer() {
             <a href="https://github.com/dylporter" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="icon-button"><FaGithub size={14} /></a>
           </div>
         </div>
-      </motion.div>
+      </Reveal>
     </footer>
   );
 }
@@ -130,7 +108,7 @@ function Home() {
 
           <div className="flex flex-col gap-5">
             {/* Featured */}
-            <motion.div variants={fadeUp}>
+            <Reveal as="div">
               <Link
                 to={`/projects/${featuredProject.id}`}
                 className="group card card-interactive border-l-2 border-l-[var(--accent)] overflow-hidden text-left flex flex-col lg:flex-row"
@@ -149,12 +127,12 @@ function Home() {
                   <span className="text-sm text-[var(--body)] leading-relaxed">{featuredProject.tagline}</span>
                 </div>
               </Link>
-            </motion.div>
+            </Reveal>
 
             {/* The rest */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {otherProjects.map((p) => (
-                <motion.div key={p.id} variants={fadeUp}>
+                <Reveal key={p.id}>
                   <Link
                     to={`/projects/${p.id}`}
                     className="group card card-interactive p-6 h-full text-left flex flex-col gap-2 relative"
@@ -164,7 +142,7 @@ function Home() {
                     <span className="serif text-2xl font-semibold text-[var(--ink)]">{p.title}</span>
                     <span className="text-sm text-[var(--body)] leading-relaxed">{p.tagline}</span>
                   </Link>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -174,25 +152,25 @@ function Home() {
         <Band line="right" inner="py-12 md:py-20 gap-12">
           <SectionHead title="Experience & Education" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
-            <motion.div variants={fadeUp} className="flex flex-col gap-6">
+            <Reveal as="div" className="flex flex-col gap-6">
               <span className="eyebrow">Experience</span>
               {EXPERIENCE.map((e) => <ResumeEntry key={e.name} {...e} />)}
-            </motion.div>
-            <motion.div variants={fadeUp} className="flex flex-col gap-6">
+            </Reveal>
+            <Reveal as="div" className="flex flex-col gap-6">
               <span className="eyebrow">Education</span>
               {EDUCATION.map((e) => <ResumeEntry key={e.name} {...e} />)}
-            </motion.div>
+            </Reveal>
           </div>
 
-          <motion.a variants={fadeUp} href="/Dylan_Porter_Resume.pdf" target="_blank" rel="noopener noreferrer" className="group link-accent text-sm w-fit inline-flex items-center gap-1">
+          <Reveal as="a" href="/Dylan_Porter_Resume.pdf" target="_blank" rel="noopener noreferrer" className="group link-accent text-sm w-fit inline-flex items-center gap-1">
             See the full résumé
             <LuArrowUpRight size={14} className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </motion.a>
+          </Reveal>
         </Band>
 
         {/* ── CTA ──────────────────────────────────────── */}
         <Band id="contact" alt line="left" inner="py-12 md:py-20 gap-6">
-          <motion.div variants={fadeUp} className="card p-10 md:p-16 grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-10 md:gap-14 md:items-stretch">
+          <Reveal as="div" className="card p-10 md:p-16 grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-10 md:gap-14 md:items-stretch">
             {/* Left — the pitch (centered on mobile, right-aligns toward the divider on desktop) */}
             <div className="flex flex-col justify-center gap-4 items-center text-center md:items-end md:text-right">
               <span className="eyebrow">Let's talk</span>
@@ -210,7 +188,7 @@ function Home() {
                 <span className="btn-ico"><FaRegEnvelope size={13} /></span>{EMAIL}
               </a>
             </div>
-          </motion.div>
+          </Reveal>
 
           {/* Easter egg — part of this section (sits above the footer). Toys expand
               down + the page smooth-scrolls to the bottom on open. */}
@@ -237,7 +215,7 @@ function App() {
   }, [theme]);
 
   // After the first mount, later POP navigations are genuine in-app back/forward.
-  useEffect(() => { appHasNavigated = true; }, []);
+  useEffect(() => { appNav.hasNavigated = true; }, []);
 
   const toggleTheme = () => setTheme((prev) => {
     const next = prev === "dark" ? "light" : "dark";

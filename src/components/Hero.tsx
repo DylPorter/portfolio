@@ -1,8 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { LuExternalLink } from "react-icons/lu";
 import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/fa6";
-import { motion } from "framer-motion";
-import { fadeUp, stagger } from "./animations";
+import { Reveal } from "./animations";
 
 const EMAIL = "info@tdporter.dev";
 
@@ -38,34 +37,34 @@ export function Hero() {
   }, []);
 
   return (
-    <motion.div variants={stagger} className="flex flex-col md:flex-row gap-8 md:gap-14 items-center">
-      {/* Photo first in the cascade so it lands with the name, not after the icons */}
-      <motion.div variants={fadeUp} className="w-full md:w-[44%] md:order-last flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
+    <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-center">
+      {/* Photo first in DOM so it takes the first reveal slot, landing with the name */}
+      <Reveal as="div" className="w-full md:w-[44%] md:order-last flex-shrink-0 h-[320px] md:h-[440px] overflow-hidden rounded-2xl">
         <img className="w-full h-full object-cover object-top" alt="Dylan Porter" src="/profile_pic.webp" />
-      </motion.div>
+      </Reveal>
       <div className="flex flex-col md:flex-1 items-center text-center md:items-start md:text-left">
-        <motion.h1 variants={fadeUp} className="text-6xl md:text-7xl font-bold tracking-[-0.03em] leading-[0.95]">Dylan Porter</motion.h1>
-        <motion.p variants={fadeUp} className="mt-7 text-lg md:text-xl leading-relaxed text-[var(--body)] max-w-2xl">
+        <Reveal as="h1" className="text-6xl md:text-7xl font-bold tracking-[-0.03em] leading-[0.95]">Dylan Porter</Reveal>
+        <Reveal as="p" className="mt-7 text-lg md:text-xl leading-relaxed text-[var(--body)] max-w-2xl">
           I build production AI systems across sourcing, healthcare, and education as a full-stack AI engineer in Hong Kong.
-        </motion.p>
-        <motion.p variants={fadeUp} className="mt-3 text-base leading-relaxed text-neutral-500 dark:text-neutral-500 max-w-2xl">
+        </Reveal>
+        <Reveal as="p" className="mt-3 text-base leading-relaxed text-neutral-500 dark:text-neutral-500 max-w-2xl">
           I ship your products end to end — agentic pipelines, AWS infrastructure, React frontends — and write about how they actually get made.
-        </motion.p>
-        <motion.div variants={fadeUp} ref={roleListRef} className="role-list mt-6 flex flex-row flex-wrap items-center gap-x-6 gap-y-2 justify-center md:justify-start text-sm text-[var(--body)]">
+        </Reveal>
+        <Reveal as="div" ref={roleListRef} className="role-list mt-6 flex flex-row flex-wrap items-center gap-x-6 gap-y-2 justify-center md:justify-start text-sm text-[var(--body)]">
           {ROLES.map((r) => (
             <p key={r.org} data-role className="role">
               {r.label}{" "}<a href={r.href} target="_blank" rel="noopener noreferrer" className="link-accent">{r.org}</a>
             </p>
           ))}
-        </motion.div>
-        <motion.div variants={fadeUp} className="flex items-center gap-3 mt-8 justify-center md:justify-start">
+        </Reveal>
+        <Reveal as="div" className="flex items-center gap-3 mt-8 justify-center md:justify-start">
           <a href="/Dylan_Porter_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-chunky text-sm"><span className="btn-ico"><LuExternalLink size={14} /></span>Résumé</a>
           <a href={`mailto:${EMAIL}`} className="icon-button" title={EMAIL} aria-label="Email"><FaRegEnvelope size={15} /></a>
           <a href="https://x.com/tdporterdev" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="icon-button"><FaXTwitter size={15} /></a>
           <a href="https://linkedin.com/in/tdporter" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="icon-button"><FaLinkedinIn size={15} /></a>
           <a href="https://github.com/dylporter" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="icon-button"><FaGithub size={15} /></a>
-        </motion.div>
+        </Reveal>
       </div>
-    </motion.div>
+    </div>
   );
 }
