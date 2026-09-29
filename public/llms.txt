@@ -1,0 +1,27 @@
+# Dylan Porter
+
+> Dylan Porter is an AI engineer in Hong Kong who builds production AI systems: agentic workflows, retrieval (RAG) pipelines and the cloud backends around them. He is the founding lead engineer at SourcingGPT (Antler Inception SG20), does AI client work through Collective Global, and studies Computer Science at the University of Hong Kong.
+
+Contact: info@tdporter.dev · X: [@tdporterdev](https://x.com/tdporterdev) · [LinkedIn](https://www.linkedin.com/in/tdporter) · [GitHub](https://github.com/DylPorter)
+
+## Projects
+
+- [SourcingGPT](https://tdporter.dev/projects/sourcinggpt): B2B sourcing agent that reads a product request, searches and ranks suppliers, and drafts the outreach email. Dylan is the founding lead engineer (since Apr 2025) and wrote most of the codebase: hybrid keyword + semantic supplier search on PostgreSQL + pgvector, an n8n orchestrator that routes buyer chat into tool calls, and an AWS SES email pipeline.
+- [VETsage](https://tdporter.dev/projects/vetsage): turns veterinary clinics' scanned records, PDFs and handwritten notes into structured clinical reports, using AWS Textract and a RAG layer. In beta with clinics in Hong Kong and Australia.
+- [PACL](https://tdporter.dev/projects/pacl): open-source coordination layer for teams of AI agents. Agents connect over MCP, and a Gemini intermediary flags overlapping work and turns blockers into tickets. Built solo for the Google Cloud Rapid Agent Hackathon. Code: https://github.com/DylPorter/pacl
+
+## Experience
+
+- Founding Lead Engineer, SourcingGPT (Antler Inception SG20), Apr 2025 to present
+- AI Engineer, Client Deployments, Collective Global, Jul 2024 to present
+- Coding Instructor, BSD Education, May 2025 to present
+- IBM Z Student Ambassador, IBM, Sep 2025 to May 2026
+- Software Engineering Intern, BSD Education, Sep 2023 to Mar 2024: deployed a local LLaMA-2 chatbot for 500+ educators on a platform reaching 150,000+ students
+
+## Skills
+
+Python, TypeScript, C++, Java, SQL, React. AWS (Lambda, S3, SES, Textract), Firebase, PostgreSQL, Docker, n8n. RAG, vector embeddings, LLM agents, Model Context Protocol (MCP).
+
+## Optional
+
+- [Projects index](https://tdporter.dev/projects)

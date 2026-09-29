@@ -3,9 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tdporter</title>
+    <title>Dylan Porter | AI Engineer in Hong Kong</title>
     <meta name="description" content="Dylan Porter is a full-stack AI engineer in Hong Kong building production AI systems across sourcing, healthcare, and education." />
     <link rel="canonical" href="https://tdporter.dev/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Dylan Porter",
+        "url": "https://tdporter.dev/",
+        "image": "https://tdporter.dev/profile_pic.webp",
+        "jobTitle": "AI Engineer",
+        "email": "mailto:info@tdporter.dev",
+        "address": { "@type": "PostalAddress", "addressLocality": "Hong Kong" },
+        "worksFor": [
+          { "@type": "Organization", "name": "SourcingGPT", "url": "https://sourcinggpt.ai" },
+          { "@type": "Organization", "name": "Collective Global" }
+        ],
+        "affiliation": { "@type": "CollegeOrUniversity", "name": "The University of Hong Kong" },
+        "knowsAbout": ["AI agents", "Retrieval-augmented generation", "LLM applications", "Model Context Protocol", "AWS"],
+        "sameAs": [
+          "https://www.linkedin.com/in/tdporter",
+          "https://github.com/DylPorter",
+          "https://x.com/tdporterdev"
+        ]
+      }
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -40,6 +63,10 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Dylan Porter</h1>
+      <p>AI engineer in Hong Kong building production AI systems. Founding lead engineer at SourcingGPT, AI client work at Collective Global, Computer Science at the University of Hong Kong. Projects: SourcingGPT, VETsage, PACL. Contact: info@tdporter.dev. Summary for AI tools: <a href="/llms.txt">/llms.txt</a>.</p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

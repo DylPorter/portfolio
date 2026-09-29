@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { LuArrowLeft, LuExternalLink, LuLock, LuExpand } from "react-icons/lu";
 import { motion } from "framer-motion";
@@ -11,6 +11,14 @@ export function ProjectPage() {
   const navigate = useNavigate();
   const [lightbox, setLightbox] = useState<string | null>(null);
   const project = projects.find((p) => p.id === slug);
+
+  useEffect(() => {
+    if (!project) return;
+    const prev = document.title;
+    document.title = `${project.title} | Dylan Porter`;
+    return () => { document.title = prev; };
+  }, [project]);
+
   if (!project) return <Navigate to="/projects" replace />;
 
   // Prefer real history-back (restores prior scroll); fall back to the projects index.
