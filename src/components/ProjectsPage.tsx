@@ -8,7 +8,7 @@ import { routeHistory } from "./routeHistory";
 export function ProjectsPage() {
   const navigate = useNavigate();
   // Same as the project page: real history-back restores the home page where you left
-  // it, with no replayed fades. A direct visit has no history, so go to the section.
+  // it (fades replay for what's on screen). A direct visit has no history, so go to the section.
   const goHome = (e: React.MouseEvent) => {
     if (routeHistory.previous === "/" && (window.history.state?.idx ?? 0) > 0) { e.preventDefault(); navigate(-1); }
   };

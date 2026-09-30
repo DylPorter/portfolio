@@ -4,7 +4,7 @@ import { FaLinkedinIn, FaGithub, FaRegEnvelope, FaXTwitter } from "react-icons/f
 import { LuArrowUpRight } from "react-icons/lu";
 import { MotionConfig } from "framer-motion";
 
-import { Reveal, appNav } from "./components/animations";
+import { Reveal } from "./components/animations";
 import { Nav } from "./components/Nav";
 import { FontSwitcher } from "./components/FontSwitcher";
 import { ButtonToy } from "./components/ButtonToy";
@@ -226,7 +226,6 @@ function App() {
   }, [theme]);
 
   // After the first mount, later POP navigations are genuine in-app back/forward.
-  useEffect(() => { appNav.hasNavigated = true; }, []);
 
   const toggleTheme = () => setTheme((prev) => {
     const next = prev === "dark" ? "light" : "dark";

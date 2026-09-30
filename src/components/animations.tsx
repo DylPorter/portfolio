@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type Ref } from "react";
 import { motion, useInView, type HTMLMotionProps } from "framer-motion";
-import { useNavigationType } from "react-router-dom";
 
 // Tuned to tomtau.be: a short 12px rise over a long 700ms decelerate reads as a drift,
 // not a jump. `custom` carries a queue delay (see Reveal); when it's absent, a parent's
@@ -18,15 +17,12 @@ export const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-// Set once the app has mounted, so a genuine in-app back/forward (returning from a
-// subpage) can skip the intro fades. A fresh load/refresh is also navigationType "POP",
-// hence the flag.
-export const appNav = { hasNavigated: false };
-
 // Page-wide reveal queue. Each element fades in when IT enters the viewport; elements
 // that enter together (first screen, two cards side by side) take 150ms slots in DOM
 // order, so the page always reads top-down, left-to-right. An element scrolling in
-// alone starts immediately.
+// alone starts immediately. Anything already scrolled off-screen by the time it's
+// claimed (e.g. landing on /#projects) is shown instantly and takes no slot, so the
+// visible content never waits behind fades nobody can see.
 const SLOT = 0.15;
 let nextSlot = 0;
 function claimDelay() {
@@ -43,15 +39,18 @@ type RevealProps = HTMLMotionProps<"div"> &
 export function Reveal({ as = "div", ref, ...props }: RevealProps) {
   const local = useRef<HTMLDivElement | null>(null);
   const inView = useInView(local, { once: true, margin: "0px 0px -60px 0px" });
-  const navType = useNavigationType();
-  // Decided once at mount: re-evaluating it would flip to true on the first re-render
-  // after the app mounts, and every element would skip its fade.
-  const [restored] = useState(() => appNav.hasNavigated && navType === "POP");
   const [delay, setDelay] = useState<number | null>(null);
 
   useEffect(() => {
-    if (inView && delay === null && !restored) setDelay(claimDelay());
-  }, [inView, delay, restored]);
+    if (!inView || delay !== null) return;
+    // One frame later, so scroll restoration / hash jumps have landed first.
+    const id = requestAnimationFrame(() => {
+      const r = local.current?.getBoundingClientRect();
+      const onScreen = !!r && r.bottom > 0 && r.top < window.innerHeight;
+      setDelay(onScreen ? claimDelay() : 0);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [inView, delay]);
 
   const setRef = (el: HTMLDivElement | null) => {
     local.current = el;
@@ -64,8 +63,8 @@ export function Reveal({ as = "div", ref, ...props }: RevealProps) {
     <Comp
       ref={setRef}
       variants={fadeUp}
-      initial={restored ? false : "hidden"}
-      animate={restored || delay !== null ? "visible" : "hidden"}
+      initial="hidden"
+      animate={delay !== null ? "visible" : "hidden"}
       custom={delay ?? 0}
       {...props}
     />

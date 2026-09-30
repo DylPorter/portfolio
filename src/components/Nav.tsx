@@ -12,6 +12,11 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
   // On a route change the page jumps to its new scroll position in one frame. Snap the
   // bar to match instead of animating its width, which read as a flash on every nav.
   const [instant, setInstant] = useState(false);
+  // The mega-menu is CSS hover/focus driven, so after picking a tile the pointer and
+  // focus are still on it and it would stay open over the new page. Force it shut
+  // until the pointer leaves the group.
+  const [megaShut, setMegaShut] = useState(false);
+  const shutMega = () => { (document.activeElement as HTMLElement | null)?.blur(); setMegaShut(true); };
   useLayoutEffect(() => {
     setInstant(true);
     setScrolled(window.scrollY > 50);
@@ -66,7 +71,7 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
 
         {/* Center — Work · Contact (absolutely centered on desktop, inline on mobile) */}
         <ul className="relative z-10 flex items-center gap-4 md:gap-7 md:absolute md:left-1/2 md:-translate-x-1/2">
-          <li className="nav-group">
+          <li className={`nav-group ${megaShut ? "mega-shut" : ""}`} onMouseLeave={() => setMegaShut(false)}>
             <button
               type="button"
               className="nav-trigger link text-sm font-medium"
@@ -79,16 +84,16 @@ export function Nav({ theme, toggleTheme }: { theme: string; toggleTheme: () => 
             <div className="mega" role="menu">
               <div className="mega-grid">
                 {projects.filter((p) => p.featured).map((p) => (
-                  <Link key={p.id} to={`/projects/${p.id}`} role="menuitem" className="mega-tile">
+                  <Link key={p.id} to={`/projects/${p.id}`} role="menuitem" className="mega-tile" onClick={shutMega}>
                     <span className="mega-name">{p.title}</span>
                     <span className="mega-role">{p.role}</span>
                     <LuArrowUpRight className="mega-arrow" size={15} />
                   </Link>
                 ))}
-                <Link to="/projects" role="menuitem" className="mega-tile mega-all">
+                <Link to="/projects" role="menuitem" className="mega-tile mega-all" onClick={shutMega}>
                   <LuArrowUpRight className="mega-github" size={15} />
-                  <span className="mega-name">Also built</span>
-                  <span className="mega-role">every project</span>
+                  <span className="mega-name">All projects</span>
+                  <span className="mega-role">The full list</span>
                 </Link>
               </div>
             </div>

@@ -521,6 +521,13 @@ html.light .nav-bar {
   visibility: visible;
   translate: 0 0;
 }
+/* Just picked a tile: stay shut until the pointer leaves (see Nav megaShut). */
+.nav-group.mega-shut:hover .mega,
+.nav-group.mega-shut:focus-within .mega {
+  visibility: hidden;
+  translate: 0 8px;
+}
+.nav-group.mega-shut .nav-chev { transform: none; }
 /* Frosted to MATCH the nav bar: same neutral-900/75 · white/75 + blur + rounding. */
 .mega-grid {
   display: grid;

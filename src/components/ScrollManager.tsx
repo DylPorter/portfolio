@@ -10,7 +10,7 @@ const positions = new Map<string, number>();
    - save each entry's position in the cleanup (runs BEFORE the next route scrolls)
    - POP (back/forward): restore that entry's position, re-applying across a few
      frames in case the page is still growing (images/layout settling)
-   - PUSH/REPLACE with a #hash: smooth-scroll to that section; otherwise top. */
+   - PUSH/REPLACE with a #hash: jump to that section; otherwise top. */
 export function ScrollManager() {
   const { key, pathname, hash } = useLocation();
   const navType = useNavigationType();
@@ -38,7 +38,10 @@ export function ScrollManager() {
         restore();
       } else if (hash) {
         const el = document.getElementById(hash.slice(1));
-        if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
+        // Jump, don't smooth-scroll: arriving from another page there's nothing to
+        // travel past, and a smooth scroll would queue the hero's fades ahead of the
+        // section you actually landed on.
+        if (el) el.scrollIntoView();
         else window.scrollTo(0, 0);
       } else {
         window.scrollTo(0, 0);
