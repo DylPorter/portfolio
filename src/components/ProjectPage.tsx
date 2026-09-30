@@ -28,7 +28,9 @@ export function ProjectPage() {
   };
 
   return (
-    <main className="max-w-3xl px-6 md:px-8 mx-auto pt-8 pb-20">
+    // Keyed by slug: hopping project → project (via the Work menu) reuses this route, so
+    // without a fresh mount the fades wouldn't replay.
+    <main key={slug} className="max-w-3xl px-6 md:px-8 mx-auto pt-8 pb-20">
       <motion.div initial="hidden" animate="visible" variants={stagger}>
         <motion.div variants={fadeUp}>
         <button onClick={goBack} className="link inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium mb-8 cursor-pointer">
@@ -45,6 +47,8 @@ export function ProjectPage() {
             <img
               src={project.images[0]}
               alt={project.title}
+              width={project.imageSize?.[0]}
+              height={project.imageSize?.[1]}
               fetchPriority="high"
               decoding="async"
               className="w-full h-full object-cover object-[50%_0%] transition-transform duration-500 group-hover:scale-[1.03]"

@@ -1,29 +1,29 @@
 import { useEffect, useRef, useState, type Ref } from "react";
 import { motion, useInView, type HTMLMotionProps } from "framer-motion";
 
-// Tuned to tomtau.be: a short 12px rise over a long 700ms decelerate reads as a drift,
-// not a jump. `custom` carries a queue delay (see Reveal); when it's absent, a parent's
+// Tuned from tomtau.be's 12px / 700ms, then sped up 1.25x (560ms) on Dylan's call.
+// A short rise over a long decelerate reads as a drift, not a jump. `custom` carries a queue delay (see Reveal); when it's absent, a parent's
 // staggerChildren still drives the timing.
 export const fadeUp = {
   hidden: { opacity: 0, y: 12 },
   visible: (delay?: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0, 0, 0.2, 1] as const, ...(delay !== undefined && { delay }) },
+    transition: { duration: 0.56, ease: [0, 0, 0.2, 1] as const, ...(delay !== undefined && { delay }) },
   }),
 };
 
 export const stagger = {
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 // Page-wide reveal queue. Each element fades in when IT enters the viewport; elements
-// that enter together (first screen, two cards side by side) take 150ms slots in DOM
+// that enter together (first screen, two cards side by side) take 120ms slots in DOM
 // order, so the page always reads top-down, left-to-right. An element scrolling in
 // alone starts immediately. Anything already scrolled off-screen by the time it's
 // claimed (e.g. landing on /#projects) is shown instantly and takes no slot, so the
 // visible content never waits behind fades nobody can see.
-const SLOT = 0.15;
+const SLOT = 0.12;
 let nextSlot = 0;
 function claimDelay() {
   const now = performance.now() / 1000;

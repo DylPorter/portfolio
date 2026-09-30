@@ -96,6 +96,18 @@ function Home() {
   const featuredProject = projects.find((p) => p.id === "sourcinggpt") ?? projects[0];
   const otherProjects = projects.filter((p) => p.featured && p.id !== featuredProject.id);
 
+  // Warm the cache for every project's splash image once the page is idle, so opening
+  // a project (or /projects) never shows an empty frame fading in.
+  useEffect(() => {
+    const warm = () => projects.forEach((p) => p.images[0] && (new Image().src = p.images[0]));
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(warm);
+      return () => cancelIdleCallback(id);
+    }
+    const id = setTimeout(warm, 1500);
+    return () => clearTimeout(id);
+  }, []);
+
   return (
     <>
       <main className="w-full">
@@ -126,7 +138,7 @@ function Home() {
               >
                 <div className="lg:w-1/2 h-60 lg:h-auto lg:min-h-[280px] flex-shrink-0 overflow-hidden">
                   {featuredProject.images.length > 0 ? (
-                    <img src={featuredProject.images[0]} alt={featuredProject.title} loading="lazy" decoding="async" className="w-full h-full object-cover object-[50%_0%] transition-transform duration-500 group-hover:scale-[1.03]" draggable={false} />
+                    <img src={featuredProject.images[0]} alt={featuredProject.title} width={featuredProject.imageSize?.[0]} height={featuredProject.imageSize?.[1]} fetchPriority="high" decoding="async" className="w-full h-full object-cover object-[50%_0%] transition-transform duration-500 group-hover:scale-[1.03]" draggable={false} />
                   ) : (
                     <div className="w-full h-full bg-neutral-100 dark:bg-neutral-900" />
                   )}

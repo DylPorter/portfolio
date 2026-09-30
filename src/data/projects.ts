@@ -7,6 +7,9 @@ export type Project = {
   highlights: string[];
   tech: string[];
   images: string[];
+  // Intrinsic size of images[0]. Lets the browser reserve the box before the image
+  // arrives, so a card never changes height mid-fade.
+  imageSize?: [number, number];
   url: string;
   status?: string;
   // Shown on the home page and in the Work menu. The rest live on /projects only.
@@ -28,7 +31,8 @@ export const projects: Project[] = [
       "The React and TypeScript app with Firebase auth on top, deployed on AWS.",
     ],
     tech: ["LLMs", "RAG", "n8n", "TypeScript", "React", "Firebase", "AWS", "PostgreSQL"],
-    images: ["/sourcinggpt1.png"],
+    images: ["/sourcinggpt1.webp"],
+    imageSize: [1345, 983],
     url: "https://sourcinggpt.ai",
   },
   {
@@ -45,7 +49,8 @@ export const projects: Project[] = [
       "Deployed and running in production for veterinary clinics across multiple countries.",
     ],
     tech: ["LLMs", "RAG", "OCR", "Python", "n8n", "React", "AWS"],
-    images: ["/vetsage1.png"],
+    images: ["/vetsage1.webp"],
+    imageSize: [1345, 983],
     url: "https://vetsage.webflow.io/",
   },
   {
@@ -61,7 +66,8 @@ export const projects: Project[] = [
       "Traced end to end in Arize Phoenix, with an online self-evaluation loop scoring the intermediary's coordination calls.",
     ],
     tech: ["LLMs", "MCP", "Python", "Gemini", "Phoenix", "Cloud Run"],
-    images: ["/pacl1.png"],
+    images: ["/pacl1.webp"],
+    imageSize: [840, 760],
     url: "https://github.com/DylPorter/pacl",
     status: "Shipped · open source",
   },

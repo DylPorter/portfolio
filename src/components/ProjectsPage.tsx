@@ -30,7 +30,7 @@ export function ProjectsPage() {
               <Link to={`/projects/${p.id}`} className="group card card-interactive overflow-hidden h-full flex flex-col text-left">
                 {p.images.length > 0 && (
                   <div className="h-48 overflow-hidden">
-                    <img src={p.images[0]} alt={p.title} loading="lazy" decoding="async" className="w-full h-full object-cover object-[50%_0%] transition-transform duration-500 group-hover:scale-[1.03]" draggable={false} />
+                    <img src={p.images[0]} alt={p.title} width={p.imageSize?.[0]} height={p.imageSize?.[1]} decoding="async" className="w-full h-full object-cover object-[50%_0%] transition-transform duration-500 group-hover:scale-[1.03]" draggable={false} />
                   </div>
                 )}
                 <div className="p-6 flex flex-col gap-2 relative flex-1">
