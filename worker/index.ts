@@ -301,6 +301,14 @@ export default {
         return json({ error: "internal error", detail: String(err) }, 500);
       }
     }
-    return env.ASSETS.fetch(request);
+    const res = await env.ASSETS.fetch(request);
+    // SPA deep links are extensionless paths — serve them the shell. Anything
+    // that looks like a file we don't actually have (/.env, /.git/config,
+    // /wp-login.php — the daily scanner fleet) is a real 404, so scanners stop
+    // collecting 200s and the traffic analytics stay honest.
+    if (res.status === 404 && !url.pathname.includes(".")) {
+      return env.ASSETS.fetch(new Request(new URL("/index.html", url), request));
+    }
+    return res;
   },
 };

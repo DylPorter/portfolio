@@ -7,10 +7,9 @@
   "main": "worker/index.ts",
   "assets": {
     "binding": "ASSETS",
-    "directory": "./dist/",
-    // Serve index.html (200) for any path that isn't a built asset, so client-side
-    // routes like /projects/:slug work on hard refresh / deep links.
-    "not_found_handling": "single-page-application"
+    "directory": "./dist/"
+    // SPA fallback for extensionless deep links (/projects/:slug) is handled in
+    // worker/index.ts — real 404s for missing files, 200+shell for client routes.
   },
   // D1 database for the GMD Studios kanban board.
   "d1_databases": [
